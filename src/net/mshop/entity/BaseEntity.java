@@ -1,16 +1,19 @@
 package net.mshop.entity;
 
+import net.mshop.listener.EntityListener;
 import org.hibernate.search.annotations.*;
 import org.hibernate.search.annotations.Index;
 
+
 import javax.persistence.*;
+import javax.validation.groups.Default;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Panfuhao on 2016/9/21.
  */
-@EntityListeners(EntityListeners.class)
+@EntityListeners(EntityListener.class)
 @MappedSuperclass
 public abstract class BaseEntity<ID extends Serializable> implements Serializable {
     /**
@@ -29,6 +32,21 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
      * 版本 属性名称
      */
     public static final String VERSION_PROPERTY_NAME = "version";
+
+    /**
+     * 保存验证组
+     */
+    public interface Save extends Default {
+
+    }
+
+    /**
+     * 更新验证组
+     */
+    public interface Update extends Default {
+
+    }
+
     /**
      * id
      */
@@ -101,6 +119,7 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
 
     /**
      * 重写equals方法
+     *
      * @param o
      * @return
      */
@@ -122,6 +141,7 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
 
     /**
      * 重写hashCode方法
+     *
      * @return
      */
     @Override
