@@ -4,10 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
@@ -131,6 +128,7 @@ public class Member extends BaseEntity<Long> {
      * 锁定KEY
      */
     private String lockKey;
+    private MemberRank memberRank;
 
     @NotEmpty(groups = Save.class)
     @Pattern(regexp = "^[0-9a-zA-Z_\\u4e00-\\u9fa5]+$")
@@ -320,5 +318,16 @@ public class Member extends BaseEntity<Long> {
 
     public void setLockKey(String lockKey) {
         this.lockKey = lockKey;
+    }
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    public MemberRank getMemberRank() {
+        return memberRank;
+    }
+
+    public void setMemberRank(MemberRank memberRank) {
+        this.memberRank = memberRank;
     }
 }
