@@ -24,6 +24,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
             </list>
         </property>
     </bean>
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
 
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/views/" p:suffix=".jsp" />
