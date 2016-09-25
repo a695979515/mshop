@@ -47,5 +47,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="cacheSeconds" value="3600" />
+        <property name="useCodeAsDefaultMessage" value="true" />
+
+    </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
 </beans>
