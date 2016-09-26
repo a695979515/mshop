@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Panfuhao on 2016/9/23.
  */
-public interface BaseService<T extends BaseEntity<ID>,ID extends Serializable> {
+public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> {
     /**
      * 根据ID查找
      * @param id
@@ -63,19 +63,19 @@ public interface BaseService<T extends BaseEntity<ID>,ID extends Serializable> {
      * @param id
      * @return
      */
-    T deleteById(ID id);
+    void deleteById(ID id);
 
     /**
      * 批量删除
      * @param ids
      * @return
      */
-    T deleteByIds(ID... ids);
+    void deleteByIds(ID... ids);
 
     /**
      * 删除
      * @param entity
      * @return
      */
-    T delete(T entity);
+    void delete(T entity);
 }

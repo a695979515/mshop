@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="hibernate-validator-annotation-processor-5.2.4.Final">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hibernate-validator-annotation-processor-5.2.4.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -38,5 +38,12 @@
     <orderEntry type="library" name="lucene-analyzers-common-5.3.1" level="project" />
     <orderEntry type="library" name="hibernate-core-5.2.2.Final" level="project" />
     <orderEntry type="library" name="javassist-3.20.0-GA" level="project" />
+    <orderEntry type="library" name="hibernate-validator-annotation-processor-5.2.4.Final" level="project" />
+    <orderEntry type="library" name="javax.el-api-2.2.4" level="project" />
+    <orderEntry type="library" name="json-lib-2.4-jdk15" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.4.3" level="project" />
+    <orderEntry type="library" name="jackson-core-2.4.3" level="project" />
+    <orderEntry type="library" name="freemarker" level="project" />
+    <orderEntry type="library" name="commons-collections-3.2.1" level="project" />
   </component>
 </module>

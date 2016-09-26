@@ -3,7 +3,7 @@ package net.mshop.util;
 /**
  * Created by Panfuhao on 2016/9/23.
  */
-public final class CommonAttrbutes {
+public final class CommonAttributes {
     /**
      * 日期格式匹配
      */
@@ -20,6 +20,6 @@ public final class CommonAttrbutes {
     /**
      * 不可实例化
      */
-    private CommonAttrbutes() {
+    private CommonAttributes() {
     }
 }

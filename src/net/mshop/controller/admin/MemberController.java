@@ -16,11 +16,14 @@ import java.math.BigDecimal;
  */
 @Controller("adminMemberController")
 @RequestMapping("/admin/member")
-public class MemberController extends BaseController{
+public class MemberController extends BaseController {
+
     @Resource(name = "memberServiceImpl")
     private MemberService memberService;
-    @RequestMapping(value = "save" ,method = RequestMethod.POST)
-    public String save(Member member, Long memberRankId, HttpServletRequest request, RedirectAttributes redirectAttributes){
+
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public String save(Member member, Long memberRankId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        System.out.println("保存方法...............");
         member.setPoint(0L);
         member.setBalance(BigDecimal.ZERO);
         member.setAmount(BigDecimal.ZERO);

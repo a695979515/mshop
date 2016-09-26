@@ -8,6 +8,15 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <context:component-scan base-package="net.mshop.controller"/>
+    <context:component-scan base-package="net.mshop" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+    <mvc:annotation-driven validator="validator">
+        <mvc:message-converters>
+            <ref bean="messageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <!-- 避免 IE 执行 AJAX 时,返回 JSON 出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
@@ -26,6 +35,14 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     </bean>
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+    <bean id="messageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json; charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
     </bean>
 
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
