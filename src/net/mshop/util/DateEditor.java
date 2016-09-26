@@ -39,7 +39,7 @@ public class DateEditor extends PropertyEditorSupport{
                 setValue(null);
             }else {
                 try {
-                    setValue(DateUtils.parseDate(value,CommonAttrbutes.DATE_PATTERNS));
+                    setValue(DateUtils.parseDate(value, CommonAttributes.DATE_PATTERNS));
                 } catch (ParseException e) {
                     setValue(null);
                 }

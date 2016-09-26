@@ -23,7 +23,7 @@ public class MemberRank extends BaseEntity<Long> {
     private BigDecimal amount;  //消费金额
     private Boolean isDefault;  //是否默认
     private Boolean isSpecial;  //是否特殊
-    private Set<Member> memberSet = new HashSet<>();    //会员
+    private Set<Member> members = new HashSet<>();    //会员
 
     @NotEmpty
     @Length(max=200)
@@ -80,11 +80,11 @@ public class MemberRank extends BaseEntity<Long> {
     }
 
     @OneToMany(mappedBy = "memberRank", fetch =FetchType.LAZY)
-    public Set<Member> getMemberSet() {
-        return memberSet;
+    public Set<Member> getMembers() {
+        return members;
     }
 
-    public void setMemberSet(Set<Member> memberSet) {
-        this.memberSet = memberSet;
+    public void setMembers(Set<Member> members) {
+        this.members = members;
     }
 }

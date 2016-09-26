@@ -12,10 +12,15 @@ import java.io.Serializable;
 /**
  * Created by Panfuhao on 2016/9/23.
  */
-public abstract class BaseDaoImpl<T extends BaseEntity<ID> ,ID extends Serializable> implements BaseDao<T,ID> {
+public abstract class BaseDaoImpl<T extends BaseEntity<ID>, ID extends Serializable> implements BaseDao<T, ID> {
+    /**
+     * 实体类类型
+     */
     private Class<T> entityClass;
+
     @PersistenceContext
     protected EntityManager entityManager;
+
     @SuppressWarnings("unchecked")
     public BaseDaoImpl() {
         ResolvableType resolvableType = ResolvableType.forClass(getClass());
@@ -31,5 +36,23 @@ public abstract class BaseDaoImpl<T extends BaseEntity<ID> ,ID extends Serializa
         Assert.notNull(entity);
 
         entityManager.persist(entity);
+    }
+    public boolean isManaged(T entity){
+        Assert.notNull(entity);
+        return entityManager.contains(entity);
+    }
+    public ID getIdentifier(T entity){
+        Assert.notNull(entity);
+        return (ID) entityManager.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier(entity);
+    }
+    public void remove(T entity) {
+        if (entity != null) {
+            entityManager.remove(entity);
+        }
+    }
+    public T merge(T entity) {
+        Assert.notNull(entity);
+
+        return entityManager.merge(entity);
     }
 }

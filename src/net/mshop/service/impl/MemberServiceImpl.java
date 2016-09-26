@@ -14,7 +14,8 @@ import javax.annotation.Resource;
  * Created by Panfuhao on 2016/9/23.
  */
 @Service("memberServiceImpl")
-public abstract class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements MemberService {
+public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements MemberService{
+
     @Resource(name = "memberDaoImpl")
     private MemberDao memberDao;
 
@@ -22,8 +23,13 @@ public abstract class MemberServiceImpl extends BaseServiceImpl<Member, Long> im
     @Transactional
     public Member save(Member member) {
         Assert.notNull(member);
-
         Member pMember = super.save(member);
         return pMember;
+    }
+
+
+    @Transactional(readOnly = true)
+    public boolean usernameExists(String username){
+        return memberDao.usernameExists(username);
     }
 }
