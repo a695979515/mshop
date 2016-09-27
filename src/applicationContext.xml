@@ -52,8 +52,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <bean id="freemarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/"/>
+    <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPaths">
+            <array>
+                <value>classpath:/</value>
+                <value>/WEB-INF/template</value>
+            </array>
+        </property>
         <property name="freemarkerSettings">
             <props>
                 <prop key="defaultEncoding">UTF-8</prop>
@@ -73,18 +78,15 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         </property>
         <property name="freemarkerVariables">
             <map>
-                <entry key="" value=""/>
+                <entry key="base" value="#{servletContext.contextPath}" />
             </map>
         </property>
     </bean>
-    <bean id="viewResolver" class="net.mshop.FreeMarkerViewResolver">
-        <property name="suffix" value=".ftl"/>
-        <property name="contentType" value="text/html; charset=UTF-8" />
-    </bean>
+
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="cacheSeconds" value="3600" />
         <property name="useCodeAsDefaultMessage" value="true" />
-
     </bean>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver" />
 
 </beans>
