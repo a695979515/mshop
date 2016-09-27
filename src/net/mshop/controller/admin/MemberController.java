@@ -3,6 +3,7 @@ package net.mshop.controller.admin;
 import net.mshop.entity.Member;
 import net.mshop.service.MemberService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,7 +22,7 @@ public class MemberController extends BaseController {
     @Resource(name = "memberServiceImpl")
     private MemberService memberService;
 
-    @RequestMapping(value = "save", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Member member, Long memberRankId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         System.out.println("保存方法...............");
         member.setPoint(0L);
