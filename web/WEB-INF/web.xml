@@ -7,6 +7,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:/applicationContext.xml
+            classpath*:/applicationContext-shiro.xml
         </param-value>
     </context-param>
 
@@ -26,6 +27,14 @@
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 
     <listener>
