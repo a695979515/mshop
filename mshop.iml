@@ -45,5 +45,8 @@
     <orderEntry type="library" name="jackson-core-2.4.3" level="project" />
     <orderEntry type="library" name="freemarker" level="project" />
     <orderEntry type="library" name="commons-collections-3.2.1" level="project" />
+    <orderEntry type="library" name="shiro-all-1.3.2" level="project" />
+    <orderEntry type="library" name="commons-codec-1.10" level="project" />
+    <orderEntry type="library" name="slf4j-api-1.7.7" level="project" />
   </component>
 </module>

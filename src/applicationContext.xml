@@ -51,6 +51,10 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:/ehcache.xml"/>
+        <property name="shared" value="true"/>
+    </bean>
 
     <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPaths">
