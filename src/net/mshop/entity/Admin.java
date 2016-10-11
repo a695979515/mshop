@@ -15,29 +15,29 @@ import java.util.Set;
  * Created by Panfuhao on 2016/9/27.
  */
 @Entity
-@Table(name="m_admin")
-@SequenceGenerator(name="sequenceGenerator" ,sequenceName = "seq_admin")
-public class Admin extends BaseEntity<Long>{
-    public static final String LOING_TOKEN_COOKIE_NAME="adminLoginToken";
-    private String username;
-    private String password;
-    private String email;
-    private String name;
-    private String department;
-    private Boolean isEnabled;
-    private Boolean isLocked;
-    private Integer loginFailureCount;
-    private Date lockedDate;
-    private Date loginDate;
-    private String loginIp;
-    private String lockKey;
-    private Set<Role>  roles = new HashSet<>();
+@Table(name = "m_admin")
+@SequenceGenerator(name = "sequenceGenerator", sequenceName = "seq_admin")
+public class Admin extends BaseEntity<Long> {
+    public static final String LOING_TOKEN_COOKIE_NAME = "adminLoginToken";
+    private String username;        //用户名
+    private String password;        //密码
+    private String email;           //邮箱
+    private String name;            //名字
+    private String department;         //部门
+    private Boolean isEnabled;          //是否开启
+    private Boolean isLocked;           //是否锁定
+    private Integer loginFailureCount;  //登录错误总数
+    private Date lockedDate;            //锁定时间
+    private Date loginDate;             //登录时间
+    private String loginIp;             //登录IP
+    private String lockKey;             //锁定key
+    private Set<Role> roles = new HashSet<>();     //权限
 
 
     @NotEmpty(groups = Save.class)
     @Pattern(regexp = "^[0-9a-zA-Z_\\u4e00-\\u9fa5]+$")
-    @Length(min=2,max = 20)
-    @Column(nullable = false,updatable = false,unique = true)
+    @Length(min = 2, max = 20)
+    @Column(nullable = false, updatable = false, unique = true)
     public String getUsername() {
         return username;
     }
@@ -47,7 +47,7 @@ public class Admin extends BaseEntity<Long>{
     }
 
     @NotEmpty(groups = Save.class)
-    @Length(min=4,max = 20)
+    @Length(min = 4, max = 20)
     @Column(nullable = false)
     public String getPassword() {
         return password;
@@ -69,7 +69,7 @@ public class Admin extends BaseEntity<Long>{
         this.email = email;
     }
 
-    @Length(max=200)
+    @Length(max = 200)
     public String getName() {
         return name;
     }
@@ -78,7 +78,7 @@ public class Admin extends BaseEntity<Long>{
         this.name = name;
     }
 
-    @Length(max=200)
+    @Length(max = 200)
     public String getDepartment() {
         return department;
     }
@@ -139,7 +139,7 @@ public class Admin extends BaseEntity<Long>{
         this.loginIp = loginIp;
     }
 
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     public String getLockKey() {
         return lockKey;
     }

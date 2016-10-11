@@ -35,7 +35,7 @@
         <property name="cacheManager" ref="ehCacheManager"/>
     </bean>
 
-    <bean id="authenticationFilter" class="net.mshop.AuthenticationFilter"/>
+    <bean id="authenticationFilter" class="net.mshop.filter.AuthenticationFilter"/>
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
         <property name="arguments" ref="securityManager"/>

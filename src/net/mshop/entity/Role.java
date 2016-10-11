@@ -15,16 +15,16 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "m_role")
-@SequenceGenerator(name = "sequenceGenerator" , sequenceName = "seq_role")
-public class Role extends BaseEntity<Long>{
-    private String name;
-    private String isSystem;
-    private String description;
-    private List<String> authorities = new ArrayList<>();
-    private Set<Admin> admins = new HashSet<>();
+@SequenceGenerator(name = "sequenceGenerator", sequenceName = "seq_role")
+public class Role extends BaseEntity<Long> {
+    private String name;        //名称
+    private String isSystem;    //是否内置
+    private String description; //描述
+    private List<String> authorities = new ArrayList<>(); //权限
+    private Set<Admin> admins = new HashSet<>();            //管理员
 
     @NotEmpty
-    @Length(max=200)
+    @Length(max = 200)
     @Column(nullable = false)
     public String getName() {
         return name;
@@ -34,7 +34,7 @@ public class Role extends BaseEntity<Long>{
         this.name = name;
     }
 
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     public String getIsSystem() {
         return isSystem;
     }
@@ -53,7 +53,7 @@ public class Role extends BaseEntity<Long>{
     }
 
     @NotEmpty
-    @Column(nullable = false,length = 4000)
+    @Column(nullable = false, length = 4000)
     @Convert(converter = AuthorityConverter.class)
     public List<String> getAuthorities() {
         return authorities;
@@ -63,7 +63,7 @@ public class Role extends BaseEntity<Long>{
         this.authorities = authorities;
     }
 
-    @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     public Set<Admin> getAdmins() {
         return admins;
     }
@@ -71,6 +71,7 @@ public class Role extends BaseEntity<Long>{
     public void setAdmins(Set<Admin> admins) {
         this.admins = admins;
     }
+
     /**
      * 类型转换 - 权限
      *
