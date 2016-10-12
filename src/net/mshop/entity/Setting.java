@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 /**
  * Created by Panfuhao on 2016/10/11.
  */
+@ScriptAssert(lang = "javascript", script = "_this.usernameMaxLength >= _this.usernameMinLength && _this.passwordMaxLength >= _this.passwordMinLength")
 public class Setting implements Serializable {
     /**
      * 缓存名称

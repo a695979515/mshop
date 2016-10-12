@@ -92,7 +92,7 @@ public class AuthenticationFilter extends FormAuthenticationFilter{
         System.out.println("loginToken1=="+loginToken);
         System.out.println("loginToken2=="+adminService.getLoginToken());
         if(!StringUtils.equalsIgnoreCase(loginToken,adminService.getLoginToken())){
-            WebUtils.issueRedirect(httpServletRequest,response,"/");
+            WebUtils.issueRedirect(httpServletRequest,httpServletResponse,"/");
             return false;
         }
         return super.onAccessDenied(httpServletRequest,httpServletResponse);
