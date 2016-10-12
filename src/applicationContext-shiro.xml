@@ -5,14 +5,15 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/admin/login"/>
+        <property name="loginUrl" value="/admin/login.html"/>
         <property name="successUrl" value="/admin/common/main"/>
         <property name="unauthorizedUrl" value="/admin/common/unauthorizedUrl"/>
         <property name="filterChainDefinitionMap">
             <map>
                 <entry key="/admin/" value="anon"/>
-                <entry key="/admin/login/" value="authc"/>
-                <entry key="/admin/logout" value="logout"/>
+                <entry key="/admin/index.jsp" value="anon"/>
+                <entry key="/admin/login.html" value="authc"/>
+                <entry key="/admin/logout.html" value="logout"/>
                 <entry key="/admin/**" value="authc"/>
             </map>
         </property>
