@@ -49,5 +49,6 @@
     <orderEntry type="library" name="commons-codec-1.10" level="project" />
     <orderEntry type="library" name="slf4j-api-1.7.7" level="project" />
     <orderEntry type="library" name="bcprov-jdk15on-155" level="project" />
+    <orderEntry type="library" name="jaxen-1.2.0-atlassian-2" level="project" />
   </component>
 </module>

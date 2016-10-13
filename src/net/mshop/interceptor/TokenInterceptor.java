@@ -22,11 +22,10 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("preHandle===");
         String token = WebUtils.getCookie(request, TOKEN_COOKIE_NAME);
         if (StringUtils.equalsIgnoreCase(request.getMethod(), "POST")) {
             if (StringUtils.isNotEmpty(token)) {
-                String requestType = request.getHeader("X-Request-With");
+                String requestType = request.getHeader("X-Requested-With");
                 if (StringUtils.equalsIgnoreCase(requestType, "XMLHttpRequest")) {
                     if (StringUtils.equals(token, request.getHeader(TOKEN_PARAMETER_NAME))) {
                         return true;
@@ -39,14 +38,12 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                     }
                 }
             } else {
-                System.out.println("token是空的1");
                 WebUtils.addCookie(request, response, TOKEN_COOKIE_NAME, DigestUtils.md5Hex(UUID.randomUUID() + RandomStringUtils.randomAlphabetic(30)));
             }
             response.sendError(HttpServletResponse.SC_FORBIDDEN, ERROR_MESSAGE);
             return false;
         } else {
             if (StringUtils.isEmpty(token)) {
-                System.out.println("token是空的2");
                 token = DigestUtils.md5Hex(UUID.randomUUID() + RandomStringUtils.randomAlphabetic(30));
                 WebUtils.addCookie(request, response, TOKEN_COOKIE_NAME, token);
             }
