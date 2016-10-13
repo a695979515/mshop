@@ -12,7 +12,6 @@
 <%@page import="net.mshop.util.WebUtils" %>
 <%@page import="net.mshop.entity.Admin" %>
 <%
-    System.out.println("index.......");
     String base = request.getContextPath();
     ApplicationContext applicationContext = SpringUtils.getApplicationContext();
     if (applicationContext != null) {

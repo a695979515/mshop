@@ -89,8 +89,6 @@ public class AuthenticationFilter extends FormAuthenticationFilter{
             return false;
         }
         String loginToken = net.mshop.util.WebUtils.getCookie(httpServletRequest, Admin.LOING_TOKEN_COOKIE_NAME);
-        System.out.println("loginToken1=="+loginToken);
-        System.out.println("loginToken2=="+adminService.getLoginToken());
         if(!StringUtils.equalsIgnoreCase(loginToken,adminService.getLoginToken())){
             WebUtils.issueRedirect(httpServletRequest,httpServletResponse,"/");
             return false;

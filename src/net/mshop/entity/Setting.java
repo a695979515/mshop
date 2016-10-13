@@ -258,7 +258,9 @@ public class Setting implements Serializable {
      * 媒体上传路径
      */
     private String mediaUploadPath;
-    /** 文件上传路径 */
+    /**
+     * 文件上传路径
+     */
     private String fileUploadPath;
     /**
      * SMTP地址
@@ -1014,6 +1016,7 @@ public class Setting implements Serializable {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
     @NotEmpty
     @Length(max = 200)
     public String getImageUploadPath() {
@@ -1031,6 +1034,7 @@ public class Setting implements Serializable {
         }
         this.imageUploadPath = imageUploadPath;
     }
+
     @NotEmpty
     @Length(max = 200)
     public String getMediaUploadPath() {
@@ -1048,6 +1052,7 @@ public class Setting implements Serializable {
         }
         this.mediaUploadPath = mediaUploadPath;
     }
+
     @NotEmpty
     @Length(max = 200)
     public String getFileUploadPath() {
@@ -1068,57 +1073,64 @@ public class Setting implements Serializable {
 
     /**
      * 获取热门搜索
+     *
      * @return
      */
-    public String[] getHotSearches(){
-        return StringUtils.split(hotSearch,SEPARATOR);
+    public String[] getHotSearches() {
+        return StringUtils.split(hotSearch, SEPARATOR);
     }
 
     /**
      * 获取不允许用户名
+     *
      * @return
      */
-    public String[] getDisabledUsernames(){
-        return StringUtils.split(disabledUsername,SEPARATOR);
+    public String[] getDisabledUsernames() {
+        return StringUtils.split(disabledUsername, SEPARATOR);
     }
 
     /**
      * 获取允许上传图片扩展名
+     *
      * @return
      */
-    public String[] getUploadImageExtensions(){
-        return StringUtils.split(uploadFileExtension,SEPARATOR);
+    public String[] getUploadImageExtensions() {
+        return StringUtils.split(uploadFileExtension, SEPARATOR);
     }
 
     /**
      * 获取允许上传媒体扩展名
+     *
      * @return
      */
-    public String[] getUploadMediaExtensions(){
-        return StringUtils.split(uploadMediaExtension,SEPARATOR);
+    public String[] getUploadMediaExtensions() {
+        return StringUtils.split(uploadMediaExtension, SEPARATOR);
     }
+
     /**
      * 获取允许上传文件扩展名
+     *
      * @return
      */
-    public String[] getUploadFileExtensions(){
-        return StringUtils.split(uploadFileExtension,SEPARATOR);
+    public String[] getUploadFileExtensions() {
+        return StringUtils.split(uploadFileExtension, SEPARATOR);
     }
 
     /**
      * 设置精度
+     *
      * @param amount
      * @return
      */
-    public BigDecimal setScale(BigDecimal amount){
-        if(amount!=null && getPriceScale()!=null && getRoundType()!=null){
-            switch (getRoundType()){
+    public BigDecimal setScale(BigDecimal amount) {
+        if (amount != null && getPriceScale() != null && getRoundType() != null) {
+            switch (getRoundType()) {
                 case roundUp:
-                    return amount.setScale(getPriceScale(),BigDecimal.ROUND_UP);
+                    return amount.setScale(getPriceScale(), BigDecimal.ROUND_UP);
                 case roundDown:
-                    return amount.setScale(getPriceScale(),BigDecimal.ROUND_DOWN);
+                    return amount.setScale(getPriceScale(), BigDecimal.ROUND_DOWN);
                 case roundHalfUp:
-                    return amount.setScale(getPriceScale(),BigDecimal.ROUND_HALF_UP);
+                    return amount.setScale(getPriceScale(), BigDecimal.ROUND_HALF_UP);
             }
         }
         return amount;

@@ -6,7 +6,7 @@
     <title>index</title>
 </head>
 <body>
-<form id="loginFrom" action="login" method="post">
+<form id="loginFrom" action="login.html" method="post">
     账户：<input type="text" name="username" value="">
     <br>
     密码：<input type="password" name="password" value="">

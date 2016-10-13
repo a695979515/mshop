@@ -4,6 +4,7 @@ import net.mshop.EnumConverter;
 import net.mshop.entity.Setting;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
+import net.sf.ehcache.Element;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
@@ -13,7 +14,6 @@ import org.apache.shiro.util.Assert;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
@@ -39,21 +39,21 @@ public final class SystemUtils {
             public String convert(Object value) {
                 if (value != null) {
                     Class<?> type = value.getClass();
-                    if (type.isEnum() && super.lookup(type) != null) {
+                    if (type.isEnum() && super.lookup(type) == null) {
                         super.register(new EnumConverter(type), type);
                     } else if (type.isArray() && type.getComponentType().isEnum()) {
-                        if (super.lookup(type) != null) {
+                        if (super.lookup(type) == null) {
                             ArrayConverter arrayConverter = new ArrayConverter(type, new EnumConverter(type.getComponentType()), 0);
                             arrayConverter.setOnlyFirstToString(false);
                             super.register(arrayConverter, type);
                         }
                         Converter converter = super.lookup(type);
-                        return (converter.convert(String.class, value));
+                        return ((String) converter.convert(String.class, value));
                     }
                 }
                 return super.convert(value);
             }
-
+            @SuppressWarnings("rawtypes")
             @Override
             public Object convert(String value, Class<?> clazz) {
                 if (clazz.isEnum() && super.lookup(clazz) == null) {
@@ -61,7 +61,7 @@ public final class SystemUtils {
                 }
                 return super.convert(value, clazz);
             }
-
+            @SuppressWarnings("rawtypes")
             @Override
             public Object convert(Object value, Class<?> targetType) {
                 if (super.lookup(targetType) == null) {
@@ -75,7 +75,7 @@ public final class SystemUtils {
                 }
                 return super.convert(value, targetType);
             }
-
+            @SuppressWarnings("rawtypes")
             @Override
             public Object convert(String[] values, Class<?> clazz) {
                 if (clazz.isArray() && clazz.getComponentType().isEnum() && super.lookup(clazz.getComponentType()) == null) {
@@ -99,17 +99,18 @@ public final class SystemUtils {
      *
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static Setting getSetting() {
         Ehcache cache = CACHE_MANAGER.getEhcache(Setting.CACHE_NAME);
         String cacheKey = "setting";
-        net.sf.ehcache.Element cacheElement = cache.get(cacheKey);
+        Element cacheElement = cache.get(cacheKey);
         if (cacheElement == null) {
             Setting setting = new Setting();
             try {
                 File xmlFile = new ClassPathResource(CommonAttributes.MSHOP_XML_PATH).getFile();
                 Document document = new SAXReader().read(xmlFile);
-                List<Element> elements = document.selectNodes("/mshop/setting");
-                for (Element element : elements) {
+                List<org.dom4j.Element> elements = document.selectNodes("/mshop/setting");
+                for (org.dom4j.Element element : elements) {
                     try {
                         String name = element.attributeValue("name");
                         String value = element.attributeValue("value");
@@ -125,10 +126,10 @@ public final class SystemUtils {
             } catch (DocumentException e) {
                 throw new RuntimeException(e.getMessage(), e);
             }
-            cache.put(new net.sf.ehcache.Element(cacheKey, setting));
+            cache.put(new Element(cacheKey, setting));
             cacheElement = cache.get(cacheKey);
         }
-        return (Setting) cacheElement.getObjectKey();
+        return (Setting) cacheElement.getObjectValue();
     }
 
     /**
@@ -140,8 +141,8 @@ public final class SystemUtils {
         try {
             File xmlFile = new ClassPathResource(CommonAttributes.MSHOP_XML_PATH).getFile();
             Document document = new SAXReader().read(xmlFile);
-            List<Element> elements = document.selectNodes("/mshop/setting");
-            for (Element element : elements) {
+            List<org.dom4j.Element> elements = document.selectNodes("/mshop/setting");
+            for (org.dom4j.Element element : elements) {
                 try {
                     String name = element.attributeValue("name");
                     String value = BEAN_UTILS.getProperty(setting, name);
@@ -190,3 +191,4 @@ public final class SystemUtils {
         }
     }
 }
+

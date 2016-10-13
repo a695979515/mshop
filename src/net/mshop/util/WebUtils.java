@@ -84,6 +84,9 @@ public final class WebUtils {
             if (StringUtils.isNotEmpty(path)) {
                 cookie.setPath(path);
             }
+            if(StringUtils.isNotEmpty(domain)){
+                cookie.setDomain(domain);
+            }
             if (secure != null) {
                 cookie.setSecure(secure);
             }
