@@ -86,6 +86,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
                 <prop key="time_format">HH:mm:ss</prop>
                 <prop key="object_wrapper">freemarker.ext.beans.BeansWrapper</prop>
                 <prop key="template_exception_handler">net.mshop.FreeMarkerExceptionHandler</prop>
+                <prop key="template_update_delay">0</prop>
             </props>
         </property>
         <property name="freemarkerVariables">

@@ -350,10 +350,6 @@ public class Setting implements Serializable {
      * cnzz统计密码
      */
     private String cnzzPassword;
-    /**
-     * 主题
-     */
-    private String theme;
 
     @NotEmpty
     @Length(max = 200)
@@ -881,15 +877,6 @@ public class Setting implements Serializable {
 
     public void setTaxRate(Boolean taxRate) {
         this.taxRate = taxRate;
-    }
-
-    @Null
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
     }
 
     @NotNull
