@@ -23,10 +23,19 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     </mvc:annotation-driven>
 
     <mvc:interceptors>
+
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="net.mshop.interceptor.TokenInterceptor"/>
         </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">
+                <property name="entityManagerFactory" ref="entityManagerFactory"/>
+            </bean>
+        </mvc:interceptor>
+
     </mvc:interceptors>
 
     <!-- 避免 IE 执行 AJAX 时,返回 JSON 出现下载文件 -->

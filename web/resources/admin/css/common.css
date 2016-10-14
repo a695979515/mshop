@@ -1,0 +1,7 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, legend, input, textarea, select, button, th, td, p, hr, blockquote, pre, code {
+    padding: 0px;
+    margin: 0px;
+}
+body, input, textarea, select, button {
+    font: 12px tahoma, Arial, Verdana, sans-serif;
+}

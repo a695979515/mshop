@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mshop>
+
     <setting name="siteName" value=""/>
     <setting name="siteUrl" value="http://localhost:8080"/>
     <setting name="logo" value=""/>
@@ -69,6 +70,5 @@
     <setting name="cnzzEnabled" value=""/>
     <setting name="cnzzSiteId" value=""/>
     <setting name="cnzzPassword" value=""/>
-    <setting name="theme" value=""/>
 
 </mshop>
