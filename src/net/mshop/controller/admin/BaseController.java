@@ -82,7 +82,7 @@ public class BaseController {
         return true;
     }
 
-    protected String currency(BigDecimal amount,boolean showSign ,boolean showUnit){
+    protected String currency(BigDecimal amount, boolean showSign, boolean showUnit) {
         return null;
     }
 }

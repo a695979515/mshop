@@ -5,6 +5,8 @@ import net.mshop.entity.Admin;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
+
 /**
  * Created by Panfuhao on 2016/9/29.
  */
@@ -25,7 +27,11 @@ public class AdminDaoImpl extends BaseDaoImpl<Admin, Long> implements AdminDao {
         if (StringUtils.isEmpty(username)) {
             return null;
         }
-        String jpql = "select admin from Admin admin wehere lower(admin.username) = lower(:username)";
-        return entityManager.createQuery(jpql, Admin.class).setParameter("username", username).getSingleResult();
+        try {
+            String jpql = "select admin from Admin admin where lower(admin.username) = lower(:username)";
+            return entityManager.createQuery(jpql, Admin.class).setParameter("username", username).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }

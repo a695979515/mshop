@@ -12,10 +12,11 @@ import java.util.Date;
 public class EntityListener {
     /**
      * 保存前处理
+     *
      * @param entity
      */
     @PrePersist
-    public void prePersist(BaseEntity<?> entity){
+    public void prePersist(BaseEntity<?> entity) {
         entity.setCreateDate(new Date());
         entity.setModifyDate(new Date());
         entity.setVersion(null);
@@ -23,10 +24,11 @@ public class EntityListener {
 
     /**
      * 更新前处理
+     *
      * @param entity
      */
     @PreUpdate
-    public void preUpdate(BaseEntity<?> entity){
+    public void preUpdate(BaseEntity<?> entity) {
         entity.setModifyDate(new Date());
     }
 }

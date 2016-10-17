@@ -89,20 +89,20 @@ public class Admin extends BaseEntity<Long> {
 
     @NotNull
     @Column(nullable = false)
-    public Boolean getEnabled() {
+    public Boolean getIsEnabled() {
         return isEnabled;
     }
 
-    public void setEnabled(Boolean enabled) {
+    public void setIsEnabled(Boolean enabled) {
         isEnabled = enabled;
     }
 
     @Column(nullable = false)
-    public Boolean getLocked() {
+    public Boolean getIsLocked() {
         return isLocked;
     }
 
-    public void setLocked(Boolean locked) {
+    public void setIsLocked(Boolean locked) {
         isLocked = locked;
     }
 

@@ -15,8 +15,8 @@ import java.util.Set;
  * Created by Panfuhao on 2016/9/23.
  */
 @Entity
-@Table(name="m_member_rank")
-@SequenceGenerator(name="sequenceGenerator",sequenceName = "seq_member_rank")
+@Table(name = "m_member_rank")
+@SequenceGenerator(name = "sequenceGenerator", sequenceName = "seq_member_rank")
 public class MemberRank extends BaseEntity<Long> {
     private String name;    //名称
     private String scale;   //优惠比列
@@ -26,8 +26,8 @@ public class MemberRank extends BaseEntity<Long> {
     private Set<Member> members = new HashSet<>();    //会员
 
     @NotEmpty
-    @Length(max=200)
-    @Column(nullable = false,unique = true)
+    @Length(max = 200)
+    @Column(nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -38,8 +38,8 @@ public class MemberRank extends BaseEntity<Long> {
 
     @NotNull
     @Min(0)
-    @Digits(integer = 3,fraction = 3)
-    @Column(nullable = false,precision = 12,scale = 6)
+    @Digits(integer = 3, fraction = 3)
+    @Column(nullable = false, precision = 12, scale = 6)
     public String getScale() {
         return scale;
     }
@@ -49,8 +49,8 @@ public class MemberRank extends BaseEntity<Long> {
     }
 
     @Min(0)
-    @Digits(integer = 12,fraction = 3)
-    @Column(precision = 21,scale = 6)
+    @Digits(integer = 12, fraction = 3)
+    @Column(precision = 21, scale = 6)
     public BigDecimal getAmount() {
         return amount;
     }
@@ -79,7 +79,7 @@ public class MemberRank extends BaseEntity<Long> {
         isSpecial = special;
     }
 
-    @OneToMany(mappedBy = "memberRank", fetch =FetchType.LAZY)
+    @OneToMany(mappedBy = "memberRank", fetch = FetchType.LAZY)
     public Set<Member> getMembers() {
         return members;
     }

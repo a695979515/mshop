@@ -11,6 +11,7 @@ import java.util.List;
 public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> {
     /**
      * 根据ID查找
+     *
      * @param id
      * @return
      */
@@ -18,12 +19,14 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
 
     /**
      * 查找全部集合
+     *
      * @return
      */
     List<T> findAll();
 
     /**
      * 根据ids查找集合
+     *
      * @param ids
      * @return
      */
@@ -31,6 +34,7 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
 
     /**
      * 根据ID判断是否存在
+     *
      * @param id
      * @return
      */
@@ -38,6 +42,7 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
 
     /**
      * 保存
+     *
      * @param entity
      * @return
      */
@@ -45,6 +50,7 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
 
     /**
      * 更新
+     *
      * @param entity
      * @return
      */
@@ -52,14 +58,16 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
 
     /**
      * 忽略一些属性更新
+     *
      * @param entity
      * @param ignoreProperties
      * @return
      */
-    T update(T entity , String... ignoreProperties);
+    T update(T entity, String... ignoreProperties);
 
     /**
      * 根据ID删除
+     *
      * @param id
      * @return
      */
@@ -67,6 +75,7 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */
@@ -74,6 +83,7 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
 
     /**
      * 删除
+     *
      * @param entity
      * @return
      */

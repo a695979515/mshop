@@ -11,12 +11,12 @@ import org.springframework.util.StringUtils;
 @Repository("memberDaoImpl")
 public class MemberDaoImpl extends BaseDaoImpl<Member, Long> implements MemberDao {
 
-    public boolean usernameExists(String username){
-        if(StringUtils.isEmpty(username)){
+    public boolean usernameExists(String username) {
+        if (StringUtils.isEmpty(username)) {
             return false;
         }
         String jpql = "select count(*) from Member members where lower(members.username) = lower(:username)";
-        Long count = entityManager.createQuery(jpql,Long.class).setParameter("username",username).getSingleResult();
+        Long count = entityManager.createQuery(jpql, Long.class).setParameter("username", username).getSingleResult();
         return count > 0;
     }
 }

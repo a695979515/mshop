@@ -15,13 +15,14 @@ public class FreeMarkerViewResolver extends AbstractTemplateViewResolver {
     public FreeMarkerViewResolver() {
         setViewClass(requiredViewClass());
     }
+
     @Override
-    protected Class<FreeMarkerView> requiredViewClass(){
+    protected Class<FreeMarkerView> requiredViewClass() {
         return FreeMarkerView.class;
     }
 
     @Override
-    protected AbstractUrlBasedView buildView(String viewName) throws Exception{
+    protected AbstractUrlBasedView buildView(String viewName) throws Exception {
         return super.buildView(FreeMarkerUtils.process(viewName));
     }
 }

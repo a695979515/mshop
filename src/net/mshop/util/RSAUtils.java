@@ -29,7 +29,7 @@ public final class RSAUtils {
     /**
      * 加密/解密算法
      */
-    private static final String TRANSFORMATION = "RSA/ECB/PLCS1Padding";
+    private static final String TRANSFORMATION = "RSA/ECB/PKCS1Padding";
     /**
      * RSA加密算法提供商
      */
@@ -203,6 +203,7 @@ public final class RSAUtils {
 
     /**
      * 验证签名
+     *
      * @param algorithm
      * @param publicKey
      * @param sign
@@ -230,80 +231,83 @@ public final class RSAUtils {
 
     /**
      * 验证签名
+     *
      * @param algorithm
      * @param certificate
      * @param sign
      * @param data
      * @return
      */
-    public static boolean verify(String algorithm, Certificate certificate,byte[] sign,byte[] data){
+    public static boolean verify(String algorithm, Certificate certificate, byte[] sign, byte[] data) {
         Assert.hasText(algorithm);
         Assert.notNull(certificate);
         Assert.notNull(sign);
         Assert.notNull(data);
         try {
-            Signature signature = Signature.getInstance(algorithm,PROVIDER);
+            Signature signature = Signature.getInstance(algorithm, PROVIDER);
             signature.initVerify(certificate);
             signature.update(data);
             return signature.verify(sign);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (InvalidKeyException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (SignatureException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
     /**
      * 加密
+     *
      * @param publicKey
      * @param data
      * @return
      */
-    public static byte[] encrypt(PublicKey publicKey,byte[] data){
+    public static byte[] encrypt(PublicKey publicKey, byte[] data) {
         Assert.notNull(publicKey);
         Assert.notNull(data);
         try {
-            Cipher cipher = Cipher.getInstance(TRANSFORMATION,PROVIDER);
-            cipher.init(Cipher.ENCRYPT_MODE,publicKey);
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION, PROVIDER);
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             return cipher.doFinal(data);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (NoSuchPaddingException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (InvalidKeyException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (BadPaddingException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (IllegalBlockSizeException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 
     /**
      * 解密
+     *
      * @param privateKey
      * @param data
      * @return
      */
-    public static byte[] decrypt(PrivateKey privateKey,byte[] data){
+    public static byte[] decrypt(PrivateKey privateKey, byte[] data) {
         Assert.notNull(privateKey);
         Assert.notNull(data);
         try {
-            Cipher cipher = Cipher.getInstance(TRANSFORMATION,PROVIDER);
-            cipher.init(Cipher.DECRYPT_MODE,privateKey);
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION, PROVIDER);
+            cipher.init(Cipher.DECRYPT_MODE, privateKey);
             return cipher.doFinal(data);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (NoSuchPaddingException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (InvalidKeyException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (BadPaddingException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         } catch (IllegalBlockSizeException e) {
-            throw new RuntimeException(e.getMessage(),e);
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 

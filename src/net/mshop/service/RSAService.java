@@ -9,6 +9,7 @@ import java.security.interfaces.RSAPublicKey;
 public interface RSAService {
     /**
      * 生成密钥  （添加私钥至Seesion并返回公钥）
+     *
      * @param request
      * @return
      */
@@ -16,15 +17,17 @@ public interface RSAService {
 
     /**
      * 移除私钥
+     *
      * @param request
      */
     void removePrivateKey(HttpServletRequest request);
 
     /**
      * 解密参数
+     *
      * @param name
      * @param request
      * @return
      */
-    String decryptParameter(String name,HttpServletRequest request);
+    String decryptParameter(String name, HttpServletRequest request);
 }
