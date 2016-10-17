@@ -53,6 +53,7 @@ public final class SystemUtils {
                 }
                 return super.convert(value);
             }
+
             @SuppressWarnings("rawtypes")
             @Override
             public Object convert(String value, Class<?> clazz) {
@@ -61,6 +62,7 @@ public final class SystemUtils {
                 }
                 return super.convert(value, clazz);
             }
+
             @SuppressWarnings("rawtypes")
             @Override
             public Object convert(Object value, Class<?> targetType) {
@@ -75,6 +77,7 @@ public final class SystemUtils {
                 }
                 return super.convert(value, targetType);
             }
+
             @SuppressWarnings("rawtypes")
             @Override
             public Object convert(String[] values, Class<?> clazz) {
@@ -134,6 +137,7 @@ public final class SystemUtils {
 
     /**
      * 设置系统配置
+     *
      * @param setting
      */
     public static void setSetting(Setting setting) {
@@ -158,32 +162,32 @@ public final class SystemUtils {
             }
             XMLWriter xmlWriter = null;
             try {
-            OutputFormat outputFormat = OutputFormat.createPrettyPrint();
-            outputFormat.setEncoding("UTF-8");
-            outputFormat.setIndent(true);
-            outputFormat.setIndent("	");
-            outputFormat.setNewlines(true);
-            xmlWriter = new XMLWriter(new FileOutputStream(xmlFile),outputFormat);
-            xmlWriter.write(document);
-            xmlWriter.flush();
-            }catch (FileNotFoundException e){
+                OutputFormat outputFormat = OutputFormat.createPrettyPrint();
+                outputFormat.setEncoding("UTF-8");
+                outputFormat.setIndent(true);
+                outputFormat.setIndent("	");
+                outputFormat.setNewlines(true);
+                xmlWriter = new XMLWriter(new FileOutputStream(xmlFile), outputFormat);
+                xmlWriter.write(document);
+                xmlWriter.flush();
+            } catch (FileNotFoundException e) {
                 throw new RuntimeException(e.getMessage(), e);
-            }catch (UnsupportedEncodingException e){
+            } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e.getMessage(), e);
-            }catch (IOException e){
+            } catch (IOException e) {
                 throw new RuntimeException(e.getMessage(), e);
-            }finally {
-                try{
-                    if(xmlWriter !=null){
+            } finally {
+                try {
+                    if (xmlWriter != null) {
                         xmlWriter.close();
                     }
-                }catch (IOException e){
+                } catch (IOException e) {
 
                 }
             }
             Ehcache cache = CACHE_MANAGER.getEhcache(Setting.CACHE_NAME);
             String cacheKey = "setting";
-            cache.put(new net.sf.ehcache.Element(cacheKey,setting));
+            cache.put(new net.sf.ehcache.Element(cacheKey, setting));
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         } catch (DocumentException e) {

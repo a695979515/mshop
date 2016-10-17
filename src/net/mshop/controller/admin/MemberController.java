@@ -3,7 +3,6 @@ package net.mshop.controller.admin;
 import net.mshop.entity.Member;
 import net.mshop.service.MemberService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;

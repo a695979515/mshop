@@ -13,8 +13,8 @@ import java.math.BigDecimal;
  * Created by Panfuhao on 2016/9/26.
  */
 @Service("memberRankServiceImpl")
-public class MemberRankServiceImpl extends BaseServiceImpl<MemberRank,Long> implements MemberRankService{
-    @Resource(name="memberRankDaoImpl")
+public class MemberRankServiceImpl extends BaseServiceImpl<MemberRank, Long> implements MemberRankService {
+    @Resource(name = "memberRankDaoImpl")
     private MemberRankDao memberRankDao;
 
     @Override

@@ -7,6 +7,11 @@
     <link href="${base}/resources/admin/css/common.css" rel="stylesheet" type="text/css" />
     <link href="${base}/resources/admin/css/login.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="${base}/resources/admin/jquery/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="${base}/resources/admin/js/jsbn.js"></script>
+    <script type="text/javascript" src="${base}/resources/admin/js/prng4.js"></script>
+    <script type="text/javascript" src="${base}/resources/admin/js/rng.js"></script>
+    <script type="text/javascript" src="${base}/resources/admin/js/rsa.js"></script>
+    <script type="text/javascript" src="${base}/resources/admin/js/base64.js"></script>
     <script type="text/javascript" src="${base}/resources/admin/js/common.js"></script>
 
 
@@ -19,7 +24,10 @@
             var $captcha = $("#captcha");
 
             $loginForm.submit(function(){
-                $enPassword.val($password.val());
+                var rsaKey = new RSAKey();
+                rsaKey.setPublic(b64tohex("${modulus}"),b64tohex("${exponent}"));
+                var enPassword = hex2b64(rsaKey.encrypt($password.val()));
+                $enPassword.val(enPassword);
             });
 
         });
@@ -33,7 +41,7 @@
     密码：<input type="password" name="password" id="password" value="">
     <br>
     验证码：<input type="text" name="captcha" id="captcha" value="" maxlength="4" autocomplete="off">
-    <input type="hidden" name="captchaId" value="1234"/>
+    <input type="hidden" name="captchaId" value="${captchaId}"/>
     <br>
     <input type="submit" value="提交">
 </form>

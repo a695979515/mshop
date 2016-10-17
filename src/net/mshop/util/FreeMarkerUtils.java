@@ -30,10 +30,11 @@ public final class FreeMarkerUtils {
 
     private static final Configuration DEFAULT_CONFIGURATION = new Configuration(Configuration.VERSION_2_3_25);
     private static final BeansWrapper DEFAULT_BEANS_WRAPPER = new BeansWrapperBuilder(Configuration.VERSION_2_3_25).build();
+
     static {
-        CONVERT_UTILS_BEAN = new ConvertUtilsBean(){
+        CONVERT_UTILS_BEAN = new ConvertUtilsBean() {
             @Override
-            public String convert(Object value){
+            public String convert(Object value) {
                 if (value != null) {
                     Class<?> type = value.getClass();
                     if (type.isEnum() && super.lookup(type) == null) {
@@ -50,6 +51,7 @@ public final class FreeMarkerUtils {
                 }
                 return super.convert(value);
             }
+
             @SuppressWarnings("rawtypes")
             @Override
             public Object convert(String value, Class clazz) {
@@ -87,16 +89,17 @@ public final class FreeMarkerUtils {
         dateConverter.setPatterns(CommonAttributes.DATE_PATTERNS);
         CONVERT_UTILS_BEAN.register(dateConverter, Date.class);
     }
+
     /**
      * 不可实例化
      */
     private FreeMarkerUtils() {
     }
+
     /**
      * 解析字符串模板
      *
-     * @param template
-     *            字符串模板
+     * @param template 字符串模板
      * @return 解析后内容
      */
     public static String process(String template) throws IOException, TemplateException {
@@ -106,10 +109,8 @@ public final class FreeMarkerUtils {
     /**
      * 解析字符串模板
      *
-     * @param template
-     *            字符串模板
-     * @param model
-     *            数据
+     * @param template 字符串模板
+     * @param model    数据
      * @return 解析后内容
      */
     public static String process(String template, Map<String, ?> model) throws IOException, TemplateException {
@@ -127,12 +128,9 @@ public final class FreeMarkerUtils {
     /**
      * 解析字符串模板
      *
-     * @param template
-     *            字符串模板
-     * @param model
-     *            数据
-     * @param configuration
-     *            配置
+     * @param template      字符串模板
+     * @param model         数据
+     * @param configuration 配置
      * @return 解析后内容
      */
     public static String process(String template, Map<String, ?> model, Configuration configuration) throws IOException, TemplateException {
@@ -147,12 +145,9 @@ public final class FreeMarkerUtils {
     /**
      * 获取参数
      *
-     * @param name
-     *            名称
-     * @param type
-     *            类型
-     * @param params
-     *            参数
+     * @param name   名称
+     * @param type   类型
+     * @param params 参数
      * @return 参数，若不存在则返回null
      */
     public static <T> T getParameter(String name, Class<T> type, Map<String, TemplateModel> params) throws TemplateModelException {
@@ -173,12 +168,9 @@ public final class FreeMarkerUtils {
     /**
      * 获取参数
      *
-     * @param index
-     *            索引
-     * @param type
-     *            类型
-     * @param arguments
-     *            参数
+     * @param index     索引
+     * @param type      类型
+     * @param arguments 参数
      * @return 参数，若不存在则返回null
      */
     public static <T> T getArgument(int index, Class<T> type, List<?> arguments) throws TemplateModelException {
@@ -205,10 +197,8 @@ public final class FreeMarkerUtils {
     /**
      * 获取变量
      *
-     * @param name
-     *            名称
-     * @param env
-     *            环境变量
+     * @param name 名称
+     * @param env  环境变量
      * @return 变量
      */
     public static TemplateModel getVariable(String name, Environment env) throws TemplateModelException {
@@ -221,12 +211,9 @@ public final class FreeMarkerUtils {
     /**
      * 设置变量
      *
-     * @param name
-     *            名称
-     * @param value
-     *            变量值
-     * @param env
-     *            环境变量
+     * @param name  名称
+     * @param value 变量值
+     * @param env   环境变量
      */
     public static void setVariable(String name, Object value, Environment env) throws TemplateException {
         Assert.hasText(name);
@@ -242,10 +229,8 @@ public final class FreeMarkerUtils {
     /**
      * 设置变量
      *
-     * @param variables
-     *            变量
-     * @param env
-     *            环境变量
+     * @param variables 变量
+     * @param env       环境变量
      */
     public static void setVariables(Map<String, Object> variables, Environment env) throws TemplateException {
         Assert.notNull(variables);

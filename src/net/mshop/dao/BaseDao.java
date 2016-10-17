@@ -30,26 +30,26 @@ public interface BaseDao<T extends BaseEntity<ID>, ID extends Serializable> {
      * @return 是否为托管状态
      */
     boolean isManaged(T entity);
+
     /**
      * 获取实体对象ID
      *
-     * @param entity
-     *            实体对象
+     * @param entity 实体对象
      * @return 实体对象ID
      */
     ID getIdentifier(T entity);
+
     /**
      * 移除实体对象
      *
-     * @param entity
-     *            实体对象
+     * @param entity 实体对象
      */
     void remove(T entity);
+
     /**
      * 合并实体对象
      *
-     * @param entity
-     *            实体对象
+     * @param entity 实体对象
      * @return 实体对象
      */
     T merge(T entity);

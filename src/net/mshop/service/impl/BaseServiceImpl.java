@@ -137,10 +137,11 @@ public abstract class BaseServiceImpl<T extends BaseEntity<ID>, ID extends Seria
             }
         }
     }
+
     @Transactional
     public void delete(T entity) {
-       if(entity!=null){
-           baseDao.remove(baseDao.isManaged(entity)?entity:baseDao.merge(entity));
+        if (entity != null) {
+            baseDao.remove(baseDao.isManaged(entity) ? entity : baseDao.merge(entity));
         }
     }
 

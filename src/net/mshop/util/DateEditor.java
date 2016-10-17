@@ -9,11 +9,11 @@ import java.text.ParseException;
 /**
  * Created by Panfuhao on 2016/9/23.
  */
-public class DateEditor extends PropertyEditorSupport{
+public class DateEditor extends PropertyEditorSupport {
     /**
      * 默认时间格式
      */
-    private static final String DEFAULT_DATE_FORMAT="yyyy-MM-dd HH:mm:ss";
+    private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     /**
      * 是否讲空的转换为null
      */
@@ -23,28 +23,29 @@ public class DateEditor extends PropertyEditorSupport{
      */
     private String dateFormat = DEFAULT_DATE_FORMAT;
 
-    public DateEditor(boolean emptyAsNull){
+    public DateEditor(boolean emptyAsNull) {
         this.emptyAsNull = emptyAsNull;
     }
-    public DateEditor(boolean emptyAsNull ,String dateFormat){
+
+    public DateEditor(boolean emptyAsNull, String dateFormat) {
         this.emptyAsNull = emptyAsNull;
         this.dateFormat = dateFormat;
     }
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
-        if(text !=null){
+        if (text != null) {
             String value = text.trim();
-            if(emptyAsNull && StringUtils.isEmpty(text)){
+            if (emptyAsNull && StringUtils.isEmpty(text)) {
                 setValue(null);
-            }else {
+            } else {
                 try {
                     setValue(DateUtils.parseDate(value, CommonAttributes.DATE_PATTERNS));
                 } catch (ParseException e) {
                     setValue(null);
                 }
             }
-        }else{
+        } else {
             setValue(null);
         }
     }

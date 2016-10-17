@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Panfuhao on 2016/9/29.
  */
-public class Principal implements Serializable{
+public class Principal implements Serializable {
     private Long id;
     private String username;
 
@@ -30,5 +30,8 @@ public class Principal implements Serializable{
         this.id = id;
     }
 
-
+    @Override
+    public String toString() {
+        return username;
+    }
 }

@@ -26,30 +26,36 @@ public abstract class BaseDaoImpl<T extends BaseEntity<ID>, ID extends Serializa
         ResolvableType resolvableType = ResolvableType.forClass(getClass());
         entityClass = (Class<T>) resolvableType.getSuperType().getGeneric().resolve();
     }
+
     public T findById(ID id) {
         if (id == null) {
             return null;
         }
         return entityManager.find(entityClass, id);
     }
+
     public void persist(T entity) {
         Assert.notNull(entity);
 
         entityManager.persist(entity);
     }
-    public boolean isManaged(T entity){
+
+    public boolean isManaged(T entity) {
         Assert.notNull(entity);
         return entityManager.contains(entity);
     }
-    public ID getIdentifier(T entity){
+
+    public ID getIdentifier(T entity) {
         Assert.notNull(entity);
         return (ID) entityManager.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier(entity);
     }
+
     public void remove(T entity) {
         if (entity != null) {
             entityManager.remove(entity);
         }
     }
+
     public T merge(T entity) {
         Assert.notNull(entity);
 

@@ -9,8 +9,7 @@ public interface MemberDao extends BaseDao<Member, Long> {
     /**
      * 判断用户名是否存在
      *
-     * @param username
-     *            用户名(忽略大小写)
+     * @param username 用户名(忽略大小写)
      * @return 用户名是否存在
      */
     boolean usernameExists(String username);
