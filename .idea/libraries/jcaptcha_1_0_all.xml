@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jcaptcha-1.0-all">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jcaptcha-1.0-all.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

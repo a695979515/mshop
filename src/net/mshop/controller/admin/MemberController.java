@@ -23,7 +23,6 @@ public class MemberController extends BaseController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Member member, Long memberRankId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        System.out.println("保存方法...............");
         member.setPoint(0L);
         member.setBalance(BigDecimal.ZERO);
         member.setAmount(BigDecimal.ZERO);

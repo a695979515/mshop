@@ -16,7 +16,7 @@
     ApplicationContext applicationContext = SpringUtils.getApplicationContext();
     if (applicationContext != null) {
         AdminService adminService = SpringUtils.getBean("adminServiceImpl", AdminService.class);
-        WebUtils.addCookie(request, response, Admin.LOING_TOKEN_COOKIE_NAME, adminService.getLoginToken());
+        WebUtils.addCookie(request, response, Admin.LOGIN_TOKEN_COOKIE_NAME, adminService.getLoginToken());
         response.sendRedirect(base + "/admin/login.html");
         return;
     }

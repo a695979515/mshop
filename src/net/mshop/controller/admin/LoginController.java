@@ -29,7 +29,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping
     public String index(HttpServletRequest request, ModelMap model) {
-        String loginToken = WebUtils.getCookie(request, Admin.LOING_TOKEN_COOKIE_NAME);
+        String loginToken = WebUtils.getCookie(request, Admin.LOGIN_TOKEN_COOKIE_NAME);
         if (!StringUtils.equalsIgnoreCase(loginToken, adminService.getLoginToken())) {
             return "redirect:/";
         }

@@ -56,45 +56,47 @@ public class AuthenticationFilter extends FormAuthenticationFilter {
     /**
      * 创建令牌TOKEN
      *
-     * @param request
-     * @param response
+     * @param servletRequest
+     * @param servletResponse
      * @return
      */
     @Override
-    protected org.apache.shiro.authc.AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-        String username = getUsername(request);
-        String password = getPassword(request);
-        String captchaId = getCaptchaId(request);
-        String captcha = getCaptcha(request);
-        boolean rememberMe = isRememberMe(request);
-        String host = getHost(request);
+    protected org.apache.shiro.authc.AuthenticationToken createToken(ServletRequest servletRequest, ServletResponse servletResponse) {
+        String username = getUsername(servletRequest);
+        String password = getPassword(servletRequest);
+        String captchaId = getCaptchaId(servletRequest);
+        String captcha = getCaptcha(servletRequest);
+        boolean rememberMe = isRememberMe(servletRequest);
+        String host = getHost(servletRequest);
         return new AuthenticationToken(username, password, captchaId, captcha, rememberMe, host);
     }
+
+
 
 
     /**
      * 拒绝访问处理
      *
-     * @param request
-     * @param response
+     * @param servletRequest
+     * @param servletResponse
      * @return
      * @throws Exception
      */
     @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        if (StringUtils.equalsIgnoreCase(httpServletRequest.getHeader("X-Requested-With"), "XMLHttpRequest")) {
-            httpServletResponse.addHeader("loginStatus", "accessDenied");
-            httpServletResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+    protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        if (StringUtils.equalsIgnoreCase(request.getHeader("X-Requested-With"), "XMLHttpRequest")) {
+            response.addHeader("loginStatus", "accessDenied");
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return false;
         }
-        String loginToken = net.mshop.util.WebUtils.getCookie(httpServletRequest, Admin.LOING_TOKEN_COOKIE_NAME);
+        String loginToken = net.mshop.util.WebUtils.getCookie(request, Admin.LOGIN_TOKEN_COOKIE_NAME);
         if (!StringUtils.equalsIgnoreCase(loginToken, adminService.getLoginToken())) {
-            WebUtils.issueRedirect(httpServletRequest, httpServletResponse, "/");
+            WebUtils.issueRedirect(request, response, "/");
             return false;
         }
-        return super.onAccessDenied(httpServletRequest, httpServletResponse);
+        return super.onAccessDenied(request, response);
     }
 
 
@@ -119,10 +121,11 @@ public class AuthenticationFilter extends FormAuthenticationFilter {
         session.stop();
         session = subject.getSession();
         for (Map.Entry<Object, Object> entry : attributes.entrySet()) {
-            session.setAttribute(entry.getKey(), entry.getKey());
+            session.setAttribute(entry.getKey(), entry.getValue());
         }
         return super.onLoginSuccess(token, subject, request, response);
     }
+
 
     /**
      * 获取密码

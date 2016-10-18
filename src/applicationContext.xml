@@ -100,6 +100,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <property name="cacheSeconds" value="3600" />
         <property name="useCodeAsDefaultMessage" value="true" />
     </bean>
+
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver" />
+
+    <bean id="imageCaptchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">
+        <property name="captchaEngine" ref="captchaEngine"/>
+        <property name="minGuarantedStorageDelayInSeconds" value="600"/>
+    </bean>
 
 </beans>

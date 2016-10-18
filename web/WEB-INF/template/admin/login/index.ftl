@@ -22,6 +22,10 @@
             var $username = $("#username");
             var $password = $("#password");
             var $captcha = $("#captcha");
+            var $captchaImage = $("#captchaImage");
+           /* $captchaImage.click(function(){
+                $captchaImage.attr("src","common/captcha.html/captchaId=${captchaId}&timestamp="+new Date().getTime());
+            });*/
 
             $loginForm.submit(function(){
                 var rsaKey = new RSAKey();
@@ -41,8 +45,12 @@
     密码：<input type="password" name="password" id="password" value="">
     <br>
     验证码：<input type="text" name="captcha" id="captcha" value="" maxlength="4" autocomplete="off">
+
+    <img id="captchaImage" class="captchaImage" src="common/captcha.html?captchaId=${captchaId}" title="${message("admin.captcha.imageTitle")}" />
+
     <input type="hidden" name="captchaId" value="${captchaId}"/>
     <br>
+    <input type="checkbox" id="isRememberUsername" value="true" />记住用户名
     <input type="submit" value="提交">
 </form>
 

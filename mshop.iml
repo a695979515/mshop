@@ -50,5 +50,6 @@
     <orderEntry type="library" name="slf4j-api-1.7.7" level="project" />
     <orderEntry type="library" name="bcprov-jdk15on-155" level="project" />
     <orderEntry type="library" name="jaxen-1.2.0-atlassian-2" level="project" />
+    <orderEntry type="library" name="jcaptcha-1.0-all" level="project" />
   </component>
 </module>

@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(name = "m_admin")
 @SequenceGenerator(name = "sequenceGenerator", sequenceName = "seq_admin")
 public class Admin extends BaseEntity<Long> {
-    public static final String LOING_TOKEN_COOKIE_NAME = "adminLoginToken";
+    public static final String LOGIN_TOKEN_COOKIE_NAME = "adminLoginToken";
     private String username;        //用户名
     private String password;        //密码
     private String email;           //邮箱
