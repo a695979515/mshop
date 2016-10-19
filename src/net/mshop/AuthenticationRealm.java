@@ -2,7 +2,9 @@ package net.mshop;
 
 import net.mshop.entity.Admin;
 import net.mshop.entity.Setting;
+import net.mshop.exception.IncorrectCaptchaException;
 import net.mshop.service.AdminService;
+import net.mshop.service.CaptchaService;
 import net.mshop.util.SystemUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -23,6 +25,8 @@ import java.util.List;
 public class AuthenticationRealm extends AuthorizingRealm {
     @Resource(name = "adminServiceImpl")
     private AdminService adminService;
+    @Resource(name = "captchaServiceImpl")
+    private CaptchaService captchaService;
 
 
     @Override
@@ -33,6 +37,9 @@ public class AuthenticationRealm extends AuthorizingRealm {
         String captcha = token.getCaptcha();
         String ip = token.getHost();
         String captchaId = token.getCaptchaId();
+        if(!captchaService.isValid(Setting.CaptchaType.adminLogin,captchaId,captcha)){
+            throw new IncorrectCaptchaException();
+        }
         if (username != null && password != null) {
             Admin admin = adminService.findByUsername(username);
             if (admin == null) {

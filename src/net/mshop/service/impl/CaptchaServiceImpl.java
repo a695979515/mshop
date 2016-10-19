@@ -40,6 +40,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         try {
             return imageCaptchaService.validateResponseForID(captchaId, captcha.toUpperCase());
         } catch (CaptchaServiceException e) {
+            System.out.println("异常");
             return false;
         }
     }

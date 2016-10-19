@@ -3,9 +3,13 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <title>index</title>
-    <link href="${base}/resources/admin/css/common.css" rel="stylesheet" type="text/css" />
-    <link href="${base}/resources/admin/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="${base}/resources/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${base}/resources/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${base}/resources/admin/css/components.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${base}/resources/admin/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${base}/resources/admin/css/login.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="${base}/resources/admin/jquery/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${base}/resources/admin/js/jsbn.js"></script>
     <script type="text/javascript" src="${base}/resources/admin/js/prng4.js"></script>
@@ -16,20 +20,43 @@
 
 
     <script type="text/javascript">
-        $().ready(function(){
+        $().ready(function () {
             var $loginForm = $("#loginFrom");
             var $enPassword = $("#enPassword");
             var $username = $("#username");
             var $password = $("#password");
             var $captcha = $("#captcha");
             var $captchaImage = $("#captchaImage");
-           /* $captchaImage.click(function(){
-                $captchaImage.attr("src","common/captcha.html/captchaId=${captchaId}&timestamp="+new Date().getTime());
-            });*/
+            var $close = $("#close");
+            var $failureMessage = $("#failureMessage");
+            var $forgetPassword = $("#forget-password");
+            var $backBtn = $("#back-btn");
 
-            $loginForm.submit(function(){
+        <#if message??>
+            $("#alert").attr("style", "display:block");
+            $failureMessage.text("${message.content}");
+        </#if>
+            $close.click(function () {
+                $("#alert").removeAttr("style");
+            });
+            $forgetPassword.click(function () {
+                $(".login-form").attr("style", "display:none");
+                $(".forget-form").attr("style", "display:block");
+            });
+            $backBtn.click(function () {
+                $(".login-form").attr("style", "display:block");
+                $(".forget-form").attr("style", "display:none");
+            });
+            /**
+             * 点击验证码图片
+             */
+            $captchaImage.click(function () {
+                $captchaImage.attr("src", "common/captcha.html?captchaId=${captchaId}&timestamp = " + new Date().getTime());
+            });
+
+            $loginForm.submit(function () {
                 var rsaKey = new RSAKey();
-                rsaKey.setPublic(b64tohex("${modulus}"),b64tohex("${exponent}"));
+                rsaKey.setPublic(b64tohex("${modulus}"), b64tohex("${exponent}"));
                 var enPassword = hex2b64(rsaKey.encrypt($password.val()));
                 $enPassword.val(enPassword);
             });
@@ -37,22 +64,74 @@
         });
     </script>
 </head>
-<body>
-<form id="loginFrom" action="login.html" method="post">
-    <input type="hidden" name="enPassword" id="enPassword" value="">
-    账户：<input type="text" name="username" id="username" value="">
-    <br>
-    密码：<input type="password" name="password" id="password" value="">
-    <br>
-    验证码：<input type="text" name="captcha" id="captcha" value="" maxlength="4" autocomplete="off">
+<body class="login">
+<h2 class="logo"><h2 style="color:#fff;text-align: center;">MSHOP</span></h2>
+    <div class="content">
+        <form id="loginFrom" action="login.html" method="post" class="login-form">
+            <div class="form-title">
+                <span class="form-title">欢迎.</span>
+                <span class="form-subtitle">请登录.</span>
+            </div>
 
-    <img id="captchaImage" class="captchaImage" src="common/captcha.html?captchaId=${captchaId}" title="${message("admin.captcha.imageTitle")}" />
+            <div class="alert alert-danger display-hide" id="alert">
+                <span class="close" id="close"></span>
+                <span id="failureMessage"></span>
+            </div>
 
-    <input type="hidden" name="captchaId" value="${captchaId}"/>
-    <br>
-    <input type="checkbox" id="isRememberUsername" value="true" />记住用户名
-    <input type="submit" value="提交">
-</form>
+            <input type="hidden" name="enPassword" id="enPassword" value="">
+            <input type="hidden" name="captchaId" value="${captchaId}"/>
 
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">用户名</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off"
+                       placeholder="用户名" name="username" id="username"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">密码</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off"
+                       placeholder="密码" name="password" id="password"/></div>
+            <div class="form-inline margin-bottom-15">
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">验证码</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" type="text"
+                           autocomplete="off"
+                           placeholder="验证码" name="captcha" id="captcha"/>
+                </div>
+                <div class="form-group" style="float: right;">
+                    <img id="captchaImage" style="float: right;" src="common/captcha.html?captchaId=${captchaId}"
+                         title="点击更换验证码"/>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn red btn-block uppercase">登录</button>
+            </div>
+
+            <div class="form-actions">
+                <div class="pull-left">
+                    <label class="rememberme mt-checkbox mt-checkbox-outline">
+                        <input type="checkbox" name="isRememberUsername" id="isRememberUsername"/> 记住用户名
+                        <span></span>
+                    </label>
+                </div>
+                <div class="pull-right forget-password-block">
+                    <a href="javascript:;" id="forget-password" class="forget-password">忘记密码?</a>
+                </div>
+            </div>
+        </form>
+
+        <form class="forget-form" action="forget.html" method="post">
+            <div class="form-title">
+                <span class="form-title">忘记密码?</span>
+                <span class="form-subtitle">发送邮件重置密码.</span>
+            </div>
+            <div class="form-group">
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email"
+                       name="email"/></div>
+            <div class="form-actions">
+                <button type="button" id="back-btn" class="btn btn-default">返回</button>
+                <button type="submit" class="btn btn-primary uppercase pull-right">发送邮件</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

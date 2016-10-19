@@ -26,26 +26,27 @@ import java.awt.*;
  */
 @Component("captchaEngine")
 public class CaptchaEngine extends ImageCaptchaEngine implements ServletContextAware ,InitializingBean{
+
     private ServletContext servletContext;
     /**
      * 图片宽度
      */
-    @Value("80")
+    @Value("120")
     private int imageWidth;
     /**
      * 图片高度
      */
-    @Value("28")
+    @Value("38")
     private int imageHeight;
     /**
      * 最小字体
      */
-    @Value("12")
+    @Value("18")
     private int minFontSize;
     /**
      * 最大字体
      */
-    @Value("16")
+    @Value("24")
     private int maxFontSize;
     /**
      * 最小字符长度

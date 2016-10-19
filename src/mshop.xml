@@ -36,7 +36,7 @@
     <setting name="passwordMaxLength" value=""/>
     <setting name="registerPoint" value=""/>
     <setting name="registerAgreement" value=""/>
-    <setting name="captchaTypes" value=""/>
+    <setting name="captchaTypes" value="memberLogin,memberRegister,adminLogin,findPassword,resetPassword,other"/>
     <setting name="accountLockTypes" value=""/>
     <setting name="failureLoginCount" value=""/>
     <setting name="autoUnlockTime" value=""/>
