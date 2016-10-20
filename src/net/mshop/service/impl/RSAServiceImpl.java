@@ -25,6 +25,12 @@ public class RSAServiceImpl implements RSAService {
 
     private static final String PRIVATE_KEY_ATTRIBUTE_NAME = "privateKey";
 
+    /**
+     * 生成密钥
+     *
+     * @param request
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public RSAPublicKey generateKey(HttpServletRequest request) {
@@ -36,6 +42,11 @@ public class RSAServiceImpl implements RSAService {
         return publicKey;
     }
 
+    /**
+     * 移除密钥
+     *
+     * @param request
+     */
     @Transactional(readOnly = true)
     @Override
     public void removePrivateKey(HttpServletRequest request) {
@@ -43,6 +54,13 @@ public class RSAServiceImpl implements RSAService {
         request.getSession().removeAttribute(PRIVATE_KEY_ATTRIBUTE_NAME);
     }
 
+    /**
+     * 解密
+     *
+     * @param name
+     * @param request
+     * @return
+     */
     @Override
     public String decryptParameter(String name, HttpServletRequest request) {
         Assert.notNull(request);

@@ -27,18 +27,36 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
     @Resource(name = "adminDaoImpl")
     private AdminDao adminDao;
 
+    /**
+     * 判断用户名是否存在
+     *
+     * @param username
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public boolean usernameExists(String username) {
         return adminDao.usernameExists(username);
     }
 
+    /**
+     * 根据用户名查找
+     *
+     * @param username
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public Admin findByUsername(String username) {
         return adminDao.findByUsername(username);
     }
 
+    /**
+     * 根据ID查找权限
+     *
+     * @param id
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public List<String> findAuthorities(Long id) {
@@ -54,6 +72,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return authorities;
     }
 
+    /**
+     * 判断是否登录
+     *
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public boolean isAuthenticated() {
@@ -64,6 +87,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return false;
     }
 
+    /**
+     * 获取当前登录管理员
+     *
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public Admin getCurrent() {
@@ -77,6 +105,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return null;
     }
 
+    /**
+     * 获取当前登录管理员账户名
+     *
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public String getCurrentUsername() {
@@ -90,6 +123,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return null;
     }
 
+    /**
+     * 获取登录token
+     *
+     * @return
+     */
     @Transactional(readOnly = true)
     @Cacheable(value = "loginToken")
     @Override
@@ -97,6 +135,12 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return DigestUtils.md5Hex(UUID.randomUUID() + RandomStringUtils.randomAlphabetic(30));
     }
 
+    /**
+     * 保存管理员操作
+     *
+     * @param entity
+     * @return
+     */
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
     @Override
@@ -104,6 +148,12 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return super.save(entity);
     }
 
+    /**
+     * 更新管理员操作
+     *
+     * @param entity
+     * @return
+     */
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
     @Override
@@ -111,6 +161,13 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return super.update(entity);
     }
 
+    /**
+     * 更新管理员操作
+     *
+     * @param entity
+     * @param ignoreProperties
+     * @return
+     */
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
     @Override
@@ -118,6 +175,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         return super.update(entity, ignoreProperties);
     }
 
+    /**
+     * 根据ID删除管理员
+     *
+     * @param aLong
+     */
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
     @Override
@@ -125,6 +187,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         super.deleteById(aLong);
     }
 
+    /**
+     * 批量删除管理员
+     *
+     * @param longs
+     */
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
     @Override
@@ -132,6 +199,11 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long> implements Ad
         super.deleteByIds(longs);
     }
 
+    /**
+     * 删除管理员
+     *
+     * @param entity
+     */
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
     @Override

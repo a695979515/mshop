@@ -27,7 +27,12 @@ public class MemberServiceImpl extends BaseServiceImpl<Member, Long> implements 
         return pMember;
     }
 
-
+    /**
+     * 判断用户名是否存在
+     *
+     * @param username
+     * @return
+     */
     @Transactional(readOnly = true)
     public boolean usernameExists(String username) {
         return memberDao.usernameExists(username);

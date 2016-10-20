@@ -7,7 +7,7 @@
     <title>index</title>
     <link href="${base}/resources/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/resources/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${base}/resources/admin/css/components.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${base}/resources/admin/css/components.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/resources/admin/css/plugins.min.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/resources/admin/css/login.min.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="${base}/resources/admin/jquery/jquery-1.12.4.min.js"></script>

@@ -17,12 +17,24 @@ public class MemberRankServiceImpl extends BaseServiceImpl<MemberRank, Long> imp
     @Resource(name = "memberRankDaoImpl")
     private MemberRankDao memberRankDao;
 
+    /**
+     * 判断名称是否存在
+     *
+     * @param name 名称(忽略大小写)
+     * @return
+     */
     @Override
     @Transactional(readOnly = true)
     public boolean nameExists(String name) {
         return memberRankDao.nameExists(name);
     }
 
+    /**
+     * 判断消费金额是否存在
+     *
+     * @param amount 消费金额
+     * @return
+     */
     @Override
     @Transactional(readOnly = true)
     public boolean amountExists(BigDecimal amount) {

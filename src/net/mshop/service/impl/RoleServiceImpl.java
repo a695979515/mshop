@@ -10,7 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by Panfuhao on 2016/10/17.
  */
 @Service("roleServiceImpl")
-public class RoleServiceImpl extends BaseServiceImpl<Role , Long> implements RoleService{
+public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements RoleService {
+    /**
+     * 保存
+     *
+     * @param entity
+     * @return
+     */
     @Override
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
@@ -18,6 +24,12 @@ public class RoleServiceImpl extends BaseServiceImpl<Role , Long> implements Rol
         return super.save(entity);
     }
 
+    /**
+     * 更新
+     *
+     * @param entity
+     * @return
+     */
     @Override
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
@@ -25,6 +37,13 @@ public class RoleServiceImpl extends BaseServiceImpl<Role , Long> implements Rol
         return super.update(entity);
     }
 
+    /**
+     * 更新
+     *
+     * @param entity
+     * @param ignoreProperties
+     * @return
+     */
     @Override
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
@@ -32,6 +51,11 @@ public class RoleServiceImpl extends BaseServiceImpl<Role , Long> implements Rol
         return super.update(entity, ignoreProperties);
     }
 
+    /**
+     * 批量删除
+     *
+     * @param longs
+     */
     @Override
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
@@ -39,6 +63,11 @@ public class RoleServiceImpl extends BaseServiceImpl<Role , Long> implements Rol
         super.deleteByIds(longs);
     }
 
+    /**
+     * 根据id删除
+     *
+     * @param aLong
+     */
     @Override
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)
@@ -46,6 +75,11 @@ public class RoleServiceImpl extends BaseServiceImpl<Role , Long> implements Rol
         super.deleteById(aLong);
     }
 
+    /**
+     * 删除
+     *
+     * @param entity
+     */
     @Override
     @Transactional
     @CacheEvict(value = "authorization", allEntries = true)

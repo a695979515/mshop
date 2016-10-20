@@ -21,12 +21,26 @@ public class CaptchaServiceImpl implements CaptchaService {
     @Resource(name = "imageCaptchaService")
     private com.octo.captcha.service.CaptchaService imageCaptchaService;
 
+    /**
+     * 生成图片
+     *
+     * @param captchaId
+     * @return
+     */
     @Override
     public BufferedImage buildImage(String captchaId) {
         Assert.hasText(captchaId);
         return (BufferedImage) imageCaptchaService.getChallengeForID(captchaId);
     }
 
+    /**
+     * 验证 验证码
+     *
+     * @param captchaType
+     * @param captchaId
+     * @param captcha
+     * @return
+     */
     @Override
     public boolean isValid(Setting.CaptchaType captchaType, String captchaId, String captcha) {
         Assert.notNull(captchaType);
@@ -40,7 +54,6 @@ public class CaptchaServiceImpl implements CaptchaService {
         try {
             return imageCaptchaService.validateResponseForID(captchaId, captcha.toUpperCase());
         } catch (CaptchaServiceException e) {
-            System.out.println("异常");
             return false;
         }
     }

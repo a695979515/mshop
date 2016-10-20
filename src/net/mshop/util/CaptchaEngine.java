@@ -25,7 +25,7 @@ import java.awt.*;
  * Created by Panfuhao on 2016/10/18.
  */
 @Component("captchaEngine")
-public class CaptchaEngine extends ImageCaptchaEngine implements ServletContextAware ,InitializingBean{
+public class CaptchaEngine extends ImageCaptchaEngine implements ServletContextAware, InitializingBean {
 
     private ServletContext servletContext;
     /**
@@ -61,25 +61,27 @@ public class CaptchaEngine extends ImageCaptchaEngine implements ServletContextA
     /**
      * 随机字符串
      */
-    @Value("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890")
+    @Value("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")
     private String charString;
 
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Assert.state(imageHeight>0);
-        Assert.state(imageWidth>0);
-        Assert.state(minFontSize>0);
-        Assert.state(maxFontSize>0);
-        Assert.state(minWordLength>0);
-        Assert.state(maxWordLength>0);
+        Assert.state(imageHeight > 0);
+        Assert.state(imageWidth > 0);
+        Assert.state(minFontSize > 0);
+        Assert.state(maxFontSize > 0);
+        Assert.state(minWordLength > 0);
+        Assert.state(maxWordLength > 0);
         Assert.hasText(charString);
-        Font[] fonts = new Font[]{new Font("Arial",Font.BOLD,maxFontSize),new Font("Bell",Font.BOLD,maxFontSize),new Font("Credit",Font.BOLD,maxFontSize),new Font("Impact",Font.BOLD,maxFontSize) };
-        FontGenerator fontGenerator = new RandomFontGenerator(minFontSize,maxFontSize,fonts);
+
+        Font[] fonts = new Font[]{new Font("Arial", Font.BOLD, maxFontSize), new Font("Bell", Font.BOLD, maxFontSize), new Font("Credit", Font.BOLD, maxFontSize), new Font("Impact", Font.BOLD, maxFontSize)};
+        FontGenerator fontGenerator = new RandomFontGenerator(minFontSize, maxFontSize, fonts);
         BackgroundGenerator backgroundGenerator = new FunkyBackgroundGenerator(imageWidth, imageHeight);
-        TextPaster textPaster = new RandomTextPaster(minWordLength,maxWordLength,Color.white);
-        CaptchaFactory[] captchaFactories = new CaptchaFactory[]{new GimpyFactory(new RandomWordGenerator(charString),new ComposedWordToImage(fontGenerator,backgroundGenerator,textPaster))};
+        TextPaster textPaster = new RandomTextPaster(minWordLength, maxWordLength, Color.WHITE);
+        CaptchaFactory[] captchaFactories = new CaptchaFactory[]{new GimpyFactory(new RandomWordGenerator(charString), new ComposedWordToImage(fontGenerator, backgroundGenerator, textPaster))};
         super.setFactories(captchaFactories);
+
     }
 
     @Override

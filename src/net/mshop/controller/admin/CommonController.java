@@ -1,7 +1,9 @@
 package net.mshop.controller.admin;
 
 import net.mshop.service.CaptchaService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,10 +24,14 @@ import java.io.OutputStream;
 @Controller("adminCommonController")
 @RequestMapping("/admin/common")
 public class CommonController implements ServletContextAware {
-
-    private ServletContext servletContext;
+    @Value("${system.name}")
+    private String systemName;
+    @Value("${system.version}")
+    private String systemVersion;
     @Resource(name = "captchaServiceImpl")
     private CaptchaService captchaService;
+
+    private ServletContext servletContext;
 
     @Override
     public void setServletContext(ServletContext servletContext) {
@@ -33,8 +39,16 @@ public class CommonController implements ServletContextAware {
     }
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String main() {
-        return "/admin/common/main";
+    public String main(ModelMap model) {
+        model.addAttribute("systemName", systemName);
+        model.addAttribute("systemVersion", systemVersion);
+        model.addAttribute("javaVersion", System.getProperty("java.version"));
+        model.addAttribute("javaHome", System.getProperty("java.home"));
+        model.addAttribute("osName", System.getProperty("os.name"));
+        model.addAttribute("osArch", System.getProperty("os.arch"));
+        model.addAttribute("serverInfo", servletContext.getServerInfo());
+        model.addAttribute("servletVersion", servletContext.getMajorVersion() + "." + servletContext.getMinorVersion());
+        return "/admin/main/index";
     }
 
     /**
@@ -54,7 +68,7 @@ public class CommonController implements ServletContextAware {
         String pragma = new StringBuilder().append("yB").append("-").append("der").append("ewoP").reverse().toString();
         String value = new StringBuilder().append("ten").append(".").append("xxp").append("ohs").reverse().toString();
         response.addHeader(pragma, value);
-        response.addHeader("Pragma", "no-cache");
+        response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Cache-Control", "no-store");
         response.setDateHeader("Expires", 0);
