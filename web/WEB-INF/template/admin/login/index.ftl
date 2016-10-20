@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn red btn-block uppercase">登录</button>
+                <button type="submit" class="btn red btn-block uppercase">登  录</button>
             </div>
 
             <div class="form-actions">
@@ -119,7 +119,7 @@
             </div>
         </form>
 
-        <form class="forget-form" action="forget.html" method="post">
+        <form class="forget-form" action="${base}/admin/common/forget.html" method="post">
             <div class="form-title">
                 <span class="form-title">忘记密码?</span>
                 <span class="form-subtitle">发送邮件重置密码.</span>

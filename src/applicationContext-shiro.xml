@@ -15,6 +15,7 @@
                 <entry key="/admin/login.html" value="authc"/>
                 <entry key="/admin/logout.html" value="logout"/>
                 <entry key="/admin/common/captcha.html" value="anon"/>
+                <entry key="/admin/common/forget.html" value="anon"/>
 
                 <entry key="/admin/**" value="authc"/>
             </map>

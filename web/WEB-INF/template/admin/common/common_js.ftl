@@ -5,3 +5,4 @@
 <script src="${base}/resources/admin/js/jquery.blockui.min.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/js/app.min.js" type="text/javascript"></script>
 <script src="${base}/resources/admin/layout/scripts/layout.min.js" type="text/javascript"></script>
+<script src="${base}/resources/admin/js/common.js" type="text/javascript"></script>

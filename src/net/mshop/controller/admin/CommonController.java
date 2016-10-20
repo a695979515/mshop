@@ -79,6 +79,11 @@ public class CommonController implements ServletContextAware {
         ImageIO.write(bufferedImage, "jpeg", outputStream);
         outputStream.flush();
     }
+    @RequestMapping(value = "forget",method = RequestMethod.POST)
+    private String forget(String email){
+        System.out.println("email1="+email);
+        return "/admin/forget/forget/rest";
+    }
 
     /**
      * 权限错误

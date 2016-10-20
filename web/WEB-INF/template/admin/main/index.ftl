@@ -25,7 +25,7 @@
             </div>
             <!-- END PAGE BAR -->
             <h3 class="page-title"> 主页
-                <small>显示消息、系统信息、概要</small>
+                <small>系统信息、概要</small>
             </h3>
 
             <div class="row">
