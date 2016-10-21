@@ -165,7 +165,7 @@ public class Setting implements Serializable {
     /**
      * 水印位置
      */
-    private Setting.WaterMarkPosition waterMarkPosition;
+    private Setting.WaterMarkPosition watermarkPosition;
     /**
      * 价格小数点精确位数
      */
@@ -988,11 +988,11 @@ public class Setting implements Serializable {
 
     @NotNull
     public WaterMarkPosition getWaterMarkPosition() {
-        return waterMarkPosition;
+        return watermarkPosition;
     }
 
-    public void setWaterMarkPosition(WaterMarkPosition waterMarkPosition) {
-        this.waterMarkPosition = waterMarkPosition;
+    public void setWaterMarkPosition(WaterMarkPosition watermarkPosition) {
+        this.watermarkPosition = watermarkPosition;
     }
 
     @Length(max = 200)

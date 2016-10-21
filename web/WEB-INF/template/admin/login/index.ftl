@@ -31,18 +31,33 @@
             var $failureMessage = $("#failureMessage");
             var $forgetPassword = $("#forget-password");
             var $backBtn = $("#back-btn");
-
+            var $isRememberUsername = $("#isRememberUsername");
+            //登录失败显示消息
         <#if message??>
             $("#alert").attr("style", "display:block");
             $failureMessage.text("${message.content}");
         </#if>
+
+            //cookie存在不存在
+            if(getCookie("adminUsername")!=null){
+                $isRememberUsername.prop("checked",true);
+                $username.val(getCookie("adminUsername"));
+                $password.focus();
+            }else{
+                $isRememberUsername.prop("checked",false);
+                $username.focus();
+            }
+
+            //消息框点击消失
             $close.click(function () {
                 $("#alert").removeAttr("style");
             });
+            //忘记密码
             $forgetPassword.click(function () {
                 $(".login-form").attr("style", "display:none");
                 $(".forget-form").attr("style", "display:block");
             });
+            //返回按钮
             $backBtn.click(function () {
                 $(".login-form").attr("style", "display:block");
                 $(".forget-form").attr("style", "display:none");
@@ -55,6 +70,27 @@
             });
 
             $loginForm.submit(function () {
+                if($username.val()==""){
+                    $("#alert").attr("style", "display:block");
+                    $failureMessage.text("请输入您的用户名");
+                    return false;
+                }
+                if($password.val()==""){
+                    $("#alert").attr("style", "display:block");
+                    $failureMessage.text("请输入您的密码");
+                    return false;
+                }
+                if($captcha.val()==""){
+                    $("#alert").attr("style", "display:block");
+                    $failureMessage.text("请输入您的验证码");
+                    return false;
+                }
+                if($isRememberUsername.prop("checked")){
+                    addCookie("adminUsername",$username.val(),{expires:7*24*60*60});
+                }else{
+                    removeCookie("adminUsername")
+                }
+
                 var rsaKey = new RSAKey();
                 rsaKey.setPublic(b64tohex("${modulus}"), b64tohex("${exponent}"));
                 var enPassword = hex2b64(rsaKey.encrypt($password.val()));
@@ -89,7 +125,7 @@
             <div class="form-group">
                 <label class="control-label visible-ie8 visible-ie9">密码</label>
                 <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off"
-                       placeholder="密码" name="password" id="password"/></div>
+                       placeholder="密码" id="password"/></div>
             <div class="form-inline margin-bottom-15">
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">验证码</label>
@@ -103,7 +139,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn red btn-block uppercase">登  录</button>
+                <button type="submit" class="btn red btn-block uppercase">登 录</button>
             </div>
 
             <div class="form-actions">

@@ -20,10 +20,10 @@
                 <!-- END SIDEBAR TOGGLER BUTTON -->
             </li>
             <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
-            <li class="sidebar-search-wrapper">
-                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-                <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
-                <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+      <#--      <li class="sidebar-search-wrapper">
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM &ndash;&gt;
+                <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box &ndash;&gt;
+                <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box &ndash;&gt;
                 <form class="sidebar-search  " action="" method="POST">
                     <a href="javascript:;" class="remove">
                         <i class="icon-close"></i>
@@ -37,8 +37,8 @@
                                     </span>
                     </div>
                 </form>
-                <!-- END RESPONSIVE QUICK SEARCH FORM -->
-            </li>
+                <!-- END RESPONSIVE QUICK SEARCH FORM &ndash;&gt;
+            </li>-->
             <li class="nav-item start active open">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
@@ -331,7 +331,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item  ">
-                        <a href="#" class="nav-link ">
+                        <a href="${base}/admin/setting/edit.html" class="nav-link ">
                             <span class="title">系统设置</span>
                         </a>
                     </li>
@@ -342,7 +342,7 @@
                     </li>
                     <li class="nav-item  ">
                         <a href="#" class="nav-link ">
-                            <span class="title">支付方法</span>
+                            <span class="title">支付方式</span>
                         </a>
                     </li>
                     <li class="nav-item  ">

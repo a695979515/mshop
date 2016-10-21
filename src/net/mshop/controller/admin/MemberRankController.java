@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 
 /**
+ * 会员等级Controller
  * Created by Panfuhao on 2016/9/26.
  */
 @Controller("adminMemberRankController")

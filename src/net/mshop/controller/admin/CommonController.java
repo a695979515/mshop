@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
+ * 共同Controller
  * Created by Panfuhao on 2016/10/17.
  */
 @Controller("adminCommonController")

@@ -14,16 +14,14 @@
 <#include "/admin/common/navigation.ftl"/>
     <div class="page-content-wrapper">
         <div class="page-content">
-            <!-- BEGIN PAGE BAR -->
             <div class="page-bar">
                 <ul class="page-breadcrumb">
                     <li>
-                        <a href="index.html">主页</a>
+                        <a href="${base}/admin/common/main.html">主页</a>
                     </li>
 
                 </ul>
             </div>
-            <!-- END PAGE BAR -->
             <h3 class="page-title"> 主页
                 <small>系统信息、概要</small>
             </h3>

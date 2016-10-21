@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 
 /**
+ * 后台用户管理 Controller
  * Created by Panfuhao on 2016/9/23.
  */
 @Controller("adminMemberController")

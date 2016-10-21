@@ -99,7 +99,13 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="cacheSeconds" value="3600" />
         <property name="useCodeAsDefaultMessage" value="true" />
+        <property name="basenames">
+            <list>
+                <value>/WEB-INF/message</value>
+            </list>
+        </property>
     </bean>
+
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver" />
 

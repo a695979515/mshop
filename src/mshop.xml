@@ -10,7 +10,7 @@
     <setting name="zipCode" value=""/>
     <setting name="email" value=""/>
     <setting name="recordNumber" value=""/>
-    <setting name="siteEnabled" value=""/>
+    <setting name="siteEnabled" value="true"/>
     <setting name="closeMessage" value=""/>
     <setting name="largeProductImageWidth" value=""/>
     <setting name="largeProductImageHeight" value=""/>
@@ -23,12 +23,12 @@
     <setting name="defaultThumbnailProductImage" value=""/>
     <setting name="watermarkAlpha" value=""/>
     <setting name="watermarkImage" value=""/>
-    <setting name="waterMarkPosition" value=""/>
+    <setting name="watermarkPosition" value=""/>
     <setting name="priceScale" value=""/>
     <setting name="roundType" value=""/>
     <setting name="showMarketPrice" value=""/>
     <setting name="defaultMarketPriceScale" value=""/>
-    <setting name="registerEnabled" value=""/>
+    <setting name="registerEnabled" value="true"/>
     <setting name="disabledUsername" value=""/>
     <setting name="usernameMinLength" value=""/>
     <setting name="usernameMaxLength" value=""/>
@@ -70,5 +70,4 @@
     <setting name="cnzzEnabled" value=""/>
     <setting name="cnzzSiteId" value=""/>
     <setting name="cnzzPassword" value=""/>
-
 </mshop>

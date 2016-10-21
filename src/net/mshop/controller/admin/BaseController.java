@@ -1,8 +1,18 @@
 package net.mshop.controller.admin;
 
+
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
 import net.mshop.util.DateEditor;
 import net.mshop.util.StringEditor;
-import org.omg.CORBA.Object;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.WebDataBinder;
@@ -10,19 +20,15 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import javax.annotation.Resource;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
-
 /**
+ * 基础Controller
  * Created by Panfuhao on 2016/9/23.
  */
 public class BaseController {
+    /**
+     * 错误视图
+     */
+    protected static final String ERROR_VIEW="/admin/common/error";
     /**
      * "验证结果"属性名称
      */
