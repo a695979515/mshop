@@ -481,7 +481,9 @@ public class Setting implements Serializable {
     public void setDefaultLargeProductImage(String defaultLargeProductImage) {
         this.defaultLargeProductImage = defaultLargeProductImage;
     }
-
+    @NotNull
+    @Min(0)
+    @Digits(integer = 3, fraction = 3)
     public Double getDefaultMarketPriceScale() {
         return defaultMarketPriceScale;
     }

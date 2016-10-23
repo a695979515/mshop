@@ -4,16 +4,17 @@ package net.mshop.controller.admin;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import net.mshop.entity.Setting;
 import net.mshop.util.DateEditor;
 import net.mshop.util.SpringUtils;
 import net.mshop.util.StringEditor;
+import net.mshop.util.SystemUtils;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,7 +30,7 @@ public class BaseController {
     /**
      * 错误视图
      */
-    protected static final String ERROR_VIEW="/admin/common/error";
+    protected static final String ERROR_VIEW = "/admin/common/error";
     /**
      * "验证结果"属性名称
      */
@@ -49,15 +50,12 @@ public class BaseController {
     /**
      * 数据验证
      *
-     * @param target
-     *            验证对象
-     * @param groups
-     *            验证组
+     * @param target 验证对象
+     * @param groups 验证组
      * @return 验证结果
      */
     protected boolean isValid(Object target, Class<?>... groups) {
         Assert.notNull(target);
-
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(target, groups);
         if (constraintViolations.isEmpty()) {
             return true;
@@ -70,10 +68,8 @@ public class BaseController {
     /**
      * 数据验证
      *
-     * @param targets
-     *            验证对象
-     * @param groups
-     *            验证组
+     * @param targets 验证对象
+     * @param groups  验证组
      * @return 验证结果
      */
     protected boolean isValid(Collection<Object> targets, Class<?>... groups) {
@@ -90,14 +86,10 @@ public class BaseController {
     /**
      * 数据验证
      *
-     * @param type
-     *            类型
-     * @param property
-     *            属性
-     * @param value
-     *            值
-     * @param groups
-     *            验证组
+     * @param type     类型
+     * @param property 属性
+     * @param value    值
+     * @param groups   验证组
      * @return 验证结果
      */
     protected boolean isValid(Class<?> type, String property, Object value, Class<?>... groups) {
@@ -112,13 +104,12 @@ public class BaseController {
         requestAttributes.setAttribute(CONSTRAINT_VIOLATIONS_ATTRIBUTE_NAME, constraintViolations, RequestAttributes.SCOPE_REQUEST);
         return false;
     }
+
     /**
      * 获取国际化消息
      *
-     * @param code
-     *            代码
-     * @param args
-     *            参数
+     * @param code 代码
+     * @param args 参数
      * @return 国际化消息
      */
     protected String message(String code, Object... args) {
@@ -126,6 +117,14 @@ public class BaseController {
     }
 
     protected String currency(BigDecimal amount, boolean showSign, boolean showUnit) {
-        return null;
+        Setting setting = SystemUtils.getSetting();
+        String price = setting.setScale(amount).toString();
+        if (showSign) {
+            price = setting.getCurrencySign() + price;
+        }
+        if (showUnit) {
+            price += setting.getCurrencyUnit();
+        }
+        return price;
     }
 }

@@ -16,10 +16,10 @@ import static net.mshop.controller.admin.BaseController.ERROR_VIEW;
  */
 @Controller("settingController")
 @RequestMapping("/admin/setting")
-public class SettingController extends BaseController{
+public class SettingController extends BaseController {
 
-    @RequestMapping(value="/edit",method = RequestMethod.GET)
-    public String edit(ModelMap model){
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String edit(ModelMap model) {
         model.addAttribute("setting", SystemUtils.getSetting());
         model.addAttribute("watermarkPositions", Setting.WatermarkPosition.values());
         model.addAttribute("roundTypes", Setting.RoundType.values());
@@ -28,23 +28,28 @@ public class SettingController extends BaseController{
         model.addAttribute("stockAllocationTimes", Setting.StockAllocationTime.values());
         return "/admin/setting/edit";
     }
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public String update(Setting setting , RedirectAttributes redirectAttributes){
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(Setting setting) {
+        setting.setSmtpSSLEnabled(setting.getSmtpSSLEnabled() == null ? false : setting.getSmtpSSLEnabled());
+        setting.setInvoiceEnabled(setting.getInvoiceEnabled() == null ? false : setting.getInvoiceEnabled());
+        setting.setTaxPriceEnabled(setting.getTaxPriceEnabled() == null ? false : setting.getTaxPriceEnabled());
+        setting.setShowMarketPrice(setting.getShowMarketPrice() == null ? false : setting.getShowMarketPrice());
+        setting.setSiteEnabled(setting.getSiteEnabled() == null ? false : setting.getSiteEnabled());
+        setting.setRegisterEnabled(setting.getRegisterEnabled() == null ? false : setting.getRegisterEnabled());
+        setting.setReviewEnabled(setting.getReviewEnabled() == null ? false : setting.getReviewEnabled());
+        setting.setReviewCheck(setting.getReviewCheck() == null ? false : setting.getReviewCheck());
         if (!isValid(setting)) {
-            System.out.println("错误");
             return ERROR_VIEW;
         }
         Setting srcSetting = SystemUtils.getSetting();
-        if(StringUtils.isEmpty(setting.getSmtpPassword())){
+        if (StringUtils.isEmpty(setting.getSmtpPassword())) {
             setting.setSmtpPassword(srcSetting.getSmtpPassword());
         }
-        setting.setWatermarkImage(srcSetting.getWatermarkImage());
         setting.setCnzzEnabled(srcSetting.getCnzzEnabled());
         setting.setCnzzSiteId(srcSetting.getCnzzSiteId());
         setting.setCnzzPassword(srcSetting.getCnzzPassword());
-        System.out.println("44444");
         SystemUtils.setSetting(setting);
-        System.out.println("55555");
         return "redirect:edit.html";
     }
 }

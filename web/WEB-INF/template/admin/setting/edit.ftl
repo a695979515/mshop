@@ -64,7 +64,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>网站名称</label>
+                                                <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>网站名称${message("Setting.WatermarkPosition.no")}</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="siteUrl" value="${setting.siteUrl}" maxlength="200">
                                                 </div>
@@ -254,8 +254,8 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>注册协议</label>
                                                 <div class="col-md-4">
-                                                    <textarea class="form-control" rows="8" name="registerAgreement" style="resize: none;">${setting.registerAgreement}</textarea>                                                </div>
-                                              <#--  </div>-->
+                                                    <textarea class="form-control" rows="8" name="registerAgreement" style="resize: none;">${setting.registerAgreement}</textarea>
+                                                </div>
                                             </div>
 
                                                 <div class="form-group">
@@ -380,7 +380,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">是否开启SSL</label>
                                                 <div class="col-md-4">
-                                                    <input type="checkbox" class="make-switch" name="smtpSSLEnabled" data-on-text="是" data-off-text="否"  <#if setting.smtpSSLEnabled> checked="checked"</#if>>
+                                                    <input type="checkbox" class="make-switch" name="smtpSSLEnabled" data-on-text="是" data-off-text="否" <#if setting.smtpSSLEnabled> checked="checked"</#if>>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -478,7 +478,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">价格精确方式</label>
                                                 <div class="col-md-4">
-                                                    <select name="priceRoundType" class="form-control input-medium">
+                                                    <select name="roundType" class="form-control input-medium">
                                                         <#list roundTypes as roundType>
                                                         <option value="${roundType}"<#if roundType == setting.priceRoundType> selected="selected"</#if>>精确方式</option>
                                                         </#list>

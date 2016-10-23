@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mshop>
 
-    <setting name="siteName" value=""/>
+<mshop>
+    <setting name="siteName" value="MSHOP"/>
     <setting name="siteUrl" value="http://localhost:8080"/>
-    <setting name="logo" value=""/>
-    <setting name="hotSearch" value=""/>
-    <setting name="address" value=""/>
-    <setting name="phone" value=""/>
-    <setting name="zipCode" value=""/>
-    <setting name="email" value=""/>
-    <setting name="recordNumber" value=""/>
+    <setting name="logo" value="/logo.jpg"/>
+    <setting name="hotSearch" value="手机，数码，电脑"/>
+    <setting name="address" value="深圳市南山区"/>
+    <setting name="phone" value="13557854833"/>
+    <setting name="zipCode" value="537111"/>
+    <setting name="email" value="pfh13557854833@gmail.com"/>
+    <setting name="recordNumber" value="粤12345678"/>
     <setting name="siteEnabled" value="true"/>
-    <setting name="closeMessage" value=""/>
-    <setting name="largeProductImageWidth" value=""/>
-    <setting name="largeProductImageHeight" value=""/>
-    <setting name="mediumProductImageWidth" value=""/>
-    <setting name="mediumProductImageHeight" value=""/>
-    <setting name="thumbnailProductImageWidth" value=""/>
-    <setting name="thumbnailProductImageHeight" value=""/>
-    <setting name="defaultLargeProductImage" value=""/>
-    <setting name="defaultMediumProductImage" value=""/>
-    <setting name="defaultThumbnailProductImage" value=""/>
-    <setting name="watermarkAlpha" value=""/>
-    <setting name="watermarkImage" value=""/>
-    <setting name="watermarkPosition" value=""/>
-    <setting name="priceScale" value=""/>
+    <setting name="closeMessage" value="网站暂时关闭"/>
+    <setting name="largeProductImageWidth" value="800"/>
+    <setting name="largeProductImageHeight" value="800"/>
+    <setting name="mediumProductImageWidth" value="400"/>
+    <setting name="mediumProductImageHeight" value="400"/>
+    <setting name="thumbnailProductImageWidth" value="140"/>
+    <setting name="thumbnailProductImageHeight" value="140"/>
+    <setting name="defaultLargeProductImage" value="/da.jpg"/>
+    <setting name="defaultMediumProductImage" value="/zhong.jpg"/>
+    <setting name="defaultThumbnailProductImage" value="/suo.jpg"/>
+    <setting name="watermarkAlpha" value="0"/>
+    <setting name="watermarkImage" value="/shuiying.jpg"/>
+    <setting name="watermarkPosition" value="no"/>
+    <setting name="priceScale" value="0"/>
     <setting name="roundType" value=""/>
     <setting name="showMarketPrice" value=""/>
-    <setting name="defaultMarketPriceScale" value=""/>
+    <setting name="defaultMarketPriceScale" value="1.2"/>
     <setting name="registerEnabled" value="true"/>
-    <setting name="disabledUsername" value=""/>
-    <setting name="usernameMinLength" value=""/>
-    <setting name="usernameMaxLength" value=""/>
-    <setting name="passwordMinLength" value=""/>
-    <setting name="passwordMaxLength" value=""/>
-    <setting name="registerPoint" value=""/>
-    <setting name="registerAgreement" value=""/>
+    <setting name="disabledUsername" value="admin，管理员"/>
+    <setting name="usernameMinLength" value="6"/>
+    <setting name="usernameMaxLength" value="12"/>
+    <setting name="passwordMinLength" value="6"/>
+    <setting name="passwordMaxLength" value="12"/>
+    <setting name="registerPoint" value="10"/>
+    <setting name="registerAgreement" value="注册协议"/>
     <setting name="captchaTypes" value="memberLogin,memberRegister,adminLogin,findPassword,resetPassword,other"/>
     <setting name="accountLockTypes" value=""/>
-    <setting name="failureLoginCount" value=""/>
-    <setting name="autoUnlockTime" value=""/>
-    <setting name="safeKeyExpiryTime" value=""/>
-    <setting name="uploadMaxSize" value=""/>
+    <setting name="failureLoginCount" value="5"/>
+    <setting name="autoUnlockTime" value="10"/>
+    <setting name="safeKeyExpiryTime" value="1440"/>
+    <setting name="uploadMaxSize" value="10"/>
     <setting name="uploadImageExtension" value=""/>
     <setting name="uploadMediaExtension" value=""/>
     <setting name="uploadFileExtension" value=""/>
-    <setting name="imageUploadPath" value=""/>
-    <setting name="mediaUploadPath" value=""/>
-    <setting name="fileUploadPath" value=""/>
-    <setting name="smtpHost" value=""/>
-    <setting name="smtpPort" value=""/>
-    <setting name="smtpUsername" value=""/>
+    <setting name="imageUploadPath" value="/"/>
+    <setting name="mediaUploadPath" value="/"/>
+    <setting name="fileUploadPath" value="/"/>
+    <setting name="smtpHost" value="cesiumai.smtp"/>
+    <setting name="smtpPort" value="23"/>
+    <setting name="smtpUsername" value="service@cesiumai.com"/>
     <setting name="smtpPassword" value=""/>
     <setting name="smtpSSLEnabled" value=""/>
-    <setting name="smtpFromMail" value=""/>
-    <setting name="currencySign" value=""/>
-    <setting name="currencyUnit" value=""/>
-    <setting name="stockAlertCount" value=""/>
-    <setting name="stockAllocationTime" value=""/>
-    <setting name="defaultPointScale" value=""/>
-    <setting name="reviewEnabled" value=""/>
-    <setting name="reviewCheck" value=""/>
+    <setting name="smtpFromMail" value="service@cesiumai.com"/>
+    <setting name="currencySign" value="￥"/>
+    <setting name="currencyUnit" value="元"/>
+    <setting name="stockAlertCount" value="10"/>
+    <setting name="stockAllocationTime" value="order"/>
+    <setting name="defaultPointScale" value="1.0"/>
+    <setting name="reviewEnabled" value="true"/>
+    <setting name="reviewCheck" value="true"/>
     <setting name="invoiceEnabled" value=""/>
     <setting name="taxPriceEnabled" value=""/>
-    <setting name="taxRate" value=""/>
+    <setting name="taxRate" value="0.6"/>
     <setting name="cookiePath" value="/"/>
     <setting name="cookieDomain" value=""/>
     <setting name="kuaidi100key" value=""/>
-    <setting name="cnzzEnabled" value=""/>
+    <setting name="cnzzEnabled" value="false"/>
     <setting name="cnzzSiteId" value=""/>
     <setting name="cnzzPassword" value=""/>
 </mshop>
