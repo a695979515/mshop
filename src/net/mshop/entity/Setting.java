@@ -27,7 +27,7 @@ public class Setting implements Serializable {
     /**
      * 水印位置  枚举
      */
-    public enum WaterMarkPosition {
+    public enum WatermarkPosition {
         no,     //无
         topLeft,    //左上
         topRight,   //又上
@@ -165,7 +165,7 @@ public class Setting implements Serializable {
     /**
      * 水印位置
      */
-    private Setting.WaterMarkPosition watermarkPosition;
+    private Setting.WatermarkPosition watermarkPosition;
     /**
      * 价格小数点精确位数
      */
@@ -325,7 +325,7 @@ public class Setting implements Serializable {
     /**
      * 税率
      */
-    private Boolean taxRate;
+    private Double taxRate;
     /**
      * cookie路径
      */
@@ -351,8 +351,8 @@ public class Setting implements Serializable {
      */
     private String cnzzPassword;
 
-    @NotEmpty
-    @Length(max = 200)
+    @NotNull
+    @Min(0)
     public Integer getAutoUnlockTime() {
         return autoUnlockTime;
     }
@@ -871,11 +871,11 @@ public class Setting implements Serializable {
     @NotNull
     @Min(0)
     @Digits(integer = 3, fraction = 3)
-    public Boolean getTaxRate() {
+    public Double getTaxRate() {
         return taxRate;
     }
 
-    public void setTaxRate(Boolean taxRate) {
+    public void setTaxRate(Double taxRate) {
         this.taxRate = taxRate;
     }
 
@@ -987,11 +987,11 @@ public class Setting implements Serializable {
     }
 
     @NotNull
-    public WaterMarkPosition getWaterMarkPosition() {
+    public WatermarkPosition getWatermarkPosition() {
         return watermarkPosition;
     }
 
-    public void setWaterMarkPosition(WaterMarkPosition watermarkPosition) {
+    public void setWatermarkPosition(WatermarkPosition watermarkPosition) {
         this.watermarkPosition = watermarkPosition;
     }
 

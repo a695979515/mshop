@@ -10,7 +10,6 @@ import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.DateConverter;
-import org.apache.shiro.util.Assert;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -18,6 +17,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.Assert;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -142,6 +142,7 @@ public final class SystemUtils {
      */
     public static void setSetting(Setting setting) {
         Assert.notNull(setting);
+
         try {
             File xmlFile = new ClassPathResource(CommonAttributes.MSHOP_XML_PATH).getFile();
             Document document = new SAXReader().read(xmlFile);
@@ -160,6 +161,7 @@ public final class SystemUtils {
                     throw new RuntimeException(e.getMessage(), e);
                 }
             }
+
             XMLWriter xmlWriter = null;
             try {
                 OutputFormat outputFormat = OutputFormat.createPrettyPrint();
@@ -182,12 +184,11 @@ public final class SystemUtils {
                         xmlWriter.close();
                     }
                 } catch (IOException e) {
-
                 }
             }
             Ehcache cache = CACHE_MANAGER.getEhcache(Setting.CACHE_NAME);
             String cacheKey = "setting";
-            cache.put(new net.sf.ehcache.Element(cacheKey, setting));
+            cache.put(new Element(cacheKey, setting));
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage(), e);
         } catch (DocumentException e) {

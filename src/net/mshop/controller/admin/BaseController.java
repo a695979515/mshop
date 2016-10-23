@@ -12,6 +12,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import net.mshop.util.DateEditor;
+import net.mshop.util.SpringUtils;
 import net.mshop.util.StringEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.util.Assert;
@@ -44,8 +45,19 @@ public class BaseController {
         webDataBinder.registerCustomEditor(String.class, "password", new StringEditor(true));
     }
 
+
+    /**
+     * 数据验证
+     *
+     * @param target
+     *            验证对象
+     * @param groups
+     *            验证组
+     * @return 验证结果
+     */
     protected boolean isValid(Object target, Class<?>... groups) {
         Assert.notNull(target);
+
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(target, groups);
         if (constraintViolations.isEmpty()) {
             return true;
@@ -55,8 +67,18 @@ public class BaseController {
         return false;
     }
 
+    /**
+     * 数据验证
+     *
+     * @param targets
+     *            验证对象
+     * @param groups
+     *            验证组
+     * @return 验证结果
+     */
     protected boolean isValid(Collection<Object> targets, Class<?>... groups) {
         Assert.notEmpty(targets);
+
         for (Object target : targets) {
             if (!isValid(target, groups)) {
                 return false;
@@ -65,9 +87,23 @@ public class BaseController {
         return true;
     }
 
+    /**
+     * 数据验证
+     *
+     * @param type
+     *            类型
+     * @param property
+     *            属性
+     * @param value
+     *            值
+     * @param groups
+     *            验证组
+     * @return 验证结果
+     */
     protected boolean isValid(Class<?> type, String property, Object value, Class<?>... groups) {
         Assert.notNull(type);
         Assert.hasText(property);
+
         Set<?> constraintViolations = validator.validateValue(type, property, value, groups);
         if (constraintViolations.isEmpty()) {
             return true;
@@ -76,16 +112,17 @@ public class BaseController {
         requestAttributes.setAttribute(CONSTRAINT_VIOLATIONS_ATTRIBUTE_NAME, constraintViolations, RequestAttributes.SCOPE_REQUEST);
         return false;
     }
-
-    protected boolean isValid(Class<?> type, Map<String, Object> properties, Class<?>... groups) {
-        Assert.notNull(type);
-        Assert.notEmpty(properties);
-        for (Map.Entry<String, Object> entry : properties.entrySet()) {
-            if (!isValid(type, entry.getKey(), entry.getValue(), groups)) {
-                return false;
-            }
-        }
-        return true;
+    /**
+     * 获取国际化消息
+     *
+     * @param code
+     *            代码
+     * @param args
+     *            参数
+     * @return 国际化消息
+     */
+    protected String message(String code, Object... args) {
+        return SpringUtils.getMessage(code, args);
     }
 
     protected String currency(BigDecimal amount, boolean showSign, boolean showUnit) {

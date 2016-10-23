@@ -71,7 +71,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>网站LOGO</label>
-                                                <div class="col-md-4">
+                                                <div class="col-md-9">
                                                     <input type="text" class="form-control input-inline input-medium" name="logo" value="${setting.logo}" maxlength="200">
                                                     <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
@@ -81,6 +81,7 @@
                                                 <label class="col-md-3 control-label">热门搜索</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="hotSearch" value="${setting.hotSearch}" maxlength="200">
+                                                    <span class="help-block">多个内容请用","号隔开</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -161,7 +162,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>默认商品中图</label>
-                                                <div class="col-md-4">
+                                                <div class="col-md-9">
                                                     <input type="text" class="form-control input-inline " name="defaultMediumProductImage" value="${setting.defaultMediumProductImage}" maxlength="200">
                                                     <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
@@ -169,7 +170,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>默认商品缩略图</label>
-                                                <div class="col-md-4">
+                                                <div class="col-md-9">
                                                     <input type="text" class="form-control input-inline " name="defaultThumbnailProductImage" value="${setting.defaultThumbnailProductImage}" maxlength="200">
                                                     <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
@@ -187,7 +188,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">水印图片</label>
-                                                <div class="col-md-4">
+                                                <div class="col-md-9">
                                                     <input type="text" class="form-control input-inline " name="watermarkImage" value="${setting.watermarkImage}" maxlength="200">
                                                     <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
@@ -384,7 +385,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>发件人邮箱</label>
-                                                <div class="col-md-4">
+                                                <div class="col-md-9">
                                                     <input type="text" class="form-control input-inline input-medium" name="smtpFromMail" value="${setting.smtpFromMail}" maxlength="200">
                                                     <a class="btn btn-default" data-toggle="modal" href="#testEamil">测试邮件</a>
                                                 </div>

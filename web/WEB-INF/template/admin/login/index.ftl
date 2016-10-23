@@ -130,7 +130,7 @@
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">验证码</label>
                     <input class="form-control form-control-solid placeholder-no-fix" type="text"
-                           autocomplete="off"
+                           autocomplete="off" maxlength="4"
                            placeholder="验证码" name="captcha" id="captcha"/>
                 </div>
                 <div class="form-group" style="float: right;">
