@@ -74,6 +74,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <property name="freemarkerSettings">
             <props>
                 <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="locale">zh_CN</prop>
                 <prop key="url_escaping_charset">UTF-8</prop>
                 <prop key="template_update_delay">3600</prop>
                 <prop key="tag_syntax">auto_detect</prop>
@@ -92,6 +93,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <property name="freemarkerVariables">
             <map>
                 <entry key="base" value="#{servletContext.contextPath}" />
+                <entry key="message" value-ref="messageMethod"/>
+                <entry key="flash_message" value-ref="messageDirective"/>
             </map>
         </property>
     </bean>
@@ -101,7 +104,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <property name="useCodeAsDefaultMessage" value="true" />
         <property name="basenames">
             <list>
-                <value>/WEB-INF/message</value>
+                <value>/WEB-INF/message/message</value>
             </list>
         </property>
     </bean>

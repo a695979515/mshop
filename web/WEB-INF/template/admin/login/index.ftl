@@ -33,9 +33,9 @@
             var $backBtn = $("#back-btn");
             var $isRememberUsername = $("#isRememberUsername");
             //登录失败显示消息
-        <#if message??>
+        <#if failureMessage??>
             $("#alert").attr("style", "display:block");
-            $failureMessage.text("${message.content}");
+            $failureMessage.text("${failureMessage.content}");
         </#if>
 
             //cookie存在不存在

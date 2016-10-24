@@ -74,7 +74,7 @@ public class LoginController extends BaseController {
         model.addAttribute("modulus", Base64.encodeBase64String(publicKey.getModulus().toByteArray()));
         model.addAttribute("exponent", Base64.encodeBase64String(publicKey.getPublicExponent().toByteArray()));
         model.addAttribute("captchaId", UUID.randomUUID().toString());
-        model.addAttribute("message",message);
+        model.addAttribute("failureMessage",message);
         return "/admin/login/index";
     }
 

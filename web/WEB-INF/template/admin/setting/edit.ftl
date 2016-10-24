@@ -1,3 +1,4 @@
+<@flash_message />
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,12 +60,12 @@
                                         <div class="tab-pane active" id="tab_1">
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>网站名称</label>
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 ">
                                                     <input type="text" class="form-control" name="siteName" value="${setting.siteName}" maxlength="200">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>网站名称${message("Setting.WatermarkPosition.no")}</label>
+                                                <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>网站链接</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="siteUrl" value="${setting.siteUrl}" maxlength="200">
                                                 </div>
@@ -180,10 +181,10 @@
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>水印透明度</label>
                                                 <div class="col-md-4">
                                                     <div class="input-group input-small">
-                                                        <input type="text" class="form-control " name="watermarkAlpha" value="${setting.watermarkAlpha}" maxlength="9">
+                                                        <input type="number" class="form-control " name="watermarkAlpha" value="${setting.watermarkAlpha}" maxlength="9" min="0" max="100">
                                                         <span class="input-group-addon">%</span>
                                                     </div>
-
+                                                    <span class="help-block">取值范围: 0-100, 0代表完全透明</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -199,7 +200,7 @@
                                                 <div class="col-md-4">
                                                     <select name="watermarkPosition" class="form-control input-medium">
                                                         <#list watermarkPositions as watermarkPosition>
-                                                        <option value="${watermarkPosition}"<#if watermarkPosition == setting.watermarkPosition> selected="selected"</#if>>无</option>
+                                                        <option value="${watermarkPosition}"<#if watermarkPosition == setting.watermarkPosition> selected="selected"</#if>>${message("Setting.WatermarkPosition."+watermarkPosition)}</option>
                                                         </#list>
                                                     </select>
                                                 </div>
@@ -264,7 +265,7 @@
                                                         <div class="mt-checkbox-inline">
                                                             <#list captchaTypes as captchaType>
                                                                 <label class="mt-checkbox mt-checkbox-outline">
-                                                                    <input type="checkbox" name="captchaTypes" value="${captchaType}"<#if setting.captchaTypes?? && setting.captchaTypes?seq_contains(captchaType)> checked="checked"</#if>>验证码类型
+                                                                    <input type="checkbox" name="captchaTypes" value="${captchaType}"<#if setting.captchaTypes?? && setting.captchaTypes?seq_contains(captchaType)> checked="checked"</#if>>${message("Setting.CaptchaType." + captchaType)}
                                                                     <span></span>
                                                                 </label>
                                                             </#list>
@@ -277,7 +278,7 @@
                                                         <div class="mt-checkbox-inline">
                                                         <#list accountLockTypes as accountLockType>
                                                             <label class="mt-checkbox mt-checkbox-outline">
-                                                                <input type="checkbox" name="accountLockTypes" value="${accountLockType}"<#if setting.accountLockTypes?? && setting.accountLockTypes?seq_contains(accountLockType)> checked="checked"</#if>>账户类型
+                                                                <input type="checkbox" name="accountLockTypes" value="${accountLockType}"<#if setting.accountLockTypes?? && setting.accountLockTypes?seq_contains(accountLockType)> checked="checked"</#if>>${message("Setting.AccountLockType." + accountLockType)}
                                                                 <span></span>
                                                             </label>
                                                         </#list>
@@ -288,12 +289,14 @@
                                                     <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>连续登录失败最大次数</label>
                                                     <div class="col-md-4">
                                                         <input type="text" class="form-control input-medium" name="failureLoginCount" value="${setting.failureLoginCount}" maxlength="9">
+                                                        <span class="help-block">当连续登录失败次数超过设定值时，系统将自动锁定该账号</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>自动解锁时间</label>
                                                     <div class="col-md-4">
                                                         <input type="text" class="form-control input-medium" name="autoUnlockTime" value="${setting.autoUnlockTime}" maxlength="9">
+                                                        <span class="help-block">账号锁定后，自动解除锁定的时间，单位: 分钟，0表示永久锁定</span>
                                                     </div>
                                                 </div>
 
@@ -301,6 +304,7 @@
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>安全密钥有效时间</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control " name="safeKeyExpiryTime" value="${setting.safeKeyExpiryTime}" maxlength="9">
+                                                    <span class="help-block">找回密码时，安全密匙的有效时间，单位: 分钟，0表示永久有效</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -313,21 +317,21 @@
                                                 <label class="col-md-3 control-label">允许上传图片扩展名</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control " name="uploadImageExtension" value="${setting.uploadImageExtension}" maxlength="200">
-                                                    <span class="help-block">多个内容请用","号隔开</span>
+                                                    <span class="help-block">多个扩展名以(,)分隔，留空表示不允许上传</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">允许上传媒体扩展名</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control " name="uploadMediaExtension" value="${setting.uploadMediaExtension}" maxlength="200">
-                                                    <span class="help-block">多个内容请用","号隔开</span>
+                                                    <span class="help-block">多个扩展名以(,)分隔，留空表示不允许上传</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">允许上传文件扩展名</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control " name="uploadFileExtension" value="${setting.uploadFileExtension}" maxlength="200">
-                                                    <span class="help-block">多个内容请用","号隔开</span>
+                                                    <span class="help-block">多个扩展名以(,)分隔，留空表示不允许上传</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -390,6 +394,7 @@
                                                     <a class="btn btn-default" data-toggle="modal" href="#testEamil">测试邮件</a>
                                                 </div>
                                             </div>
+                                            <!-- .modal- -->
                                             <div class="modal fade" id="testEamil" tabindex="-1" role="testEamil" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -441,7 +446,7 @@
                                                 <div class="col-md-4">
                                                     <select name="stockAllocationTime" class="form-control input-medium">
                                                         <#list stockAllocationTimes as stockAllocationTime>
-                                                        <option value="${stockAllocationTime}"<#if stockAllocationTime == setting.stockAllocationTime> selected="selected"</#if>>时间点</option>
+                                                        <option value="${stockAllocationTime}"<#if stockAllocationTime == setting.stockAllocationTime> selected="selected"</#if>>${message("Setting.StockAllocationTime."+stockAllocationTime)}</option>
                                                         </#list>
                                                     </select>
                                                 </div>
@@ -450,6 +455,7 @@
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>默认积分换算比例</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control input-medium" name="defaultPointScale" value="${setting.defaultPointScale}" maxlength="7">
+                                                    <span class="help-block">系统将根据该比例与销售价自动计算赠送积分数</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -480,7 +486,7 @@
                                                 <div class="col-md-4">
                                                     <select name="roundType" class="form-control input-medium">
                                                         <#list roundTypes as roundType>
-                                                        <option value="${roundType}"<#if roundType == setting.priceRoundType> selected="selected"</#if>>精确方式</option>
+                                                        <option value="${roundType}"<#if roundType == setting.priceRoundType> selected="selected"</#if>>${message("Setting.RoundType."+roundType)}</option>
                                                         </#list>
                                                     </select>
                                                 </div>
@@ -536,7 +542,6 @@
                                             </div>
 
 
-
                                         </div>
 
 
@@ -544,7 +549,7 @@
                                             <div class="row">
                                                 <div class="col-md-offset-3 col-md-4">
                                                     <input type="submit" class="btn green" value="确定">
-                                                    <input type="button" class="btn btn-outline grey-salsa" value="返回">
+                                                    <input type="button" class="btn btn-outline grey-salsa" value="返回" onclick="history.back(); return false;">
                                                 </div>
                                             </div>
                                         </div>
@@ -566,5 +571,165 @@
 </div>
 <#include "/admin/common/foot.ftl"/>
 <#include "/admin/common/common_js.ftl"/>
+<script type="text/javascript">
+    $().ready(function(){
+        var $inputForm = $("#inputForm");
+        $inputForm.validate({
+            rules:{
+                siteName:"required",
+                siteUrl:{
+                    required:true,
+                    pattern:/^(http:\/\/|https:\/\/).*$/i
+                },
+                logo:{
+                    required:true,
+                    pattern:/^(http:\/\/|https:\/\/).*$/i
+                },
+                email:"email",
+                closeMessage:"required",
+                largeProductImageWidth: {
+                    required: true,
+                    integer: true,
+                    min: 1
+                },
+                largeProductImageHeight: {
+                    required: true,
+                    integer: true,
+                    min: 1
+                },
+                mediumProductImageWidth: {
+                    required: true,
+                    integer: true,
+                    min: 1
+                },
+                mediumProductImageHeight: {
+                    required: true,
+                    integer: true,
+                    min: 1
+                },
+                thumbnailProductImageWidth: {
+                    required: true,
+                    integer: true,
+                    min: 1
+                },
+                thumbnailProductImageHeight: {
+                    required: true,
+                    integer: true,
+                    min: 1
+                },
+                defaultLargeProductImage: {
+                    required: true,
+                    pattern: /^(http:\/\/|https:\/\/|\/).*$/i
+                },
+                defaultMediumProductImage: {
+                    required: true,
+                    pattern: /^(http:\/\/|https:\/\/|\/).*$/i
+                },
+                defaultThumbnailProductImage: {
+                    required: true,
+                    pattern: /^(http:\/\/|https:\/\/|\/).*$/i
+                },
+                watermarkAlpha: {
+                    required: true,
+                    digits: true,
+                    max: 100
+                },
+                defaultMarketPriceScale: {
+                    required: true,
+                    min: 0,
+                    decimal: {
+                        integer: 3,
+                        fraction: 3
+                    }
+                },
+                usernameMinLength: {
+                    required: true,
+                    integer: true,
+                    min: 1,
+                    max: 117
+                },
+                usernameMaxLength: {
+                    required: true,
+                    integer: true,
+                    min: 1,
+                    max: 117,
+                    compareLength: "#usernameMinLength"
+                },
+                passwordMinLength: {
+                    required: true,
+                    integer: true,
+                    min: 1,
+                    max: 117
+                },
+                passwordMaxLength: {
+                    required: true,
+                    integer: true,
+                    min: 1,
+                    max: 117,
+                    compareLength: "#passwordMinLength"
+                },
+                registerPoint: {
+                    required: true,
+                    integer: true,
+                    min: 0
+                },
+                registerAgreement: "required",
+                failureLoginCount:{
+                    required: true,
+                    integer: true,
+                    min: 1
+                },
+                autoUnlockTime:{
+                    required: true,
+                    digits: true
+                },
+                uploadMaxSize: {
+                    required: true,
+                    digits: true
+                },
+                imageUploadPath: "required",
+                mediaUploadPath: "required",
+                fileUploadPath: "required",
+                smtpFromMail: {
+                    required: true,
+                    email: true
+                },
+                smtpHost: "required",
+                smtpPort: {
+                    required: true,
+                    digits: true
+                },
+                smtpUsername: "required",
+                toMail: {
+                    required: true,
+                    email: true
+                },
+                currencySign: "required",
+                currencyUnit: "required",
+                stockAlertCount: {
+                    required: true,
+                    digits: true
+                },
+                defaultPointScale: {
+                    required: true,
+                    min: 0,
+                    decimal: {
+                        integer: 3,
+                        fraction: 3
+                    }
+                },
+                taxRate: {
+                    required: true,
+                    min: 0,
+                    decimal: {
+                        integer: 3,
+                        fraction: 3
+                    }
+                },
+                cookiePath: "required"
+            }
+        });
+    });
+</script>
 </body>
 </html>

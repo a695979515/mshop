@@ -30,14 +30,14 @@ public class AuthenticationRealm extends AuthorizingRealm {
 
 
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken authenticationToken){
         AuthenticationToken token = (AuthenticationToken) authenticationToken;
         String username = token.getUsername();
         String password = new String(token.getPassword());
         String captcha = token.getCaptcha();
         String ip = token.getHost();
         String captchaId = token.getCaptchaId();
-        if(!captchaService.isValid(Setting.CaptchaType.adminLogin,captchaId,captcha)){
+        if (!captchaService.isValid(Setting.CaptchaType.adminLogin, captchaId, captcha)) {
             throw new IncorrectCaptchaException();
         }
         if (username != null && password != null) {
@@ -49,23 +49,23 @@ public class AuthenticationRealm extends AuthorizingRealm {
                 throw new DisabledAccountException();
             }
             Setting setting = SystemUtils.getSetting();
-            if (admin.getIsEnabled()) {
-                if(ArrayUtils.contains(setting.getAccountLockTypes(),Setting.AccountLockType.admin)){
+            if (admin.getIsLocked()) {
+                if (ArrayUtils.contains(setting.getAccountLockTypes(), Setting.AccountLockType.admin)) {
                     int loginFailureLockTime = setting.getAutoUnlockTime();
-                    if(loginFailureLockTime==0){
+                    if (loginFailureLockTime == 0) {
                         throw new LockedAccountException();
                     }
                     Date lockedDate = admin.getLockedDate();
-                    Date unlockDate = DateUtils.addMinutes(lockedDate,loginFailureLockTime);
-                    if(new Date().after(unlockDate)){
+                    Date unlockDate = DateUtils.addMinutes(lockedDate, loginFailureLockTime);
+                    if (new Date().after(unlockDate)) {
                         admin.setLoginFailureCount(0);
                         admin.setIsLocked(false);
                         admin.setLockedDate(null);
                         adminService.update(admin);
-                    }else{
-                        throw  new LockedAccountException();
+                    } else {
+                        throw new LockedAccountException();
                     }
-                }else{
+                } else {
                     admin.setLoginFailureCount(0);
                     admin.setIsLocked(false);
                     admin.setLockedDate(null);
@@ -73,8 +73,8 @@ public class AuthenticationRealm extends AuthorizingRealm {
                 }
             }
             if (!DigestUtils.md5Hex(password).equals(admin.getPassword())) {
-                int loginFailureCount = admin.getLoginFailureCount()+1;
-                if(loginFailureCount>=setting.getFailureLoginCount()){
+                int loginFailureCount = admin.getLoginFailureCount() + 1;
+                if (loginFailureCount >= setting.getFailureLoginCount()) {
                     admin.setIsLocked(true);
                     admin.setLockedDate(new Date());
                 }

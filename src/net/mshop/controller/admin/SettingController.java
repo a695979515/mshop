@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import static net.mshop.controller.admin.BaseController.ERROR_VIEW;
 
 /**
  * Created by Panfuhao on 2016/10/21.
