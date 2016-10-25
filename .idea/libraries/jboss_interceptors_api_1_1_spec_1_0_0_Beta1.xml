@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jboss-interceptors-api_1.1_spec-1.0.0.Beta1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
