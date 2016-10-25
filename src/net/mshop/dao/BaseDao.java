@@ -1,8 +1,13 @@
 package net.mshop.dao;
 
 import net.mshop.entity.BaseEntity;
+import net.mshop.operator.Filter;
+import net.mshop.operator.Order;
+import net.mshop.operator.Page;
+import net.mshop.operator.Pageable;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Panfuhao on 2016/9/23.
@@ -15,6 +20,31 @@ public interface BaseDao<T extends BaseEntity<ID>, ID extends Serializable> {
      * @return
      */
     T findById(ID id);
+
+    /**
+     * 排序筛选查找集合
+     *
+     * @param count
+     * @param filters
+     * @param orders
+     * @return
+     */
+    List<T> findList(Integer first, Integer count, List<Filter> filters, List<Order> orders);
+
+    /**
+     * 查找分页
+     *
+     * @param pageable
+     * @return
+     */
+    Page<T> findPage(Pageable pageable);
+
+    /**
+     * 查询总数
+     *
+     * @return
+     */
+    long count(Filter... filters);
 
     /**
      * 持久化

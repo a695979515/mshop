@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>index</title>
+    <title>MSHOP后台管理系统-登录</title>
     <link href="${base}/resources/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/resources/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/resources/admin/css/components.css" rel="stylesheet" type="text/css"/>

@@ -99,17 +99,13 @@ if ($.validator != null) {
         errorElement: "span",
         errorPlacement: function(error, element) {
             var fieldSet = element.closest("div.form-group.div.input");
-            console.log(fieldSet.size());
             if (fieldSet.size() > 0) {
                 error.appendTo(fieldSet);
             } else {
                 error.insertAfter(element);
             }
-        },
-        submitHandler: function(form) {
-            $(form).find("input:submit").prop("disabled", true);
-            form.submit();
+
         }
-    });
+        });
 
 }

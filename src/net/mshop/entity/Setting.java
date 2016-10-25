@@ -165,7 +165,7 @@ public class Setting implements Serializable {
     /**
      * 水印位置
      */
-    private Setting.WatermarkPosition watermarkPosition;
+    private WatermarkPosition watermarkPosition;
     /**
      * 价格小数点精确位数
      */
@@ -173,7 +173,7 @@ public class Setting implements Serializable {
     /**
      * 价格精确方式
      */
-    private Setting.RoundType roundType;
+    private RoundType roundType;
     /**
      * 是否显示市场价
      */
@@ -217,11 +217,11 @@ public class Setting implements Serializable {
     /**
      * 验证码类型
      */
-    private Setting.CaptchaType[] captchaTypes;
+    private CaptchaType[] captchaTypes;
     /**
      * 账户锁定类型
      */
-    private Setting.AccountLockType[] accountLockTypes;
+    private AccountLockType[] accountLockTypes;
     /**
      * 连续登录失败最大次数
      */
@@ -301,7 +301,7 @@ public class Setting implements Serializable {
     /**
      * 库存修改时间点
      */
-    private Setting.StockAllocationTime stockAllocationTime;
+    private StockAllocationTime stockAllocationTime;
     /**
      * 默认积分换算比列
      */
@@ -481,6 +481,7 @@ public class Setting implements Serializable {
     public void setDefaultLargeProductImage(String defaultLargeProductImage) {
         this.defaultLargeProductImage = defaultLargeProductImage;
     }
+
     @NotNull
     @Min(0)
     @Digits(integer = 3, fraction = 3)

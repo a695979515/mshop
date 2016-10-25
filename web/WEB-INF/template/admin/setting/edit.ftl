@@ -1,39 +1,14 @@
-<@flash_message />
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <#include "/admin/common/common_css.ftl"/>
-    <title></title>
-</head>
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white <#--page-sidebar-fixed-->">
-<#include "/admin/common/header.ftl"/>
-
-<div class="page-container">
-<#include "/admin/common/navigation.ftl"/>
-    <div class="page-content-wrapper">
-        <div class="page-content">
-            <div class="page-bar">
-                <ul class="page-breadcrumb">
-                    <li>
-                        <a href="${base}/admin/common/main.html">主页</a>
-                        <i class="fa fa-angle-right"></i>
-                    </li>
-                    <li>
-                        <span>系统设置</span>
-                    </li>
-
-                </ul>
-            </div>
-            <h3 class="page-title"> 系统设置
-                <small>系统、商城配置</small>
-            </h3>
-
+<#import "/admin/common/base.ftl" as html/>
+<@html.html title="系统设置" bar="系统设置" bar_title="系统、商城基础配置">
             <div class="row">
                 <div class="col-md-12">
                     <form id="inputForm" action="update.html" method="post" class="form-horizontal">
+                        <div class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button> 您还有选项未正确填写, 请检查.
+                        </div>
+                        <div class="alert alert-success display-hide">
+                            <button class="close" data-close="alert"></button> 系统设置已更新!
+                        </div>
                         <div class="portlet light portlet-fit bordered">
                             <div class="portlet-body">
                                 <div class="tabbable-line boxless margin-bottom-20">
@@ -82,7 +57,7 @@
                                                 <label class="col-md-3 control-label">热门搜索</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="hotSearch" value="${setting.hotSearch}" maxlength="200">
-                                                    <span class="help-block">多个内容请用","号隔开</span>
+                                                    <span class="help-block">多个内容以(,)分隔</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -219,13 +194,13 @@
                                                 <label class="col-md-3 control-label">禁止注册用户名</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="disabledUsername" value="${setting.disabledUsername}" maxlength="200">
-                                                    <span class="help-block">多个内容请用","号隔开</span>
+                                                    <span class="help-block">多个用户名以(,)分隔</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>用户名最小长度</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control input-medium" name="usernameMinLength" value="${setting.usernameMinLength}" maxlength="3">
+                                                    <input type="text" class="form-control input-medium" id="usernameMinLength" name="usernameMinLength" value="${setting.usernameMinLength}" maxlength="3">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -237,7 +212,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>密码最小长度</label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control input-medium" name="passwordMinLength" value="${setting.passwordMinLength}" maxlength="3">
+                                                    <input type="text" class="form-control input-medium" id="passwordMinLength" name="passwordMinLength" value="${setting.passwordMinLength}" maxlength="3">
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -566,14 +541,21 @@
             </div>
             <!--row-->
 
-        </div>
-    </div>
-</div>
-<#include "/admin/common/foot.ftl"/>
-<#include "/admin/common/common_js.ftl"/>
+
+
 <script type="text/javascript">
     $().ready(function(){
         var $inputForm = $("#inputForm");
+        <#if successMessage?? && successMessage>
+            $(".alert-success").show();
+            $(".alert-success").delay(3000).hide(0);
+        </#if>
+        $.validator.addMethod("compareLength",
+                function(value, element, param) {
+                    return this.optional(element) || $.trim(value) == "" || $.trim($(param).val()) == "" || parseFloat(value) >= parseFloat($(param).val());
+                },
+                "必须大于等于最小长度"
+        );
         $inputForm.validate({
             rules:{
                 siteName:"required",
@@ -643,93 +625,98 @@
                     }
                 },
                 usernameMinLength: {
-                    required: true,
-                    integer: true,
-                    min: 1,
-                    max: 117
-                },
-                usernameMaxLength: {
-                    required: true,
-                    integer: true,
-                    min: 1,
-                    max: 117,
-                    compareLength: "#usernameMinLength"
-                },
-                passwordMinLength: {
-                    required: true,
-                    integer: true,
-                    min: 1,
-                    max: 117
-                },
-                passwordMaxLength: {
-                    required: true,
-                    integer: true,
-                    min: 1,
-                    max: 117,
-                    compareLength: "#passwordMinLength"
-                },
-                registerPoint: {
-                    required: true,
-                    integer: true,
-                    min: 0
-                },
-                registerAgreement: "required",
-                failureLoginCount:{
-                    required: true,
-                    integer: true,
-                    min: 1
-                },
-                autoUnlockTime:{
-                    required: true,
-                    digits: true
-                },
-                uploadMaxSize: {
-                    required: true,
-                    digits: true
-                },
-                imageUploadPath: "required",
-                mediaUploadPath: "required",
-                fileUploadPath: "required",
-                smtpFromMail: {
-                    required: true,
-                    email: true
-                },
-                smtpHost: "required",
-                smtpPort: {
-                    required: true,
-                    digits: true
-                },
-                smtpUsername: "required",
-                toMail: {
-                    required: true,
-                    email: true
-                },
-                currencySign: "required",
-                currencyUnit: "required",
-                stockAlertCount: {
-                    required: true,
-                    digits: true
-                },
-                defaultPointScale: {
-                    required: true,
-                    min: 0,
-                    decimal: {
-                        integer: 3,
-                        fraction: 3
-                    }
-                },
-                taxRate: {
-                    required: true,
-                    min: 0,
-                    decimal: {
-                        integer: 3,
-                        fraction: 3
-                    }
-                },
+                     required: true,
+                     integer: true,
+                     min: 1,
+                     max: 117
+                 },
+                 usernameMaxLength: {
+                       required: true,
+                       integer: true,
+                       min: 1,
+                       max: 117,
+                       compareLength: "#usernameMinLength"
+                   },
+                    passwordMinLength: {
+                      required: true,
+                      integer: true,
+                      min: 1,
+                      max: 117
+                  },
+                  passwordMaxLength: {
+                      required: true,
+                      integer: true,
+                      min: 1,
+                      max: 117,
+                      compareLength: "#passwordMinLength"
+                  },
+                   registerPoint: {
+                      required: true,
+                      integer: true,
+                      min: 0
+                  },
+                  registerAgreement: "required",
+                  failureLoginCount:{
+                      required: true,
+                      integer: true,
+                      min: 1
+                  },
+                  autoUnlockTime:{
+                      required: true,
+                      digits: true
+                  },
+                  uploadMaxSize: {
+                      required: true,
+                      digits: true
+                  },
+                  imageUploadPath: "required",
+                  mediaUploadPath: "required",
+                  fileUploadPath: "required",
+                  smtpFromMail: {
+                      required: true,
+                      email: true
+                  },
+                  smtpHost: "required",
+                  smtpPort: {
+                      required: true,
+                      digits: true
+                  },
+                  smtpUsername: "required",
+                  currencySign: "required",
+                  currencyUnit: "required",
+                  stockAlertCount: {
+                      required: true,
+                      digits: true
+                  },
+                  defaultPointScale: {
+                      required: true,
+                      min: 0,
+                      decimal: {
+                          integer: 3,
+                          fraction: 3
+                      }
+                  },
+                  taxRate: {
+                      required: true,
+                      min: 0,
+                      decimal: {
+                          integer: 3,
+                          fraction: 3
+                      }
+                  },
                 cookiePath: "required"
+            },
+        submitHandler: function() {
+            form.submit();
+        },
+            invalidHandler: function() {
+                $(".alert-danger").show();
+                $(".alert-danger").delay(3000).hide(0);
             }
+
         });
+
+
     });
 </script>
-</body>
-</html>
+</@html.html>

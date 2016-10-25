@@ -1,6 +1,10 @@
 package net.mshop.service;
 
 import net.mshop.entity.BaseEntity;
+import net.mshop.operator.Filter;
+import net.mshop.operator.Order;
+import net.mshop.operator.Page;
+import net.mshop.operator.Pageable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -31,6 +35,50 @@ public interface BaseService<T extends BaseEntity<ID>, ID extends Serializable> 
      * @return
      */
     List<T> findListByIds(ID... ids);
+
+    /**
+     * 排序筛选查找集合
+     *
+     * @param count
+     * @param filters
+     * @param orders
+     * @return
+     */
+    List<T> findList(Integer count, List<Filter> filters, List<Order> orders);
+
+    /**
+     * 排序筛选查找集合
+     *
+     * @param count
+     * @param filters
+     * @param orders
+     * @return
+     */
+    List<T> findList(Integer first, Integer count, List<Filter> filters, List<Order> orders);
+
+    /**
+     * 查找分页
+     *
+     * @param pageable
+     * @return
+     */
+    Page<T> findPage(Pageable pageable);
+
+    /**
+     * 查询总数
+     *
+     * @return
+     */
+    long count();
+
+    /**
+     * 查询总数
+     *
+     * @param filters
+     * @return
+     */
+    long count(Filter... filters);
+
 
     /**
      * 根据ID判断是否存在

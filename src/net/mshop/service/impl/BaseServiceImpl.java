@@ -2,6 +2,10 @@ package net.mshop.service.impl;
 
 import net.mshop.dao.BaseDao;
 import net.mshop.entity.BaseEntity;
+import net.mshop.operator.Filter;
+import net.mshop.operator.Order;
+import net.mshop.operator.Page;
+import net.mshop.operator.Pageable;
 import net.mshop.service.BaseService;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -76,6 +80,64 @@ public abstract class BaseServiceImpl<T extends BaseEntity<ID>, ID extends Seria
             }
         }
         return result;
+    }
+
+    /**
+     * 排序筛选查找集合
+     *
+     * @param count
+     * @param filters
+     * @param orders
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<T> findList(Integer count, List<Filter> filters, List<Order> orders) {
+        return findList(null, count, filters, orders);
+    }
+
+    /**
+     * 排序筛选查找集合
+     *
+     * @param count
+     * @param filters
+     * @param orders
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<T> findList(Integer first, Integer count, List<Filter> filters, List<Order> orders) {
+        return baseDao.findList(first, count, filters, orders);
+    }
+
+    /**
+     * 查找分页
+     *
+     * @param pageable
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Page<T> findPage(Pageable pageable) {
+        return baseDao.findPage(pageable);
+    }
+
+    /**
+     * 查询总数
+     *
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public long count() {
+        return count(new Filter[]{});
+    }
+
+    /**
+     * 查询总数
+     *
+     * @param filters
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public long count(Filter... filters) {
+        return baseDao.count(filters);
     }
 
     /**

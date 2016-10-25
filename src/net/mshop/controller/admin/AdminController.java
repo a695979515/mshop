@@ -1,5 +1,6 @@
 package net.mshop.controller.admin;
 
+import net.mshop.operator.Pageable;
 import net.mshop.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,13 +14,13 @@ import javax.annotation.Resource;
  */
 @Controller("adminAdminController")
 @RequestMapping("/admin/admin")
-public class AdminController extends BaseController{
-    @Resource(name="adminServiceImpl")
+public class AdminController extends BaseController {
+    @Resource(name = "adminServiceImpl")
     private AdminService adminService;
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public String list(ModelMap model){
-      //  model.addAttribute("page",adminService.findPage());
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(Pageable pageable, ModelMap model) {
+        model.addAttribute("page", adminService.findPage(pageable));
         return "/admin/admin/list";
     }
 }

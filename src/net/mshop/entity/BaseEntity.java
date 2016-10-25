@@ -23,7 +23,7 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
     /**
      * 创建日期 属性名称
      */
-    public static final String CREATE_DATE_PROPERTY_NAME = "cereateDate";
+    public static final String CREATE_DATE_PROPERTY_NAME = "createDate";
     /**
      * 修改日期  属性名称
      */

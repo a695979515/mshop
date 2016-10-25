@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Created by Panfuhao on 2016/10/21.
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin/setting")
 public class SettingController extends BaseController {
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @RequestMapping(value="/edit",method = RequestMethod.GET)
     public String edit(ModelMap model) {
         model.addAttribute("setting", SystemUtils.getSetting());
         model.addAttribute("watermarkPositions", Setting.WatermarkPosition.values());
@@ -27,7 +28,7 @@ public class SettingController extends BaseController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(Setting setting) {
+    public String update(Setting setting,RedirectAttributes flushAttrs) {
         setting.setSmtpSSLEnabled(setting.getSmtpSSLEnabled() == null ? false : setting.getSmtpSSLEnabled());
         setting.setInvoiceEnabled(setting.getInvoiceEnabled() == null ? false : setting.getInvoiceEnabled());
         setting.setTaxPriceEnabled(setting.getTaxPriceEnabled() == null ? false : setting.getTaxPriceEnabled());
@@ -47,6 +48,7 @@ public class SettingController extends BaseController {
         setting.setCnzzSiteId(srcSetting.getCnzzSiteId());
         setting.setCnzzPassword(srcSetting.getCnzzPassword());
         SystemUtils.setSetting(setting);
+        flushAttrs.addFlashAttribute("successMessage", true);
         return "redirect:edit.html";
     }
 }
