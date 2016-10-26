@@ -1,5 +1,5 @@
 <#import "/admin/common/base.ftl" as html/>
-<@html.html title="主页" bar="主页" bar_title="系统信息、概要">
+<@html.html title=message("Admin.menu.home") bar=message("Admin.menu.home") bar_title="系统信息、概要">
 
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">

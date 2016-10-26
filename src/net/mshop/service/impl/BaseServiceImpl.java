@@ -59,7 +59,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity<ID>, ID extends Seria
      */
     @Transactional(readOnly = true)
     public List<T> findAll() {
-        return null;
+        return findList(null,null,null,null);
     }
 
     /**

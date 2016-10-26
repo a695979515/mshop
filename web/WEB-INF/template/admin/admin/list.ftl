@@ -1,15 +1,16 @@
 <#import "/admin/common/base.ftl" as html/>
-<@html.html title="管理员" bar="管理员" bar_title="添加、修改管理员">
+<@html.html title=message("Admin.menu.system.admin") bar=message("Admin.menu.system.admin") bar_title="添加、修改管理员">
+
 <div class="row">
     <div class="col-md-12">
         <div class="btn-group">
-            <button type="button" class="btn btn-default btn-outline">
+            <a class="btn btn-default btn-outline" href="add.html">
                 <i class="fa fa-plus"></i> 添加
-            </button>
-            <button type="button" class="btn btn-default btn-outline">
+            </a>
+            <button type="button" id="deleteButton" class="btn btn-default btn-outline">
                 <i class="fa fa-trash"></i> 删除
             </button>
-            <button type="button" class="btn btn-default btn-outline">
+            <button type="button" id="refreshButton" class="btn btn-default btn-outline">
                 <i class="fa fa-refresh"></i> 刷新
             </button>
         </div>

@@ -105,6 +105,10 @@ if ($.validator != null) {
                 error.insertAfter(element);
             }
 
+        },
+        submitHandler: function(form) {
+          /*  $(form).find("input:submit").prop("disabled", true);*/
+            form.submit();
         }
         });
 

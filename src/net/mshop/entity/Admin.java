@@ -1,5 +1,8 @@
 package net.mshop.entity;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -10,6 +13,7 @@ import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by Panfuhao on 2016/9/27.
@@ -157,5 +161,21 @@ public class Admin extends BaseEntity<Long> {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+    /**
+     * 持久化前处理
+     */
+    @PrePersist
+    public void prePersist() {
+        setUsername(StringUtils.lowerCase(getUsername()));
+        setEmail(StringUtils.lowerCase(getEmail()));
+        setLockKey(DigestUtils.md5Hex(UUID.randomUUID() + RandomStringUtils.randomAlphabetic(30)));
+    }
+    /**
+     * 更新前处理
+     */
+    @PreUpdate
+    public void preUpdate() {
+        setEmail(StringUtils.lowerCase(getEmail()));
     }
 }

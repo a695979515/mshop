@@ -1,5 +1,5 @@
 <#import "/admin/common/base.ftl" as html/>
-<@html.html title="系统设置" bar="系统设置" bar_title="系统、商城基础配置">
+<@html.html title=message("Admin.menu.system.systemSetting") bar=message("Admin.menu.system.systemSetting") bar_title="系统、商城基础配置">
             <div class="row">
                 <div class="col-md-12">
                     <form id="inputForm" action="update.html" method="post" class="form-horizontal">
@@ -706,9 +706,6 @@
                   },
                 cookiePath: "required"
             },
-        submitHandler: function() {
-            form.submit();
-        },
             invalidHandler: function() {
                 $(".alert-danger").show();
                 $(".alert-danger").delay(3000).hide(0);
