@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import net.mshop.entity.Message;
 import net.mshop.entity.Setting;
 import net.mshop.util.DateEditor;
 import net.mshop.util.SpringUtils;
@@ -31,6 +32,15 @@ public class BaseController {
      * 错误视图
      */
     protected static final String ERROR_VIEW = "/admin/common/error";
+    /**
+     * 错误消息
+     */
+    protected static final Message ERROR_MESSAGE = Message.error("操作失败");
+
+    /**
+     * 成功消息
+     */
+    protected static final Message SUCCESS_MESSAGE = Message.success("操作成功");
     /**
      * "验证结果"属性名称
      */

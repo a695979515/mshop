@@ -1,6 +1,6 @@
 <#macro html title bar bar_title>
 <!DOCTYPE html>
-<html>
+<html lang="zh_CN">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>

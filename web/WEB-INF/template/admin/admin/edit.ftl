@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>角色</label>
-                        <div class="col-md-9">
+                        <div class="col-md-4">
                             <div class="mt-checkbox-inline">
                             <#list roles as role>
                                 <label class="mt-checkbox mt-checkbox-outline">

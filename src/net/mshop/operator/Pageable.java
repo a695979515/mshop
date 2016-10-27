@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 分页
  * Created by Panfuhao on 2016/10/25.
  */
 public class Pageable implements Serializable {
@@ -18,7 +19,7 @@ public class Pageable implements Serializable {
     /**
      * 默认每页记录
      */
-    private static final int DEFAULT_PAGE_SIZE = 20;
+    private static final int DEFAULT_PAGE_SIZE = 10;
     /**
      * 最大每页记录
      */

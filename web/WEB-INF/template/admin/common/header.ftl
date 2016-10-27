@@ -1,3 +1,4 @@
+<#assign shiro = JspTaglibs["/WEB-INF/tld/shiro.tld"] />
 <div class="page-header navbar navbar-fixed-top">
     <div class="page-header-inner ">
         <!-- LOGO -->
@@ -325,7 +326,7 @@
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true">
                         <img alt="" class="img-circle" src="${base}/resources/admin/layout/img/avatar3_small.jpg"/>
-                        <span class="username username-hide-on-mobile"> Nick </span>
+                        <span class="username username-hide-on-mobile"> <@shiro.principal /> </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">

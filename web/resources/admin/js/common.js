@@ -49,6 +49,20 @@ function removeCookie(name,options){
     addCookie(name,null,options);
 }
 $().ready(function () {
+    // AJAX全局设置
+    $.ajaxSetup({
+        traditional: true
+    });
+    //ajax提交时 传令牌参数
+    $(document).ajaxSend(function(event,request,settings){
+        if(!settings.crossDomain&&settings.type!=null&&settings.type.toLowerCase()=="post"){
+            var token = getCookie("token");
+            if(token!=null){
+                request.setRequestHeader("token",token);
+            }
+        }
+    })
+
     $("form").submit(function () {
         var $this = $(this);
         var size = $this.find("input[name='token']").size();
@@ -96,9 +110,9 @@ if ($.validator != null) {
         errorClass: "validator-error",
         ignore: ".ignore",
         ignoreTitle: true,
-        errorElement: "span",
+        errorElement: "label",
         errorPlacement: function(error, element) {
-            var fieldSet = element.closest("div.form-group.div.input");
+            var fieldSet = element.closest("div.form-group");
             if (fieldSet.size() > 0) {
                 error.appendTo(fieldSet);
             } else {
@@ -107,7 +121,6 @@ if ($.validator != null) {
 
         },
         submitHandler: function(form) {
-          /*  $(form).find("input:submit").prop("disabled", true);*/
             form.submit();
         }
         });

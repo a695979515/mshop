@@ -1,6 +1,7 @@
 package net.mshop.controller.admin;
 
 import net.mshop.entity.Admin;
+import net.mshop.entity.Message;
 import net.mshop.entity.Role;
 import net.mshop.operator.Pageable;
 import net.mshop.service.AdminService;
@@ -43,31 +44,33 @@ public class AdminController extends BaseController {
 
     /**
      * 添加
+     *
      * @param model
      * @return
      */
-    @RequestMapping(value = "/add",method = RequestMethod.GET)
-    public String add(ModelMap model){
-        model.addAttribute("roles",roleService.findAll());
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add(ModelMap model) {
+        model.addAttribute("roles", roleService.findAll());
         return "/admin/admin/add";
     }
 
     /**
      * 保存
+     *
      * @param admin
      * @param roleIds
      * @param redirectAttributes
      * @return
      */
-    @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String save(Admin admin ,Long[] roleIds,RedirectAttributes redirectAttributes){
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(Admin admin, Long[] roleIds, RedirectAttributes redirectAttributes) {
         admin.setRoles(new HashSet<Role>(roleService.findListByIds(roleIds)));
         admin.setIsEnabled(admin.getIsEnabled() == null ? false : admin.getIsEnabled());
         admin.setIsLocked(admin.getIsLocked() == null ? false : admin.getIsLocked());
         if (!isValid(admin)) {
             return ERROR_VIEW;
         }
-        if(adminService.usernameExists(admin.getUsername())){
+        if (adminService.usernameExists(admin.getUsername())) {
             return ERROR_VIEW;
         }
         admin.setPassword(DigestUtils.md5Hex(admin.getPassword()));
@@ -78,10 +81,28 @@ public class AdminController extends BaseController {
         admin.setLoginIp(null);
         admin.setLockKey(null);
         adminService.save(admin);
-        redirectAttributes.addFlashAttribute("success","成功");
+        redirectAttributes.addFlashAttribute("success", "成功");
         return "redirect:list.html";
 
     }
+
+    /**
+     * 删除
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    Message delete(Long[] ids) {
+        if (ids.length >= adminService.count()) {
+            return Message.error("删除失败，必须至少保留一项");
+        }
+        adminService.deleteByIds(ids);
+        return SUCCESS_MESSAGE;
+    }
+
     /**
      * 编辑
      *
@@ -129,13 +150,22 @@ public class AdminController extends BaseController {
             admin.setLoginFailureCount(oldAdmin.getLoginFailureCount());
             admin.setLockedDate(oldAdmin.getLockedDate());
         }
-        adminService.update(admin,"username","loginDate","loginIp","lockKey");
-        redirectAttributes.addFlashAttribute("success","成功");
+        adminService.update(admin, "username", "loginDate", "loginIp", "lockKey");
+        redirectAttributes.addFlashAttribute("success", "成功");
         return "redirect:list.html";
     }
-    @RequestMapping(value = "/check_username",method = RequestMethod.GET)
-    public @ResponseBody boolean checkUsername(String username){
-        if(StringUtils.isEmpty(username)){
+
+    /**
+     * 检查用户名是否存在
+     *
+     * @param username
+     * @return
+     */
+    @RequestMapping(value = "/check_username", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    boolean checkUsername(String username) {
+        if (StringUtils.isEmpty(username)) {
             return false;
         }
         return !adminService.usernameExists(username);

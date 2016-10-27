@@ -53,9 +53,8 @@ input.validator-error{
 input.validator-error:focus{
     border-color: red;
 }
-span.validator-error{
-    margin-top: 5px;
-    margin-bottom: 5px;
+label.validator-error{
+    padding-top: 7px;
     color: red;
 }
 /*

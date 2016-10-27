@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>确认密码</label>
                         <div class="col-md-4">
-                            <input type="password" class="form-control" name="repassword"  maxlength="20" autocomplete="off">
+                            <input type="password" class="form-control" name="rePassword"  maxlength="20" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>角色</label>
-                        <div class="col-md-9">
+                        <div class="col-md-4">
                             <div class="mt-checkbox-inline">
                                 <#list roles as role>
                                     <label class="mt-checkbox mt-checkbox-outline">
@@ -94,9 +94,11 @@
                     }
                 },
                 password:{
+                    required:true,
                     minlength:4
                 },
                 rePassword:{
+                    required:true,
                     equalTo:"#password"
                 },
                 email:{
@@ -111,7 +113,6 @@
                     remote:"用户名已存在"
                 }
             },
-
             invalidHandler: function() {
                 $(".alert-danger").show();
                 $(".alert-danger").delay(3000).hide(0);
