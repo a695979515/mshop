@@ -332,7 +332,7 @@
                         </a>
                     </li>
                     <li class="nav-item  <#if bar==message("Admin.menu.system.role")> active open</#if>">
-                        <a href="#" class="nav-link ">
+                        <a href="${base}/admin/role/list.html" class="nav-link ">
                             <span class="title">${message("Admin.menu.system.role")}</span>
                         </a>
                     </li>

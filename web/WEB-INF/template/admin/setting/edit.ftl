@@ -1,13 +1,15 @@
 <#import "/admin/common/base.ftl" as html/>
 <@html.html title=message("Admin.menu.system.systemSetting") bar=message("Admin.menu.system.systemSetting") bar_title="系统、商城基础配置">
-            <div class="row">
+<script type="text/javascript">
+    $().ready(function(){
+        <@flash_message />
+    });
+</script>
+<div class="row">
                 <div class="col-md-12">
                     <form id="inputForm" action="update.html" method="post" class="form-horizontal">
-                        <div class="alert alert-danger display-hide">
-                            <button class="close" data-close="alert"></button> 您还有选项未正确填写, 请检查.
-                        </div>
-                        <div class="alert alert-success display-hide">
-                            <button class="close" data-close="alert"></button> 系统设置已更新!
+                        <div id="flashMessage" class="alert display-hide">
+                            <button class="close" data-close="alert"></button>
                         </div>
                         <div class="portlet light portlet-fit bordered">
                             <div class="portlet-body">
@@ -707,8 +709,7 @@
                 cookiePath: "required"
             },
             invalidHandler: function() {
-                $(".alert-danger").show();
-                $(".alert-danger").delay(3000).hide(0);
+                $.message("error","您还有选项未正确填写, 请检查.");
             }
 
         });

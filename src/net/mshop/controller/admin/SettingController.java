@@ -28,7 +28,7 @@ public class SettingController extends BaseController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(Setting setting,RedirectAttributes flushAttrs) {
+    public String update(Setting setting,RedirectAttributes redirectAttributes) {
         setting.setSmtpSSLEnabled(setting.getSmtpSSLEnabled() == null ? false : setting.getSmtpSSLEnabled());
         setting.setInvoiceEnabled(setting.getInvoiceEnabled() == null ? false : setting.getInvoiceEnabled());
         setting.setTaxPriceEnabled(setting.getTaxPriceEnabled() == null ? false : setting.getTaxPriceEnabled());
@@ -48,7 +48,7 @@ public class SettingController extends BaseController {
         setting.setCnzzSiteId(srcSetting.getCnzzSiteId());
         setting.setCnzzPassword(srcSetting.getCnzzPassword());
         SystemUtils.setSetting(setting);
-        flushAttrs.addFlashAttribute("successMessage", true);
+        addFlashMessage(redirectAttributes, SUCCESS_MESSAGE);
         return "redirect:edit.html";
     }
 }

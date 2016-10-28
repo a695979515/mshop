@@ -17,12 +17,12 @@ import java.util.Map;
  * 消息指令
  * Created by Panfuhao on 2016/10/24.
  */
-@Component("messageDirective")
-public class MessageDirective extends BaseDirective {
+@Component("flashMessageDirective")
+public class FlashMessageDirective extends BaseDirective {
     /**
      * 消息 属性名称
      */
-    public static final String MESSAGE_ATTRIBUTE_NAME= MessageDirective.class.getName()+".FLASH_MESSAGE";
+    public static final String MESSAGE_ATTRIBUTE_NAME= FlashMessageDirective.class.getName()+".FLASH_MESSAGE";
     /**
      * 变量名称
      */

@@ -5,8 +5,8 @@
     <div class="col-md-12">
         <form id="inputForm" action="update.html" method="post" class="form-horizontal">
             <input type="hidden" name="id" value="${admin.id}" />
-            <div class="alert alert-danger display-hide">
-                <button class="close" data-close="alert"></button> 您还有选项未正确填写, 请检查.
+            <div id="flashMessage" class="alert display-hide">
+                <button class="close" data-close="alert"></button>
             </div>
             <div class="portlet light portlet-fit bordered">
                 <div class="portlet-body">
@@ -107,8 +107,7 @@
             },
 
             invalidHandler: function() {
-                $(".alert-danger").show();
-                $(".alert-danger").delay(3000).hide(0);
+                $.message("error","您还有选项未正确填写, 请检查.");
             }
         });
     });

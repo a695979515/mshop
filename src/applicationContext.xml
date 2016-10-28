@@ -94,7 +94,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
             <map>
                 <entry key="base" value="#{servletContext.contextPath}" />
                 <entry key="message" value-ref="messageMethod"/>
-                <entry key="flash_message" value-ref="messageDirective"/>
+                <entry key="abbreviate" value-ref="abbreviateMethod"/>
+                <entry key="flash_message" value-ref="flashMessageDirective"/>
                 <entry key="pagination" value-ref="paginationDirective"/>
             </map>
         </property>

@@ -151,7 +151,7 @@ public class AdminController extends BaseController {
             admin.setLockedDate(oldAdmin.getLockedDate());
         }
         adminService.update(admin, "username", "loginDate", "loginIp", "lockKey");
-        redirectAttributes.addFlashAttribute("success", "成功");
+        addFlashMessage(redirectAttributes, SUCCESS_MESSAGE);
         return "redirect:list.html";
     }
 

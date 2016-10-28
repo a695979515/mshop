@@ -1,5 +1,5 @@
 <#import "/admin/common/base.ftl" as html/>
-<@html.html title=message("Admin.menu.system.admin") bar=message("Admin.menu.system.admin") bar_title="查看管理员列表，添加、修改管理员">
+<@html.html title=message("Admin.menu.system.role") bar=message("Admin.menu.system.role") bar_title="查看角色列表，添加、修改角色权限信息">
 <script src="${base}/resources/admin/js/list.js" type="text/javascript"></script>
 <script type="text/javascript">
     $().ready(function(){
@@ -47,14 +47,8 @@
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
                         <ul class="dropdown-menu" id="searchPropertyOption">
-                            <li val="username" <#if page.searchProperty == "username"> class="active"</#if>>
-                                <a href="javascript:;">用户名</a>
-                            </li>
-                            <li val="email" <#if page.searchProperty == "email"> class="active"</#if>>
-                                <a href="javascript:;">邮件</a>
-                            </li>
                             <li val="name" <#if page.searchProperty == "name"> class="active"</#if>>
-                                <a href="javascript:;">名字</a>
+                                <a href="javascript:;">角色名称</a>
                             </li>
                         </ul>
                     </div><!-- /btn-group -->
@@ -77,52 +71,28 @@
                                 <span></span>
                             </label>
                         </th>
-                        <th> 用户名</th>
-                        <th> 姓名</th>
-                        <th> 部门</th>
-                        <th> E-mail</th>
-                        <th> 最后登录日期</th>
-                        <th> 最后登录IP</th>
-                        <th> 帐号状态</th>
+                        <th> 名称</th>
+                        <th> 是否内置</th>
+                        <th> 描述</th>
                         <th> 创建日期</th>
                         <th> 操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <#list page.content as admin>
+                        <#list page.content as role>
                         <tr>
                             <td>
                                 <label class="mt-checkbox mt-checkbox-outline">
-                                    <input type="checkbox" name="ids" value="${admin.id}"/>
+                                    <input type="checkbox" name="ids" <#if role.isSystem>disabled="disabled" <#else>value="${role.id}"</#if>/>
                                     <span></span>
                                 </label>
                             </td>
-                            <td> ${admin.username}</td>
-                            <td> ${admin.name}</td>
-                            <td> ${admin.department}</td>
-                            <td> ${admin.email}</td>
+                            <td> ${role.name}</td>
+                            <td> <#if role.isSystem>是<#else>否</#if></td>
+                            <td> <#if role.description??><span title="${role.description}">${abbreviate(role.description,50,"...")}</span></#if></td>
+                            <td><span title="${role.createDate?string("yyyy-MM-dd HH:mm:ss")}">${role.createDate}</span></td>
                             <td>
-                                <#if admin.loginDate??>
-                                    <span title="${admin.loginDate?string("yyyy-MM-dd HH:mm:ss")}">${admin.loginDate}</span>
-                                <#else>
-                                    -
-                                </#if>
-                            </td>
-                            <td> ${admin.loginIp}</td>
-                            <td>
-                                <#if !admin.isEnabled>
-                                    <span class="label label-sm label-danger"> 禁用 </span>
-                                <#elseif admin.isLocked>
-                                    <span class="label label-sm label-danger"> 锁定 </span>
-                                <#else>
-                                    <span class="label label-sm label-success"> 正常 </span>
-                                </#if>
-                            </td>
-                            <td><span
-                                    title="${admin.createDate?string("yyyy-MM-dd HH:mm:ss")}">${admin.createDate}</span>
-                            </td>
-                            <td>
-                                <a href="edit.html?id=${admin.id}" class="btn btn-sm ">
+                                <a href="edit.html?id=${role.id}" class="btn btn-sm ">
                                     <i class="fa fa-edit"></i>
                                     编辑
                                 </a>

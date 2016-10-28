@@ -10,6 +10,12 @@ $().ready(function () {
     var $pageSizeMenu = $("#pageSizeMenu li");
     var $pageSize = $("#pageSize");
     var $pageNumber = $("#pageNumber");
+    var $searchPropertyOption = $("#searchPropertyOption li")
+    var $searchValue = $("#searchValue");
+    var $searchProperty = $("#searchProperty");
+    var $orderProperty = $("#orderProperty");
+    var $orderDirection = $("#orderDirection");
+
     /**
      * 删除按钮
      */
@@ -101,6 +107,16 @@ $().ready(function () {
         $pageSize.val($.trim($(this).text()));
         $pageNumber.val("1");
         $listForm.submit();
+    });
+    /**
+     * 搜索框
+     */
+    $searchPropertyOption.click(function(){
+        var $this = $(this);
+        $searchProperty.val($this.attr("val"));
+        $searchValue.attr("placeholder",$.trim($this.text()));
+        $searchPropertyOption.removeClass("active");
+        $this.addClass("active");
     });
     /**
      * 页码点击跳转事件

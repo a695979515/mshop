@@ -18,7 +18,7 @@ import java.util.Set;
 @SequenceGenerator(name = "sequenceGenerator", sequenceName = "seq_role")
 public class Role extends BaseEntity<Long> {
     private String name;        //名称
-    private String isSystem;    //是否内置
+    private Boolean isSystem;    //是否内置
     private String description; //描述
     private List<String> authorities = new ArrayList<>(); //权限
     private Set<Admin> admins = new HashSet<>();            //管理员
@@ -35,11 +35,11 @@ public class Role extends BaseEntity<Long> {
     }
 
     @Column(nullable = false, updatable = false)
-    public String getIsSystem() {
+    public Boolean getIsSystem() {
         return isSystem;
     }
 
-    public void setIsSystem(String isSystem) {
+    public void setIsSystem(Boolean isSystem) {
         this.isSystem = isSystem;
     }
 

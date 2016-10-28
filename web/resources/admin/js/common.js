@@ -45,20 +45,61 @@ function getCookie(name) {
  * @param name
  * @param options
  */
-function removeCookie(name,options){
-    addCookie(name,null,options);
+function removeCookie(name, options) {
+    addCookie(name, null, options);
 }
+
+/**
+ * 瞬时消息
+ * @returns {boolean}
+ */
+$.message = function () {
+    var $flashMessage = $("#flashMessage");
+    var message = {};
+    if ($.isPlainObject(arguments[0])) {
+        message = arguments[0];
+    } else if (typeof arguments[0] === "string" && typeof arguments[1] === "string") {
+        message.type = arguments[0];
+        message.content = arguments[1];
+    } else {
+        return false;
+    }
+    if (message.type == null || message.content == null) {
+        return false;
+    }
+    if(message.type=="success"){
+        $flashMessage.addClass("alert-success");
+        $flashMessage.append(message.content);
+        $flashMessage.show();
+        $flashMessage.delay(3000).hide(0);
+    }else if(message.type=="warn"){
+        $flashMessage.addClass("alert-warning");
+        $flashMessage.append(message.content);
+        $flashMessage.show();
+        $flashMessage.delay(3000).hide(0);
+    }else if(message.type=="error"){
+        $flashMessage.addClass("alert-danger");
+        $flashMessage.append(message.content);
+        $flashMessage.show();
+        $flashMessage.delay(3000).hide(0);
+    }
+
+    return false;
+};
+
+
 $().ready(function () {
+
     // AJAX全局设置
     $.ajaxSetup({
         traditional: true
     });
     //ajax提交时 传令牌参数
-    $(document).ajaxSend(function(event,request,settings){
-        if(!settings.crossDomain&&settings.type!=null&&settings.type.toLowerCase()=="post"){
+    $(document).ajaxSend(function (event, request, settings) {
+        if (!settings.crossDomain && settings.type != null && settings.type.toLowerCase() == "post") {
             var token = getCookie("token");
-            if(token!=null){
-                request.setRequestHeader("token",token);
+            if (token != null) {
+                request.setRequestHeader("token", token);
             }
         }
     })
@@ -111,7 +152,7 @@ if ($.validator != null) {
         ignore: ".ignore",
         ignoreTitle: true,
         errorElement: "label",
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             var fieldSet = element.closest("div.form-group");
             if (fieldSet.size() > 0) {
                 error.appendTo(fieldSet);
@@ -120,9 +161,9 @@ if ($.validator != null) {
             }
 
         },
-        submitHandler: function(form) {
+        submitHandler: function (form) {
             form.submit();
         }
-        });
+    });
 
 }

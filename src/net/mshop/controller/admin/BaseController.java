@@ -12,6 +12,7 @@ import javax.validation.Validator;
 
 import net.mshop.entity.Message;
 import net.mshop.entity.Setting;
+import net.mshop.template.directive.FlashMessageDirective;
 import net.mshop.util.DateEditor;
 import net.mshop.util.SpringUtils;
 import net.mshop.util.StringEditor;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * 基础Controller
@@ -124,6 +126,17 @@ public class BaseController {
      */
     protected String message(String code, Object... args) {
         return SpringUtils.getMessage(code, args);
+    }
+
+    /**
+     * 添加瞬时消息
+     * @param redirectAttributes
+     * @param message
+     */
+    protected void addFlashMessage(RedirectAttributes redirectAttributes,Message message){
+        if(redirectAttributes!=null && message!=null){
+            redirectAttributes.addFlashAttribute(FlashMessageDirective.MESSAGE_ATTRIBUTE_NAME,message);
+        }
     }
 
     protected String currency(BigDecimal amount, boolean showSign, boolean showUnit) {
