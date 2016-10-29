@@ -17,10 +17,10 @@
                 <entry key="/admin/common/captcha.html" value="anon"/>
                 <entry key="/admin/common/forget.html" value="anon"/>
 
-
+<!--
                 <entry key="/admin/setting/**" value="perms[admin:setting]" />
                 <entry key="/admin/admin/**" value="perms[admin:admin]" />
-                <entry key="/admin/role/**" value="perms[admin:role]" />
+                <entry key="/admin/role/**" value="perms[admin:role]" />-->
 
                 <entry key="/admin/**" value="authc"/>
             </map>
