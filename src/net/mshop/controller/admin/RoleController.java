@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 
 /**
+ * 权限Controller
  * Created by Panfuhao on 2016/10/28.
  */
 @Controller("adminRoleController")

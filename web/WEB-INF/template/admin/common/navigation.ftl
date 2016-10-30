@@ -23,7 +23,7 @@
             <li class="nav-item  <#if (message("Admin.menu.product.productManage")+message("Admin.menu.product.stockManage")+message("Admin.menu.product.productCategory")+message("Admin.menu.product.productParameter")+
             message("Admin.menu.product.productAttributes")+message("Admin.menu.product.specificationManage")+message("Admin.menu.product.brandManage")+message("Admin.menu.product.arrivalNotice"))?contains(bar)> active open</#if>">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-diamond"></i>
+                    <i class="icon-layers"></i>
                     <span class="title">${message("Admin.menu.product")}</span>
                     <span class="arrow"></span>
                 </a>
@@ -74,7 +74,7 @@
             <li class="nav-item  <#if (message("Admin.menu.order.orderManage")+message("Admin.menu.order.receiptManage")+message("Admin.menu.order.refundManage")+message("Admin.menu.order.shipManage")+
             message("Admin.menu.order.returnManage")+message("Admin.menu.order.shipPlaceManage")+message("Admin.menu.order.expressSingleTemplate"))?contains(bar)> active open</#if>">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-puzzle"></i>
+                    <i class="icon-basket-loaded"></i>
                     <span class="title">${message("Admin.menu.order")}</span>
                     <span class="arrow"></span>
                 </a>
@@ -121,7 +121,7 @@
             <li class="nav-item  <#if (message("Admin.menu.member.memberManage")+message("Admin.menu.member.memberLevel")+message("Admin.menu.member.pointManage")+message("Admin.menu.member.pre-deposit")+
             message("Admin.menu.member.reviewManage")+message("Admin.menu.member.noticeManage"))?contains(bar)> active open</#if>">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-settings"></i>
+                    <i class="icon-user"></i>
                     <span class="title">${message("Admin.menu.member")}</span>
                     <span class="arrow"></span>
                 </a>
@@ -163,7 +163,7 @@
             <li class="nav-item  <#if (message("Admin.menu.content.articleManage")+message("Admin.menu.content.links")+message("Admin.menu.content.advertisingManage")+message("Admin.menu.content.templateManage")+
             message("Admin.menu.content.cacheManage")+message("Admin.menu.content.staticManage")+message("Admin.menu.content.indexManage"))?contains(bar)> active open</#if>">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-bulb"></i>
+                    <i class="icon-note"></i>
                     <span class="title">${message("Admin.menu.content")}</span>
                     <span class="arrow"></span>
                 </a>
@@ -208,7 +208,7 @@
 
             <li class="nav-item  <#if (message("Admin.menu.marketing.promotionManage")+message("Admin.menu.marketing.couponManage")+message("Admin.menu.marketing.seoManage")+message("Admin.menu.marketing.sitemapManage"))?contains(bar)> active open</#if>">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-briefcase"></i>
+                    <i class="icon-magic-wand"></i>
                     <span class="title">${message("Admin.menu.marketing")}</span>
                     <span class="arrow"></span>
                 </a>
@@ -239,19 +239,19 @@
             <li class="nav-item  <#if (message("Admin.menu.statistics.visitStatistics")+message("Admin.menu.statistics.statisticsSetting")+message("Admin.menu.statistics.memberStatistics")+message("Admin.menu.statistics.orderStatistics")+
             message("Admin.menu.statistics.memberRanking")+message("Admin.menu.statistics.productRanking"))?contains(bar)> active open</#if>">
                 <a href="#" class="nav-link nav-toggle">
-                    <i class="icon-wallet"></i>
+                    <i class="icon-bar-chart"></i>
                     <span class="title">${message("Admin.menu.statistics")}</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item  <#if bar==message("Admin.menu.statistics.visitStatistics")> active open</#if>">
-                        <a href="#" class="nav-link ">
-                            <span class="title">${message("Admin.menu.statistics.visitStatistics")}</span>
-                        </a>
-                    </li>
                     <li class="nav-item  <#if bar==message("Admin.menu.statistics.statisticsSetting")> active open</#if>">
                         <a href="#" class="nav-link ">
                             <span class="title">${message("Admin.menu.statistics.statisticsSetting")}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  <#if bar==message("Admin.menu.statistics.visitStatistics")> active open</#if>">
+                        <a href="#" class="nav-link ">
+                            <span class="title">${message("Admin.menu.statistics.visitStatistics")}</span>
                         </a>
                     </li>
                     <li class="nav-item  <#if bar==message("Admin.menu.statistics.memberStatistics")> active open</#if>">
@@ -281,7 +281,7 @@
             message("Admin.menu.system.logisticsCompany")+message("Admin.menu.system.paymentPlugin")+message("Admin.menu.system.storagePlugin")+message("Admin.menu.system.loginPlugin")+
             message("Admin.menu.system.admin")+message("Admin.menu.system.role")+message("Admin.menu.system.log"))?contains(bar)> active open</#if>">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-bar-chart"></i>
+                    <i class="icon-settings"></i>
                     <span class="title">${message("Admin.menu.system")}</span>
                     <span class="arrow"></span>
                 </a>
