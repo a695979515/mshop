@@ -7,6 +7,7 @@
         <form id="inputForm" action="save.html" method="post" class="form-horizontal">
             <div id="flashMessage" class="alert display-hide">
                 <button class="close" data-close="alert"></button>
+                <span></span>
             </div>
             <div class="portlet light portlet-fit bordered">
                 <div class="portlet-body">
@@ -67,9 +68,29 @@
             },
             invalidHandler: function () {
                 $.message("error", "您还有选项未正确填写, 请检查.");
+            },
+            submitHandler: function (form) {
+                addAuthorities();
+                form.submit();
             }
 
         });
+        function addAuthorities () {
+            $authorities =  $("input[name='authorities']");
+            $authorities.remove();
+            var a = $('#menuTree').jstree().get_checked(true);
+            $authoritiesInput = $("#authoritiesInput");
+            var inputHtml = "";
+            if (a.length > 0) {
+                for (var i = 0; i < a.length; i++) {
+                    var b = a[i];
+                    if ((b.id).indexOf("admin:") > -1) {
+                        inputHtml = "<input type='hidden' name='authorities' value='" + b.id + "'>";
+                        $authoritiesInput.append(inputHtml);
+                    }
+                }
+            }
+        }
         $('#menuTree').jstree({
             'plugins': ["wholerow", "checkbox", "types"],
             'core': {
@@ -398,22 +419,7 @@
                 }
             }
         });
-        $inputForm.submit(function () {
-            $authorities =  $("input[name='authorities']");
-            $authorities.remove();
-            var a = $('#menuTree').jstree().get_checked(true);
-            $authoritiesInput = $("#authoritiesInput");
-            var inputHtml = "";
-            if (a.length > 0) {
-                for (var i = 0; i < a.length; i++) {
-                    var b = a[i];
-                    if ((b.id).indexOf("admin:") > -1) {
-                        inputHtml = "<input type='hidden' name='authorities' value='" + b.id + "'>";
-                        $authoritiesInput.append(inputHtml);
-                    }
-                }
-            }
-        });
+
 
     });
 </script>

@@ -55,6 +55,8 @@ function removeCookie(name, options) {
  */
 $.message = function () {
     var $flashMessage = $("#flashMessage");
+    var $flashMessageContent = $("#flashMessage span");
+    $flashMessageContent.empty();
     var message = {};
     if ($.isPlainObject(arguments[0])) {
         message = arguments[0];
@@ -69,17 +71,17 @@ $.message = function () {
     }
     if(message.type=="success"){
         $flashMessage.addClass("alert-success");
-        $flashMessage.append(message.content);
+        $flashMessageContent.append(message.content);
         $flashMessage.show();
         $flashMessage.delay(3000).hide(0);
     }else if(message.type=="warn"){
         $flashMessage.addClass("alert-warning");
-        $flashMessage.append(message.content);
+        $flashMessageContent.append(message.content);
         $flashMessage.show();
         $flashMessage.delay(3000).hide(0);
     }else if(message.type=="error"){
         $flashMessage.addClass("alert-danger");
-        $flashMessage.append(message.content);
+        $flashMessageContent.append(message.content);
         $flashMessage.show();
         $flashMessage.delay(3000).hide(0);
     }

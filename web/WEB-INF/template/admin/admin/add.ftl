@@ -5,6 +5,7 @@
         <form id="inputForm" action="save.html" method="post" class="form-horizontal">
             <div id="flashMessage" class="alert display-hide">
                 <button class="close" data-close="alert"></button>
+                <span></span>
             </div>
             <div class="portlet light portlet-fit bordered">
                 <div class="portlet-body">

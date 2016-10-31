@@ -12,6 +12,7 @@
         <form id="listForm" action="list.html" method="get">
             <div id="flashMessage" class="alert display-hide">
                 <button class="close" data-close="alert"></button>
+                <span></span>
             </div>
             <div class="btn-group">
                 <a class="btn btn-default btn-outline" href="add.html">

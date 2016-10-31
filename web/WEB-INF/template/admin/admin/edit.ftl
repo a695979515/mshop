@@ -7,6 +7,7 @@
             <input type="hidden" name="id" value="${admin.id}" />
             <div id="flashMessage" class="alert display-hide">
                 <button class="close" data-close="alert"></button>
+                <span></span>
             </div>
             <div class="portlet light portlet-fit bordered">
                 <div class="portlet-body">
