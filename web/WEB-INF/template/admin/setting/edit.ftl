@@ -549,10 +549,6 @@
 <script type="text/javascript">
     $().ready(function(){
         var $inputForm = $("#inputForm");
-        <#if successMessage?? && successMessage>
-            $(".alert-success").show();
-            $(".alert-success").delay(3000).hide(0);
-        </#if>
         $.validator.addMethod("compareLength",
                 function(value, element, param) {
                     return this.optional(element) || $.trim(value) == "" || $.trim($(param).val()) == "" || parseFloat(value) >= parseFloat($(param).val());

@@ -40,7 +40,7 @@ $().ready(function () {
                             dataTypes: "json",
                             cache: false,
                             success: function (data) {
-                                var datas = JSON.parse(data)
+                                var datas = JSON.parse(data);
                                 if (datas.type == "success") {
                                     $checkedIds.closest("tr").remove();
                                     if ($scrollable.find("tr").size() <= 0) {
