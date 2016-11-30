@@ -1,11 +1,5 @@
 <#import "/admin/common/base.ftl" as html/>
 <@html.html title=message("Admin.menu.system.systemSetting") bar=message("Admin.menu.system.systemSetting") bar_title="系统、商城基础配置">
-<style>
-    .filePicker input[type=file] {
-        display: none;
-    }
-
-</style>
 <script type="text/javascript">
     $().ready(function(){
         <@flash_message />
@@ -58,7 +52,7 @@
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>网站LOGO</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control input-inline input-medium" name="logo" value="${setting.logo}" maxlength="200">
-                                                    <a class="btn default btn-file filePicker">选择文件</a>
+                                                    <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
                                                 </div>
                                             </div>
@@ -141,7 +135,7 @@
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>默认商品大图</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control input-inline " name="defaultLargeProductImage" value="${setting.defaultLargeProductImage}" maxlength="200">
-                                                    <a class="btn default btn-file filePicker">选择文件</a>
+                                                    <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
                                                 </div>
                                             </div>
@@ -149,7 +143,7 @@
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>默认商品中图</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control input-inline " name="defaultMediumProductImage" value="${setting.defaultMediumProductImage}" maxlength="200">
-                                                    <a class="btn default btn-file filePicker">选择文件</a>
+                                                    <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
                                                 </div>
                                             </div>
@@ -157,7 +151,7 @@
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>默认商品缩略图</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control input-inline " name="defaultThumbnailProductImage" value="${setting.defaultThumbnailProductImage}" maxlength="200">
-                                                    <a class="btn default btn-file filePicker">选择文件</a>
+                                                    <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
                                                 </div>
                                             </div>
@@ -175,7 +169,7 @@
                                                 <label class="col-md-3 control-label">水印图片</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control input-inline " name="watermarkImage" value="${setting.watermarkImage}" maxlength="200">
-                                                    <a class="btn default btn-file filePicker">选择文件</a>
+                                                    <a class="btn default btn-file">选择文件</a>
                                                     <a href="${setting.logo}" target="_blank">查看</a>
                                                 </div>
                                             </div>
@@ -555,12 +549,6 @@
 <script type="text/javascript">
     $().ready(function(){
         var $inputForm = $("#inputForm");
-        var $filePicker = $("a.filePicker");
-        $filePicker.uploader();
-        <#if successMessage?? && successMessage>
-            $(".alert-success").show();
-            $(".alert-success").delay(3000).hide(0);
-        </#if>
         $.validator.addMethod("compareLength",
                 function(value, element, param) {
                     return this.optional(element) || $.trim(value) == "" || $.trim($(param).val()) == "" || parseFloat(value) >= parseFloat($(param).val());
