@@ -53,41 +53,213 @@ function removeCookie(name, options) {
  * 瞬时消息
  * @returns {boolean}
  */
-$.message = function () {
-    var $flashMessage = $("#flashMessage");
-    var $flashMessageContent = $("#flashMessage span");
-    $flashMessageContent.empty();
-    var message = {};
-    if ($.isPlainObject(arguments[0])) {
-        message = arguments[0];
-    } else if (typeof arguments[0] === "string" && typeof arguments[1] === "string") {
-        message.type = arguments[0];
-        message.content = arguments[1];
-    } else {
-        return false;
-    }
-    if (message.type == null || message.content == null) {
-        return false;
-    }
-    if(message.type=="success"){
-        $flashMessage.addClass("alert-success");
-        $flashMessageContent.append(message.content);
-        $flashMessage.show();
-        $flashMessage.delay(3000).hide(0);
-    }else if(message.type=="warn"){
-        $flashMessage.addClass("alert-warning");
-        $flashMessageContent.append(message.content);
-        $flashMessage.show();
-        $flashMessage.delay(3000).hide(0);
-    }else if(message.type=="error"){
-        $flashMessage.addClass("alert-danger");
-        $flashMessageContent.append(message.content);
-        $flashMessage.show();
-        $flashMessage.delay(3000).hide(0);
-    }
+(function ($) {
+    $.message = function () {
+        var $flashMessage = $("#flashMessage");
+        var $flashMessageContent = $("#flashMessage span");
+        $flashMessageContent.empty();
+        var message = {};
+        if ($.isPlainObject(arguments[0])) {
+            message = arguments[0];
+        } else if (typeof arguments[0] === "string" && typeof arguments[1] === "string") {
+            message.type = arguments[0];
+            message.content = arguments[1];
+        } else {
+            return false;
+        }
+        if (message.type == null || message.content == null) {
+            return false;
+        }
+        if (message.type == "success") {
+            $flashMessage.addClass("alert-success");
+            $flashMessageContent.append(message.content);
+            $flashMessage.show();
+            $flashMessage.delay(3000).hide(0);
+        } else if (message.type == "warn") {
+            $flashMessage.addClass("alert-warning");
+            $flashMessageContent.append(message.content);
+            $flashMessage.show();
+            $flashMessage.delay(3000).hide(0);
+        } else if (message.type == "error") {
+            $flashMessage.addClass("alert-danger");
+            $flashMessageContent.append(message.content);
+            $flashMessage.show();
+            $flashMessage.delay(3000).hide(0);
+        }
 
-    return false;
-};
+        return false;
+    };
+    $.fn.extend({
+        // 文件上传
+        uploader: function (options) {
+            var settings = {
+                url: '/manage/file/upload',
+                fileType: "image",
+                fileName: "file",
+                data: {},
+                maxSize: 10,
+                extensions: null,
+                before: null,
+                complete: null
+            };
+            $.extend(settings, options);
+
+            if (settings.extensions == null) {
+                switch (settings.fileType) {
+                    case "media":
+                        settings.extensions = 'swf,flv,mp3,wav,avi,rm,rmvb';
+                        break;
+                    case "file":
+                        settings.extensions = 'zip,rar,7z,doc,docx,xls,xlsx,ppt,pptx';
+                        break;
+                    default:
+                        settings.extensions = 'jpg,jpeg,bmp,gif,png';
+                }
+            }
+
+            var $progressBar = $('<div class="progressBar"><\/div>').appendTo("body");
+            return this.each(function () {
+                var element = this;
+                var $element = $(element);
+
+                var webUploader = WebUploader.create({
+                    swf: '/resource/manage/flash/webuploader.swf',
+                    server: settings.url + (settings.url.indexOf('?') < 0 ? '?' : '&') + 'fileType=' + settings.fileType,
+                    pick: {
+                        id: element,
+                        multiple: false
+                    },
+                    fileVal: settings.fileName,
+                    formData: settings.data,
+                    fileSingleSizeLimit: settings.maxSize * 1024 * 1024,
+                    accept: {
+                        extensions: settings.extensions
+                    },
+                    fileNumLimit: 1,
+                    auto: true
+                }).on('beforeFileQueued', function (file) {
+                    if ($.isFunction(settings.before) && settings.before.call(element, file) === false) {
+                        return false;
+                    }
+                    if ($.trim(settings.extensions) == '') {
+                        this.trigger('error', 'Q_TYPE_DENIED');
+                        return false;
+                    }
+                    this.reset();
+                    $progressBar.show();
+                }).on('uploadProgress', function (file, percentage) {
+                    $progressBar.width(percentage * 100 + '%');
+                }).on('uploadAccept', function (file, data) {
+                    $progressBar.fadeOut("slow", function () {
+                        $progressBar.width(0);
+                    });
+                    if (data.message.type != 'success') {
+                        $.message(data.message);
+                        return false;
+                    }
+                    $element.prev("input:text").val(data.url);
+                    if ($.isFunction(settings.complete)) {
+                        settings.complete.call(element, file, data);
+                    }
+                }).on('error', function (type) {
+                    switch (type) {
+                        case "F_EXCEED_SIZE":
+                            $.message("warn", "上传文件大小超出限制");
+                            break;
+                        case "Q_TYPE_DENIED":
+                            $.message("warn", "上传文件格式不正确");
+                            break;
+                        default:
+                            $.message("warn", "上传文件出现错误");
+                    }
+                });
+
+                $element.mouseover(function () {
+                    webUploader.refresh();
+                });
+            });
+        },
+
+        // 编辑器
+        editor: function (options) {
+            window.UEDITOR_CONFIG = {
+                UEDITOR_HOME_URL: '/resources/admin/ueditor/',
+                serverUrl: '/manage/file/upload',
+                imageActionName: "uploadImage",
+                imageFieldName: "file",
+                imageMaxSize: 10485760,
+                imageAllowFiles: ['.jpg', '.jpeg', '.bmp', '.gif', '.png'],
+                imageUrlPrefix: "",
+                imagePathFormat: "",
+                imageCompressEnable: false,
+                imageCompressBorder: 1600,
+                imageInsertAlign: "none",
+                videoActionName: "uploadMedia",
+                videoFieldName: "file",
+                videoMaxSize: 10485760,
+                videoAllowFiles: ['.swf', '.flv', '.mp3', '.wav', '.avi', '.rm', '.rmvb'],
+                videoUrlPrefix: "",
+                videoPathFormat: "",
+                fileActionName: "uploadFile",
+                fileFieldName: "file",
+                fileMaxSize: 10485760,
+                fileAllowFiles: ['.zip', '.rar', '.7z', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx'],
+                fileUrlPrefix: "",
+                filePathFormat: "",
+                toolbars: [[
+                    'fullscreen', 'source', '|',
+                    'undo', 'redo', '|',
+                    'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
+                    'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+                    'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+                    'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+                    'directionalityltr', 'directionalityrtl', 'indent', '|',
+                    'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+                    'touppercase', 'tolowercase', '|',
+                    'link', 'unlink', 'anchor', '|',
+                    'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+                    'insertimage', 'insertvideo', 'attachment', 'map', 'insertframe', 'pagebreak', '|',
+                    'horizontal', 'date', 'time', 'spechars', '|',
+                    'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
+                    'print', 'preview', 'searchreplace', 'drafts'
+                ]],
+                lang: 'zh_CN',
+                iframeCssUrl: null,
+                pageBreakTag: 'page_break_tag',
+                wordCount: false
+            };
+
+            UE.Editor.prototype.getActionUrl = function (action) {
+                var serverUrl = this.getOpt('serverUrl');
+                switch (action) {
+                    case "uploadImage":
+                        return serverUrl + (serverUrl.indexOf('?') < 0 ? '?' : '&') + 'fileType=image';
+                    case "uploadMedia":
+                        return serverUrl + (serverUrl.indexOf('?') < 0 ? '?' : '&') + 'fileType=media';
+                    case "uploadFile":
+                        return serverUrl + (serverUrl.indexOf('?') < 0 ? '?' : '&') + 'fileType=file';
+                }
+                return null;
+            };
+
+            UE.Editor.prototype.loadServerConfig = function () {
+                this._serverConfigLoaded = true;
+            };
+
+            return this.each(function () {
+                var element = this;
+                var $element = $(element);
+
+                UE.getEditor($element.attr("id"), options).ready(function () {
+                    this.execCommand("serverparam", {
+                        token: getCookie("token")
+                    });
+                });
+            });
+        }
+
+    });
+})(jQuery);
 
 
 $().ready(function () {
