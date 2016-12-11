@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import java.util.HashSet;
 
 /**
+ * 管理员Controller
  * Created by Panfuhao on 2016/10/24.
  */
 @Controller("adminAdminController")
@@ -30,7 +31,7 @@ public class AdminController extends BaseController {
     private RoleService roleService;
 
     /**
-     * 管理员列表
+     * 转到管理员列表
      *
      * @param pageable
      * @param model
@@ -43,7 +44,7 @@ public class AdminController extends BaseController {
     }
 
     /**
-     * 添加
+     * 转到添加页面
      *
      * @param model
      * @return
@@ -55,7 +56,7 @@ public class AdminController extends BaseController {
     }
 
     /**
-     * 保存
+     * 保存操作
      *
      * @param admin
      * @param roleIds
@@ -87,7 +88,7 @@ public class AdminController extends BaseController {
     }
 
     /**
-     * 删除
+     * 删除操作
      *
      * @param ids
      * @return
@@ -104,7 +105,7 @@ public class AdminController extends BaseController {
     }
 
     /**
-     * 编辑
+     * 转到编辑页面
      *
      * @param id
      * @param model
@@ -118,7 +119,7 @@ public class AdminController extends BaseController {
     }
 
     /**
-     * 更新
+     * 更新操作
      *
      * @param admin
      * @param roleIds

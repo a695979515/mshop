@@ -24,7 +24,7 @@ public class RoleController extends BaseController {
     private RoleService roleService;
 
     /**
-     * 列表
+     * 转到权限列表
      *
      * @param pageable
      * @param model
@@ -37,7 +37,7 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 添加
+     * 转到添加页面
      *
      * @return
      */
@@ -47,7 +47,7 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 编辑
+     * 转到编辑页面
      *
      * @param id
      * @param model
@@ -60,7 +60,7 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 更新
+     * 更新操作
      *
      * @param role
      * @param redirectAttributes
@@ -81,7 +81,7 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 保存
+     * 保存操作
      *
      * @param role
      * @param redirectAttributes
@@ -100,7 +100,7 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 删除
+     * 删除操作
      *
      * @param ids
      * @return

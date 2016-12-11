@@ -39,6 +39,11 @@ public class CommonController implements ServletContextAware {
         this.servletContext = servletContext;
     }
 
+    /**
+     * 登录成功后转到主页面
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main(ModelMap model) {
         model.addAttribute("systemName", systemName);
@@ -80,6 +85,12 @@ public class CommonController implements ServletContextAware {
         ImageIO.write(bufferedImage, "jpeg", outputStream);
         outputStream.flush();
     }
+
+    /**
+     * 忘记密码  发送邮件找回
+     * @param email
+     * @return
+     */
     @RequestMapping(value = "forget",method = RequestMethod.POST)
     private String forget(String email){
         System.out.println("email1="+email);

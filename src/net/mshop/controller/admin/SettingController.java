@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
+ * 系统设置Controller
  * Created by Panfuhao on 2016/10/21.
  */
 @Controller("settingController")
 @RequestMapping("/admin/setting")
 public class SettingController extends BaseController {
-
+    /**
+     * 转到编辑页面
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/edit",method = RequestMethod.GET)
     public String edit(ModelMap model) {
         model.addAttribute("setting", SystemUtils.getSetting());
@@ -27,6 +32,12 @@ public class SettingController extends BaseController {
         return "/admin/setting/edit";
     }
 
+    /**
+     * 更新操作
+     * @param setting
+     * @param redirectAttributes
+     * @return
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(Setting setting,RedirectAttributes redirectAttributes) {
         setting.setSmtpSSLEnabled(setting.getSmtpSSLEnabled() == null ? false : setting.getSmtpSSLEnabled());

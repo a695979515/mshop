@@ -19,7 +19,12 @@ public class MemberRankController extends BaseController {
     @Resource(name = "memberRankServiceImpl")
     private MemberRankService memberRankService;
 
-
+    /**
+     * 保存操作
+     * @param memberRank
+     * @param redirectAttributes
+     * @return
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(MemberRank memberRank, RedirectAttributes redirectAttributes) {
         if (memberRank.getIsSpecial()) {
