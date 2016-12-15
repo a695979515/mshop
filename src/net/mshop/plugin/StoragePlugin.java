@@ -1,9 +1,13 @@
 package net.mshop.plugin;
 
+import net.mshop.entity.PluginConfig;
+import net.mshop.service.PluginConfigService;
+import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.File;
 
 /**
@@ -12,8 +16,8 @@ import java.io.File;
  */
 public abstract class StoragePlugin implements Comparable<StoragePlugin> {
 
-/*	@Resource(name = "pluginConfigServiceImpl")
-	private PluginConfigService pluginConfigService;*/
+	@Resource(name = "pluginConfigServiceImpl")
+	private PluginConfigService pluginConfigService;
 
 	/**
 	 * 获取ID
@@ -64,52 +68,52 @@ public abstract class StoragePlugin implements Comparable<StoragePlugin> {
 	 * 获取是否已安装
 	 *
 	 * @return 是否已安装
-	 *//*
+	 */
 	public boolean getIsInstalled() {
 		return pluginConfigService.pluginIdExists(getId());
 	}
 
-	*//**
+	/**
 	 * 获取插件配置
 	 *
 	 * @return 插件配置
-	 *//*
+	 */
 	public PluginConfig getPluginConfig() {
 		return pluginConfigService.findByPluginId(getId());
 	}
 
-	*//**
+	/**
 	 * 获取是否已启用
 	 *
 	 * @return 是否已启用
-	 *//*
+	 */
 	public boolean getIsEnabled() {
 		PluginConfig pluginConfig = getPluginConfig();
 		return pluginConfig != null ? pluginConfig.getIsEnabled() : false;
 	}
 
-	*//**
+	/**
 	 * 获取属性值
 	 *
 	 * @param name
 	 *            属性名称
 	 * @return 属性值
-	 *//*
+	 */
 	public String getAttribute(String name) {
 		PluginConfig pluginConfig = getPluginConfig();
 		return pluginConfig != null ? pluginConfig.getAttribute(name) : null;
 	}
 
-	*//**
+	/**
 	 * 获取排序
 	 *
 	 * @return 排序
-	 *//*
+	 */
 	public Integer getOrder() {
 		PluginConfig pluginConfig = getPluginConfig();
 		return pluginConfig != null ? pluginConfig.getOrder() : null;
 	}
-*/
+
 	/**
 	 * 文件上传
 	 * 
@@ -170,11 +174,11 @@ public abstract class StoragePlugin implements Comparable<StoragePlugin> {
 	 *            存储插件
 	 * @return 比较结果
 	 */
-/*	public int compareTo(StoragePlugin storagePlugin) {
+	public int compareTo(StoragePlugin storagePlugin) {
 		if (storagePlugin == null) {
 			return 1;
 		}
 		return new CompareToBuilder().append(getOrder(), storagePlugin.getOrder()).append(getId(), storagePlugin.getId()).toComparison();
-	}*/
+	}
 
 }
