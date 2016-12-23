@@ -25,7 +25,7 @@ public class OssStoragePlugin extends StoragePlugin {
 
 	@Override
 	public String getSiteUrl() {
-		return "http://www.shopxx.net";
+		return "http://www.mshop.com";
 	}
 
 	@Override
