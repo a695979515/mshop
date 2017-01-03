@@ -4,6 +4,7 @@ import net.mshop.controller.admin.BaseController;
 import net.mshop.entity.Message;
 import net.mshop.entity.PluginConfig;
 import net.mshop.plugin.PaymentPlugin;
+import net.mshop.service.PluginConfigService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,8 @@ public class AlipayDirectPaymentController extends BaseController {
 
 	@Resource(name = "alipayDirectPaymentPlugin")
 	private AlipayDirectPaymentPlugin alipayDirectPaymentPlugin;
-//	@Resource(name = "pluginConfigServiceImpl")
-//	private PluginConfigService pluginConfigService;
+	@Resource(name = "pluginConfigServiceImpl")
+	private PluginConfigService pluginConfigService;
 
 	/**
 	 * 安装
@@ -41,7 +42,7 @@ public class AlipayDirectPaymentController extends BaseController {
 			pluginConfig.setPluginId(alipayDirectPaymentPlugin.getId());
 			pluginConfig.setIsEnabled(false);
 			pluginConfig.setAttributes(null);
-//			pluginConfigService.save(pluginConfig);
+			pluginConfigService.save(pluginConfig);
 		}
 		return SUCCESS_MESSAGE;
 	}
@@ -53,7 +54,7 @@ public class AlipayDirectPaymentController extends BaseController {
 	public @ResponseBody
 	Message uninstall() {
 		if (alipayDirectPaymentPlugin.getIsInstalled()) {
-//			pluginConfigService.deleteByPluginId(alipayDirectPaymentPlugin.getId());
+			pluginConfigService.deleteByPluginId(alipayDirectPaymentPlugin.getId());
 		}
 		return SUCCESS_MESSAGE;
 	}
@@ -86,7 +87,7 @@ public class AlipayDirectPaymentController extends BaseController {
 		pluginConfig.setAttributes(attributes);
 		pluginConfig.setIsEnabled(isEnabled);
 		pluginConfig.setOrder(order);
-//		pluginConfigService.update(pluginConfig);
+		pluginConfigService.update(pluginConfig);
 		addFlashMessage(redirectAttributes, SUCCESS_MESSAGE);
 		return "redirect:/admin/payment_plugin/list.jhtml";
 	}
