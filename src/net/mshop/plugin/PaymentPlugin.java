@@ -1,7 +1,9 @@
 package net.mshop.plugin;
 
+import net.mshop.entity.PaymentLog;
 import net.mshop.entity.PluginConfig;
 import net.mshop.entity.Setting;
+import net.mshop.service.PaymentLogService;
 import net.mshop.service.PluginConfigService;
 import net.mshop.util.SystemUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -84,7 +86,7 @@ public abstract class PaymentPlugin implements Comparable<PaymentPlugin> {
 	@Resource(name = "pluginConfigServiceImpl")
 	private PluginConfigService pluginConfigService;
 	@Resource(name = "paymentLogServiceImpl")
-//	private PaymentLogService paymentLogService;
+	private PaymentLogService paymentLogService;
 
 	/**
 	 * 获取ID
@@ -330,9 +332,9 @@ public abstract class PaymentPlugin implements Comparable<PaymentPlugin> {
 	 *            编号(忽略大小写)
 	 * @return 支付记录，若不存在则返回null
 	 */
-//	protected PaymentLog getPaymentLog(String sn) {
-//		return paymentLogService.findBySn(sn);
-//	}
+	protected PaymentLog getPaymentLog(String sn) {
+		return paymentLogService.findBySn(sn);
+	}
 
 	/**
 	 * 获取通知URL

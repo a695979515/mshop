@@ -1,5 +1,6 @@
 package net.mshop.plugin.alipayDirectPayment;
 
+import net.mshop.entity.PaymentLog;
 import net.mshop.entity.PluginConfig;
 import net.mshop.entity.Setting;
 import net.mshop.plugin.PaymentPlugin;
@@ -65,7 +66,7 @@ public class AlipayDirectPaymentPlugin extends PaymentPlugin {
 	public Map<String, Object> getParameterMap(String sn, String description, HttpServletRequest request) {
 		Setting setting = SystemUtils.getSetting();
 		PluginConfig pluginConfig = getPluginConfig();
-	//	PaymentLog paymentLog = getPaymentLog(sn);
+		PaymentLog paymentLog = getPaymentLog(sn);
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("service", "create_direct_pay_by_user");
 		parameterMap.put("partner", pluginConfig.getAttribute("partner"));
@@ -78,7 +79,7 @@ public class AlipayDirectPaymentPlugin extends PaymentPlugin {
 		parameterMap.put("body", StringUtils.abbreviate(description.replaceAll("[^0-9a-zA-Z\\u4e00-\\u9fa5 ]", ""), 600));
 		parameterMap.put("payment_type", "1");
 		parameterMap.put("seller_id", pluginConfig.getAttribute("partner"));
-	//	parameterMap.put("total_fee", paymentLog.getAmount().setScale(2).toString());
+		parameterMap.put("total_fee", paymentLog.getAmount().setScale(2).toString());
 		parameterMap.put("show_url", setting.getSiteUrl());
 		parameterMap.put("paymethod", "directPay");
 		parameterMap.put("extend_param", "isv^1860648a1");
