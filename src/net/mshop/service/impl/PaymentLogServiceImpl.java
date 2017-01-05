@@ -1,7 +1,9 @@
 package net.mshop.service.impl;
 
 import net.mshop.dao.PaymentLogDao;
+import net.mshop.dao.SnDao;
 import net.mshop.entity.PaymentLog;
+import net.mshop.entity.Sn;
 import net.mshop.service.MemberService;
 import net.mshop.service.PaymentLogService;
 import org.springframework.stereotype.Service;
@@ -21,8 +23,8 @@ public class PaymentLogServiceImpl extends BaseServiceImpl<PaymentLog, Long> imp
 
 	@Resource(name = "paymentLogDaoImpl")
 	private PaymentLogDao paymentLogDao;
-//	@Resource(name = "snDaoImpl")
-//	private SnDao snDao;
+	@Resource(name = "snDaoImpl")
+	private SnDao snDao;
 	@Resource(name = "memberServiceImpl")
 	private MemberService memberService;
 //	@Resource(name = "orderServiceImpl")
@@ -72,9 +74,9 @@ public class PaymentLogServiceImpl extends BaseServiceImpl<PaymentLog, Long> imp
 	@Override
 	@Transactional
 	public PaymentLog save(PaymentLog paymentLog) {
-		/*Assert.notNull(paymentLog);
+		Assert.notNull(paymentLog);
 
-		paymentLog.setSn(snDao.generate(Sn.Type.paymentLog));*/
+		paymentLog.setSn(snDao.generate(Sn.Type.paymentLog));
 
 		return super.save(paymentLog);
 	}
