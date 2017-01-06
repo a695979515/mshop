@@ -5,6 +5,7 @@ import net.mshop.entity.PluginConfig;
 import net.mshop.entity.Setting;
 import net.mshop.plugin.PaymentPlugin;
 import net.mshop.util.SystemUtils;
+import net.mshop.util.WebUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -92,7 +93,7 @@ public class AlipayDirectPaymentPlugin extends PaymentPlugin {
 	@Override
 	public boolean verifyNotify(PaymentPlugin.NotifyMethod notifyMethod, HttpServletRequest request) {
 		PluginConfig pluginConfig = getPluginConfig();
-/*		PaymentLog paymentLog = getPaymentLog(request.getParameter("out_trade_no"));
+		PaymentLog paymentLog = getPaymentLog(request.getParameter("out_trade_no"));
 		if (paymentLog != null && generateSign(request.getParameterMap()).equals(request.getParameter("sign")) && pluginConfig.getAttribute("partner").equals(request.getParameter("seller_id"))
 				&& ("TRADE_SUCCESS".equals(request.getParameter("trade_status")) || "TRADE_FINISHED".equals(request.getParameter("trade_status"))) && paymentLog.getAmount().compareTo(new BigDecimal(request.getParameter("total_fee"))) == 0) {
 			Map<String, Object> parameterMap = new HashMap<String, Object>();
@@ -102,7 +103,7 @@ public class AlipayDirectPaymentPlugin extends PaymentPlugin {
 			if ("true".equals(WebUtils.post("https://mapi.alipay.com/gateway.do", parameterMap))) {
 				return true;
 			}
-		}*/
+		}
 		return false;
 	}
 
