@@ -6,6 +6,7 @@ import net.mshop.operator.Order;
 import net.mshop.operator.Page;
 import net.mshop.operator.Pageable;
 
+import javax.persistence.LockModeType;
 import java.io.Serializable;
 import java.util.List;
 
@@ -52,6 +53,23 @@ public interface BaseDao<T extends BaseEntity<ID>, ID extends Serializable> {
      * @param entity
      */
     void persist(T entity);
+    /**
+     * 刷新实体对象
+     *
+     * @param entity
+     *            实体对象
+     */
+    void refresh(T entity);
+
+    /**
+     * 刷新实体对象
+     *
+     * @param entity
+     *            实体对象
+     * @param lockModeType
+     *            锁定方式
+     */
+    void refresh(T entity, LockModeType lockModeType);
 
     /**
      * 判断是否为托管状态
@@ -83,5 +101,23 @@ public interface BaseDao<T extends BaseEntity<ID>, ID extends Serializable> {
      * @return 实体对象
      */
     T merge(T entity);
+    /**
+     * 获取锁定方式
+     *
+     * @param entity
+     *            实体对象
+     * @return 锁定方式
+     */
+    LockModeType getLockMode(T entity);
+
+    /**
+     * 锁定实体对象
+     *
+     * @param entity
+     *            实体对象
+     * @param lockModeType
+     *            锁定方式
+     */
+    void lock(T entity, LockModeType lockModeType);
 
 }

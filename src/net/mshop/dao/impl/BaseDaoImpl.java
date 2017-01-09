@@ -102,6 +102,8 @@ public abstract class BaseDaoImpl<T extends BaseEntity<ID>, ID extends Serializa
         entityManager.persist(entity);
     }
 
+
+
     public boolean isManaged(T entity) {
         Assert.notNull(entity);
         return entityManager.contains(entity);

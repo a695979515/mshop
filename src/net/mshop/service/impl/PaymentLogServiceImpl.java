@@ -36,7 +36,7 @@ public class PaymentLogServiceImpl extends BaseServiceImpl<PaymentLog, Long> imp
 	}
 
 	public void handle(PaymentLog paymentLog) {
-		/*Assert.notNull(paymentLog);
+		Assert.notNull(paymentLog);
 
 		if (!LockModeType.PESSIMISTIC_WRITE.equals(paymentLogDao.getLockMode(paymentLog))) {
 			paymentLogDao.refresh(paymentLog, LockModeType.PESSIMISTIC_WRITE);
@@ -48,7 +48,7 @@ public class PaymentLogServiceImpl extends BaseServiceImpl<PaymentLog, Long> imp
 			return;
 		}
 
-		switch (paymentLog.getType()) {
+		/*switch (paymentLog.getType()) {
 		case recharge:
 			Member member = paymentLog.getMember();
 			if (member != null) {
@@ -67,8 +67,8 @@ public class PaymentLogServiceImpl extends BaseServiceImpl<PaymentLog, Long> imp
 				orderService.payment(order, payment, null);
 			}
 			break;
-		}
-		paymentLog.setStatus(PaymentLog.Status.success);*/
+		}*/
+		paymentLog.setStatus(PaymentLog.Status.success);
 	}
 
 	@Override
