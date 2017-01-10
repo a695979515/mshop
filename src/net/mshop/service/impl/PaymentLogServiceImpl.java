@@ -2,6 +2,7 @@ package net.mshop.service.impl;
 
 import net.mshop.dao.PaymentLogDao;
 import net.mshop.dao.SnDao;
+import net.mshop.entity.Member;
 import net.mshop.entity.PaymentLog;
 import net.mshop.entity.Sn;
 import net.mshop.service.MemberService;
@@ -48,15 +49,15 @@ public class PaymentLogServiceImpl extends BaseServiceImpl<PaymentLog, Long> imp
 			return;
 		}
 
-		/*switch (paymentLog.getType()) {
+		switch (paymentLog.getType()) {
 		case recharge:
 			Member member = paymentLog.getMember();
 			if (member != null) {
-				memberService.addBalance(member, paymentLog.getEffectiveAmount(), DepositLog.Type.recharge, null, null);
+			//	memberService.addBalance(member, paymentLog.getEffectiveAmount(), DepositLog.Type.recharge, null, null);
 			}
 			break;
 		case payment:
-			Order order = paymentLog.getOrder();
+			/*Order order = paymentLog.getOrder();
 			if (order != null) {
 				Payment payment = new Payment();
 				payment.setMethod(Payment.Method.online);
@@ -65,9 +66,9 @@ public class PaymentLogServiceImpl extends BaseServiceImpl<PaymentLog, Long> imp
 				payment.setAmount(paymentLog.getAmount());
 				payment.setOrder(order);
 				orderService.payment(order, payment, null);
-			}
+			}*/
 			break;
-		}*/
+		}
 		paymentLog.setStatus(PaymentLog.Status.success);
 	}
 
