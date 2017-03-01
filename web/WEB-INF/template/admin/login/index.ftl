@@ -134,7 +134,7 @@
                            placeholder="验证码" name="captcha" id="captcha"/>
                 </div>
                 <div class="form-group" style="float: right;">
-                    <img id="captchaImage" style="float: right;" src="common/captcha.html?captchaId=${captchaId}"
+                    <img id="captchaImage" style="float: right;height: 43px;" src="common/captcha.html?captchaId=${captchaId}"
                          title="点击更换验证码"/>
                 </div>
             </div>

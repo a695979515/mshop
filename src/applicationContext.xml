@@ -119,4 +119,12 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <property name="minGuarantedStorageDelayInSeconds" value="600"/>
     </bean>
 
+
+    <task:executor id="taskExecutor" pool-size="${task.pool_size}" queue-capacity="${task.queue_capacity}" keep-alive="${task.keep_alive}" rejection-policy="CALLER_RUNS" />
+
+    <task:annotation-driven executor="taskExecutor" />
+
+
+
+
 </beans>

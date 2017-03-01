@@ -61,9 +61,6 @@
     <setting name="defaultPointScale" value="1.0"/>
     <setting name="reviewEnabled" value="true"/>
     <setting name="reviewCheck" value="true"/>
-    <setting name="invoiceEnabled" value="false"/>
-    <setting name="taxPriceEnabled" value="false"/>
-    <setting name="taxRate" value="0.6"/>
     <setting name="cookiePath" value="/"/>
     <setting name="cookieDomain" value=""/>
     <setting name="kuaidi100key" value=""/>
@@ -71,3 +68,5 @@
     <setting name="cnzzSiteId" value=""/>
     <setting name="cnzzPassword" value=""/>
 </mshop>
+
+

@@ -41,8 +41,6 @@ public class SettingController extends BaseController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(Setting setting,RedirectAttributes redirectAttributes) {
         setting.setSmtpSSLEnabled(setting.getSmtpSSLEnabled() == null ? false : setting.getSmtpSSLEnabled());
-        setting.setInvoiceEnabled(setting.getInvoiceEnabled() == null ? false : setting.getInvoiceEnabled());
-        setting.setTaxPriceEnabled(setting.getTaxPriceEnabled() == null ? false : setting.getTaxPriceEnabled());
         setting.setShowMarketPrice(setting.getShowMarketPrice() == null ? false : setting.getShowMarketPrice());
         setting.setSiteEnabled(setting.getSiteEnabled() == null ? false : setting.getSiteEnabled());
         setting.setRegisterEnabled(setting.getRegisterEnabled() == null ? false : setting.getRegisterEnabled());

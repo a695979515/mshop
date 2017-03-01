@@ -488,24 +488,7 @@
                                                     <span class="help-block">系统将根据该比列计算市场价格</span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">是否开启发票功能</label>
-                                                <div class="col-md-4">
-                                                    <input type="checkbox" class="make-switch" name="invoiceEnabled" data-on-text="是" data-off-text="否"  <#if setting.invoiceEnabled> checked="checked"</#if>>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">是否开启含税价</label>
-                                                <div class="col-md-4">
-                                                    <input type="checkbox" class="make-switch" name="taxPriceEnabled" data-on-text="是" data-off-text="否"  <#if setting.taxPriceEnabled> checked="checked"</#if>>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>税率</label>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control input-medium" name="taxRate" value="${setting.taxRate}" maxlength="7">
-                                                </div>
-                                            </div>
+
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>Cookie路径</label>
                                                 <div class="col-md-4">
