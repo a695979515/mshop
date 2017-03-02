@@ -168,14 +168,14 @@
                     <ul class="sub-menu">
                         <@shiro.hasPermission name="admin:memberManage">
                             <li class="nav-item  <#if bar==message("Admin.menu.member.memberManage")> active open</#if>">
-                                <a href="#" class="nav-link ">
+                                <a href="${base}/admin/member/list.html" class="nav-link ">
                                     <span class="title">${message("Admin.menu.member.memberManage")}</span>
                                 </a>
                             </li>
                         </@shiro.hasPermission>
                         <@shiro.hasPermission name="admin:memberLevel">
                             <li class="nav-item  <#if bar==message("Admin.menu.member.memberLevel")> active open</#if>">
-                                <a href="#" class="nav-link ">
+                                <a href="${base}/admin/member_rank/list.html" class="nav-link ">
                                     <span class="title">${message("Admin.menu.member.memberLevel")}</span>
                                 </a>
                             </li>

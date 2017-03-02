@@ -1,8 +1,10 @@
 package net.mshop.controller.admin;
 
 import net.mshop.entity.MemberRank;
+import net.mshop.operator.Pageable;
 import net.mshop.service.MemberRankService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -34,6 +36,21 @@ public class MemberRankController extends BaseController {
         }
         memberRank.setMembers(null);
         memberRankService.save(memberRank);
-        return "/admin/memberRank/member_rank";
+        return "redirect:list.html";
+    }
+    /**
+     * 列表
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(Pageable pageable, ModelMap model) {
+        model.addAttribute("page", memberRankService.findPage(pageable));
+        return "/admin/member_rank/list";
+    }
+    /**
+     * 添加
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add(ModelMap model) {
+        return "/admin/member_rank/add";
     }
 }

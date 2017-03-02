@@ -36,17 +36,17 @@ public class CaptchaEngine extends ImageCaptchaEngine implements ServletContextA
     /**
      * 图片高度
      */
-    @Value("38")
+    @Value("43")
     private int imageHeight;
     /**
      * 最小字体
      */
-    @Value("18")
+    @Value("20")
     private int minFontSize;
     /**
      * 最大字体
      */
-    @Value("24")
+    @Value("26")
     private int maxFontSize;
     /**
      * 最小字符长度
