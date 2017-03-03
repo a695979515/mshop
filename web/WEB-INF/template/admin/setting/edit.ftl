@@ -375,34 +375,17 @@
                                                 <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>发件人邮箱</label>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control input-inline input-medium" name="smtpFromMail" value="${setting.smtpFromMail}" maxlength="200">
-                                                    <a class="btn btn-default" data-toggle="modal" href="#testEamil">测试邮件</a>
+                                                    <a class="btn btn-default" id="testEamil">测试邮件</a>
                                                 </div>
                                             </div>
-                                            <!-- .modal- -->
-                                            <div class="modal fade" id="testEamil" tabindex="-1" role="testEamil" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                            <h4 class="modal-title">测试邮件</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <div class="col-md-offset-3 col-md-9">
-                                                                    <input type="text" class="form-control input-inline " id="toMail" name="toMail"  maxlength="200">
-                                                                    <a class="btn green" id="sendEmail">发送邮件</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline grey-salsa" data-dismiss="modal">关闭</button>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.modal-content -->
+                                            <div class="form-group" style="display: none;">
+                                                <label class="col-md-3 control-label">收件人邮箱</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control input-inline input-medium ignore"
+                                                           id="toMail" name="toMail" maxlength="200">
+                                                    <a class="btn green" id="sendMail">发送邮件</a>
                                                 </div>
-                                                <!-- /.modal-dialog -->
                                             </div>
-
                                         </div>
 
 
@@ -539,11 +522,15 @@
     $().ready(function(){
         var $inputForm = $("#inputForm");
         var $filePicker = $("a.filePicker");
+        var $toMail = $("#toMail");
+        var $sendMail = $("#sendMail");
+        var $testEamil = $("#testEamil");
         $filePicker.uploader();
         <#if successMessage?? && successMessage>
             $(".alert-success").show();
             $(".alert-success").delay(3000).hide(0);
         </#if>
+
 
         $.validator.addMethod("compareLength",
                 function(value, element, param) {
@@ -699,12 +686,52 @@
                           fraction: 3
                       }
                   },
-                cookiePath: "required"
+                cookiePath: "required",
+                toMail: {
+                    required: true,
+                    email: true
+                }
             },
             invalidHandler: function() {
                 $.message("error","您还有选项未正确填写, 请检查.");
             }
 
+        });
+
+        // 邮件测试
+        $testEamil.click(function() {
+            $testEamil.hide();
+            $toMail.closest("div .form-group").show();
+            $toMail.removeClass("ignore");
+        });
+        // 发送邮件
+        $sendMail.click(function() {
+            $toMail.removeClass("ignore");
+            var validator = $inputForm.validate();
+            var isValid = validator.element($smtpFromMail) & validator.element($smtpHost) & validator.element($smtpPort) & validator.element($smtpUsername) & validator.element($toMail);
+            $toMail.addClass("ignore");
+            $.ajax({
+                url: "test_smtp.html",
+                type: "POST",
+                data: {smtpHost: $smtpHost.val(), smtpPort: $smtpPort.val(), smtpUsername: $smtpUsername.val(), smtpPassword: $smtpPassword.val(), smtpSSLEnabled: $smtpSSLEnabled.prop("checked"), smtpFromMail: $smtpFromMail.val(), toMail: $toMail.val()},
+                dataType: "json",
+                cache: false,
+                beforeSend: function() {
+                    if (!isValid) {
+                        return false;
+                    }
+                    App.blockUI({
+                        target: 'body',
+                        animate: true
+                    });
+                    $sendMail.prop("disabled", true);
+                },
+                success: function(message) {
+                    App.unblockUI('body');
+                    $sendMail.prop("disabled", false);
+                    $.message(message);
+                }
+            });
         });
 
 
