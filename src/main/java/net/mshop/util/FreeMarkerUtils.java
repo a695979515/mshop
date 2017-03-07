@@ -28,8 +28,8 @@ import java.util.Map;
 public final class FreeMarkerUtils {
     private static final ConvertUtilsBean CONVERT_UTILS_BEAN;
 
-    private static final Configuration DEFAULT_CONFIGURATION = new Configuration(Configuration.VERSION_2_3_25);
-    private static final BeansWrapper DEFAULT_BEANS_WRAPPER = new BeansWrapperBuilder(Configuration.VERSION_2_3_25).build();
+    private static final Configuration DEFAULT_CONFIGURATION = new Configuration(Configuration.VERSION_2_3_23);
+    private static final BeansWrapper DEFAULT_BEANS_WRAPPER = new BeansWrapperBuilder(Configuration.VERSION_2_3_23).build();
 
     static {
         CONVERT_UTILS_BEAN = new ConvertUtilsBean() {
