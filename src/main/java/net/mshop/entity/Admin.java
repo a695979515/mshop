@@ -178,4 +178,10 @@ public class Admin extends BaseEntity<Long> {
     public void preUpdate() {
         setEmail(StringUtils.lowerCase(getEmail()));
     }
+
+    public static void main(String[] args) {
+    }
+
+
+
 }

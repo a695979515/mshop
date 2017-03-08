@@ -1,8 +1,6 @@
 package net.mshop.controller.admin;
 
-import net.mshop.entity.Admin;
-import net.mshop.entity.Message;
-import net.mshop.entity.Role;
+import net.mshop.entity.*;
 import net.mshop.operator.Pageable;
 import net.mshop.service.AdminService;
 import net.mshop.service.RoleService;
@@ -16,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * 管理员Controller
@@ -52,6 +52,7 @@ public class AdminController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(ModelMap model) {
         model.addAttribute("roles", roleService.findAll());
+
         return "/admin/admin/add";
     }
 
