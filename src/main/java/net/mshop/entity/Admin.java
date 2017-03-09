@@ -179,9 +179,6 @@ public class Admin extends BaseEntity<Long> {
         setEmail(StringUtils.lowerCase(getEmail()));
     }
 
-    public static void main(String[] args) {
-    }
-
 
 
 }

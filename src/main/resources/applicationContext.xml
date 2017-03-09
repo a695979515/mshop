@@ -32,7 +32,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <property name="packagesToScan" value="net.mshop.entity"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="false"/>
+                <property name="showSql" value="true"/>
                 <property name="generateDdl" value="true"/>
             </bean>
         </property>
