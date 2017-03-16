@@ -83,6 +83,7 @@ public class AdminController extends BaseController {
         admin.setLoginIp(null);
         admin.setLockKey(null);
         adminService.save(admin);
+        System.out.println("id===="+admin.getId());
         redirectAttributes.addFlashAttribute("success", "成功");
         return "redirect:list.html";
 

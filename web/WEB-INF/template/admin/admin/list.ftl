@@ -6,6 +6,16 @@
         <@flash_message />
     });
 </script>
+<style>
+    .mt-checkbox {
+        padding-left: 0px;
+        margin-bottom: 0px;
+
+    }
+    .mt-checkbox > input {
+        position: relative;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
 

@@ -66,7 +66,7 @@ public class CommonController implements ServletContextAware {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "captcha", method = RequestMethod.GET)
+    @RequestMapping(value = "/captcha", method = RequestMethod.GET)
     public void captcha(String captchaId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (StringUtils.isEmpty(captchaId)) {
             captchaId = request.getSession().getId();
@@ -91,7 +91,7 @@ public class CommonController implements ServletContextAware {
      * @param email
      * @return
      */
-    @RequestMapping(value = "forget",method = RequestMethod.POST)
+    @RequestMapping(value = "/forget",method = RequestMethod.POST)
     private String forget(String email){
         System.out.println("email1="+email);
         return "/admin/forget/forget/rest";

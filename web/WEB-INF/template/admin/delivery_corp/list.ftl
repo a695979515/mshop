@@ -1,5 +1,5 @@
 <#import "/admin/common/base.ftl" as html/>
-<@html.html title=message("Admin.menu.system.role") bar=message("Admin.menu.system.role") bar_title="查看角色列表，添加、修改角色权限信息">
+<@html.html title=message("Admin.menu.system.logisticsCompany") bar=message("Admin.menu.system.logisticsCompany") bar_title="查看物流公司列表，添加、修改物流公司">
 <script src="${base}/resources/admin/js/list.js" type="text/javascript"></script>
 <script type="text/javascript">
     $().ready(function(){
@@ -58,8 +58,9 @@
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">&nbsp;<span class="caret"></span></button>
                         <ul class="dropdown-menu" id="searchPropertyOption">
+
                             <li val="name" <#if page.searchProperty == "name"> class="active"</#if>>
-                                <a href="javascript:;">角色名称</a>
+                                <a href="javascript:;">名称</a>
                             </li>
                         </ul>
                     </div><!-- /btn-group -->
@@ -83,27 +84,25 @@
                             </label>
                         </th>
                         <th> 名称</th>
-                        <th> 是否内置</th>
-                        <th> 描述</th>
-                        <th> 创建日期</th>
+                        <th> 网址</th>
+                        <th> 排序</th>
                         <th> 操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <#list page.content as role>
+                        <#list page.content as deliveryCorp>
                         <tr>
                             <td>
-                                <label class="mt-checkbox mt-checkbox-outline" <#if role.isSystem>title="系统内置角色不允许删除" </#if>>
-                                    <input type="checkbox" name="ids" <#if role.isSystem>disabled="disabled"<#else>value="${role.id}"</#if>/>
+                                <label class="mt-checkbox mt-checkbox-outline">
+                                    <input type="checkbox" name="ids" value="${deliveryCorp.id}"/>
                                     <span></span>
                                 </label>
                             </td>
-                            <td> ${role.name}</td>
-                            <td> <#if role.isSystem>是<#else>否</#if></td>
-                            <td> <#if role.description??><span title="${role.description}">${abbreviate(role.description,50,"...")}</span></#if></td>
-                            <td><span title="${role.createDate?string("yyyy-MM-dd HH:mm:ss")}">${role.createDate}</span></td>
+                            <td> ${deliveryCorp.name}</td>
+                            <td> ${deliveryCorp.url}</td>
+                            <td> ${deliveryCorp.order}</td>
                             <td>
-                                <a href="edit.html?id=${role.id}" class="btn btn-sm ">
+                                <a href="edit.html?id=${deliveryCorp.id}" class="btn btn-sm ">
                                     <i class="fa fa-edit"></i>
                                     编辑
                                 </a>

@@ -417,7 +417,7 @@
                         </@shiro.hasPermission>
                         <@shiro.hasPermission name="admin:logisticsCompany">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.logisticsCompany")> active open</#if>">
-                                <a href="#" class="nav-link ">
+                                <a href="${base}/admin/delivery_corp/list.html" class="nav-link ">
                                     <span class="title">${message("Admin.menu.system.logisticsCompany")}</span>
                                 </a>
                             </li>

@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
+ * 管理员
  * Created by Panfuhao on 2016/9/27.
  */
 @Entity
@@ -162,6 +163,7 @@ public class Admin extends BaseEntity<Long> {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
     /**
      * 持久化前处理
      */
@@ -171,6 +173,7 @@ public class Admin extends BaseEntity<Long> {
         setEmail(StringUtils.lowerCase(getEmail()));
         setLockKey(DigestUtils.md5Hex(UUID.randomUUID() + RandomStringUtils.randomAlphabetic(30)));
     }
+
     /**
      * 更新前处理
      */
@@ -178,6 +181,8 @@ public class Admin extends BaseEntity<Long> {
     public void preUpdate() {
         setEmail(StringUtils.lowerCase(getEmail()));
     }
+
+
 
 
 

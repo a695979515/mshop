@@ -12,7 +12,6 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"><span class="required" aria-required="true"> * </span>用户名</label>
                         <div class="col-md-4 ">
-                            <span class="help-block">${admin.username}</span>
                             <input type="text" class="form-control"  name="username"  maxlength="20" >
                         </div>
                     </div>
