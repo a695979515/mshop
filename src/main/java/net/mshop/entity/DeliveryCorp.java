@@ -3,10 +3,7 @@ package net.mshop.entity;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -34,6 +31,7 @@ public class DeliveryCorp extends OrderEntity<Long>{
 
     @Length(max = 200)
     @Pattern(regexp = "^(?i)(http:\\/\\/|https:\\/\\/|ftp:\\/\\/|mailto:|\\/|#).*$")
+
     public String getUrl() {
         return url;
     }
