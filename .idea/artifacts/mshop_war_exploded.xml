@@ -57,6 +57,9 @@
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.2.4.Final" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator-annotation-processor:5.2.4.Final" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.29" />
+          <element id="library" level="module" name="Maven: com.alibaba:jconsole:1.8.0" module-name="mshop" />
+          <element id="library" level="module" name="Maven: com.alibaba:tools:1.8.0" module-name="mshop" />
           <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.56" />
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.12" />
           <element id="library" level="project" name="Maven: javax.el:javax.el-api:2.2.5" />

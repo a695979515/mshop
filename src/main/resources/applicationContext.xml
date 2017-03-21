@@ -15,17 +15,49 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-        <property name="driverClass" value="${jdbc.driver}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.user}"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+
+        <!-- 基本属性url username password driverClassName -->
+        <!--<property name="driverClassName" value="${jdbc.driverClassName}"/>-->
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
-        <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
-        <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
-        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
-        <property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
-        <property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>
-        <property name="checkoutTimeout" value="${jdbc.checkoutTimeout}"/>
+
+        <!--配置初始化大小、最小、最大-->
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+
+        <!--配置获取连接等待超时时间-->
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒-->
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+
+        <!--配置一个连接在池中最小生存的时间，单位是毫秒-->
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+
+        <!--用来检测连接是否有效的sql-->
+        <property name="validationQuery" value="${jdbc.validationQuery}" />
+        <!--请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。-->
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+        <!--申请连接时执行validationQuery检测连接是否有效，做了这个配置true会降低性能。-->
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+        <!--归还连接时执行validationQuery检测连接是否有效，做了这个配置true会降低性能。-->
+        <property name="testOnReturn" value="${jdbc.testOnReturn}" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <!-- 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。-->
+        <property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}" />
+        <!--要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100-->
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.maxPoolPreparedStatementPerConnectionSize}" />
+
+        <!-- 配置监控统计拦截的filters -->
+        <!--属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：
+        监控统计用的filter:stat
+        日志用的filter:log4j
+        防御sql注入的filter:wall-->
+        <property name="filters" value="${jdbc.filters}" />
     </bean>
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
