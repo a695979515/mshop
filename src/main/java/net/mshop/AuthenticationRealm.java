@@ -16,6 +16,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -122,7 +124,8 @@ public class AuthenticationRealm extends AuthorizingRealm {
                 stringBuffer.append(passwords[j]);
             }
         }
-        stringBuffer.append(createDate.getTime());
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMM");
+        stringBuffer.append(dateFormat.format(createDate).toString());
         return stringBuffer.toString();
     }
 

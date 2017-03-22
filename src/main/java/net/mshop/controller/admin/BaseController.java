@@ -2,6 +2,8 @@ package net.mshop.controller.admin;
 
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
@@ -168,7 +170,8 @@ public class BaseController {
                 stringBuffer.append(passwords[j]);
             }
         }
-        stringBuffer.append(createDate.getTime());
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMM");
+        stringBuffer.append(dateFormat.format(createDate).toString());
         return stringBuffer.toString();
     }
 
