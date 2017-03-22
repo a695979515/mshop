@@ -72,7 +72,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
                     adminService.update(admin);
                 }
             }
-            if (!DigestUtils.md5Hex(password).equals(admin.getPassword())) {
+            if (!DigestUtils.md5Hex(addSalt(admin.getUsername(),password,admin.getCreateDate())).equals(admin.getPassword())) {
                 int loginFailureCount = admin.getLoginFailureCount() + 1;
                 if (loginFailureCount >= setting.getFailureLoginCount()) {
                     admin.setIsLocked(true);
@@ -104,6 +104,29 @@ public class AuthenticationRealm extends AuthorizingRealm {
         }
         return null;
     }
+
+    /**
+     * 加盐值
+     * @param username
+     * @param password
+     * @param createDate
+     * @return
+     */
+    public String addSalt(String username,String password,Date createDate){
+        StringBuffer stringBuffer = new StringBuffer();
+        char[] usernames = username.toCharArray();
+        char[] passwords = password.toCharArray();
+        for(int i=0;i<username.length();i++){
+            stringBuffer.append(usernames[i]);
+            for (int j=0;j<password.length();j++){
+                stringBuffer.append(passwords[j]);
+            }
+        }
+        stringBuffer.append(createDate.getTime());
+        return stringBuffer.toString();
+    }
+
+
 
 
 }

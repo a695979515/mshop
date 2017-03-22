@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class AdminController extends BaseController {
         if (adminService.usernameExists(admin.getUsername())) {
             return ERROR_VIEW;
         }
-        admin.setPassword(DigestUtils.md5Hex(admin.getPassword()));
+        admin.setPassword(DigestUtils.md5Hex(addSalt(admin.getUsername(),admin.getPassword(),new Date())));
         admin.setIsLocked(false);
         admin.setLoginFailureCount(0);
         admin.setLockedDate(null);
@@ -83,7 +84,6 @@ public class AdminController extends BaseController {
         admin.setLoginIp(null);
         admin.setLockKey(null);
         adminService.save(admin);
-        System.out.println("id===="+admin.getId());
         redirectAttributes.addFlashAttribute("success", "成功");
         return "redirect:list.html";
 
@@ -141,7 +141,7 @@ public class AdminController extends BaseController {
             return ERROR_VIEW;
         }
         if (StringUtils.isNotEmpty(admin.getPassword())) {
-            admin.setPassword(DigestUtils.md5Hex(admin.getPassword()));
+            admin.setPassword(DigestUtils.md5Hex(addSalt(oldAdmin.getUsername(),admin.getPassword(),oldAdmin.getCreateDate())));
         } else {
             admin.setPassword(oldAdmin.getPassword());
         }

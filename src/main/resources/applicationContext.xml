@@ -58,6 +58,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         日志用的filter:log4j
         防御sql注入的filter:wall-->
         <property name="filters" value="${jdbc.filters}" />
+        <!-- 配置connectionProperties让ConfigFilter解密密码-->
+
+        <property name="connectionProperties" value="config.decrypt=true;config.decrypt.key=${jdbc.publicKey}" />
     </bean>
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>

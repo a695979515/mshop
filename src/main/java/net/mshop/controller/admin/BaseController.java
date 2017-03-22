@@ -150,4 +150,26 @@ public class BaseController {
         }
         return price;
     }
+
+    /**
+     * 加盐值
+     * @param username
+     * @param password
+     * @param createDate
+     * @return
+     */
+    public String addSalt(String username,String password,Date createDate){
+        StringBuffer stringBuffer = new StringBuffer();
+        char[] usernames = username.toCharArray();
+        char[] passwords = password.toCharArray();
+        for(int i=0;i<username.length();i++){
+            stringBuffer.append(usernames[i]);
+            for (int j=0;j<password.length();j++){
+                stringBuffer.append(passwords[j]);
+            }
+        }
+        stringBuffer.append(createDate.getTime());
+        return stringBuffer.toString();
+    }
+
 }
