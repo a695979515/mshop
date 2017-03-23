@@ -387,6 +387,7 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
+                    <#--系统设置-->
                         <@shiro.hasPermission name="admin:systemSetting">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.systemSetting")> active open</#if>">
                                 <a href="${base}/admin/setting/edit.html" class="nav-link ">
@@ -394,6 +395,7 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                    <#--地区设置-->
                         <@shiro.hasPermission name="admin:areaSetting">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.areaSetting")> active open</#if>">
                                 <a href="#" class="nav-link ">
@@ -401,6 +403,7 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                    <#--支付方式-->
                         <@shiro.hasPermission name="admin:paymentMethod">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.paymentMethod")> active open</#if>">
                                 <a href="#" class="nav-link ">
@@ -408,13 +411,15 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                    <#--配送方式-->
                         <@shiro.hasPermission name="admin:shipMethod">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.shipMethod")> active open</#if>">
-                                <a href="#" class="nav-link ">
+                                <a href="${base}/admin/shipping_method/list.html" class="nav-link ">
                                     <span class="title">${message("Admin.menu.system.shipMethod")}</span>
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                    <#--物流公司-->
                         <@shiro.hasPermission name="admin:logisticsCompany">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.logisticsCompany")> active open</#if>">
                                 <a href="${base}/admin/delivery_corp/list.html" class="nav-link ">
@@ -422,6 +427,7 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                    <#--支付插件-->
                         <@shiro.hasPermission name="admin:paymentPlugin">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.paymentPlugin")> active open</#if>">
                                 <a href="#" class="nav-link ">
@@ -429,6 +435,7 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                    <#--存储插件-->
                         <@shiro.hasPermission name="admin:storagePlugin">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.storagePlugin")> active open</#if>">
                                 <a href="#" class="nav-link ">
@@ -436,6 +443,7 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                    <#--登录插件-->
                         <@shiro.hasPermission name="admin:loginPlugin">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.loginPlugin")> active open</#if>">
                                 <a href="#" class="nav-link ">
@@ -443,6 +451,7 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                    <#--管理员-->
                         <@shiro.hasPermission name="admin:admin">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.admin")> active open</#if>">
                                 <a href="${base}/admin/admin/list.html" class="nav-link ">
@@ -450,6 +459,7 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                        <#--角色权限-->
                         <@shiro.hasPermission name="admin:systemSetting">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.role")> active open</#if>">
                                 <a href="${base}/admin/role/list.html" class="nav-link ">
@@ -457,6 +467,7 @@
                                 </a>
                             </li>
                         </@shiro.hasPermission>
+                        <#--日志管理-->
                         <@shiro.hasPermission name="admin:log">
                             <li class="nav-item  <#if bar==message("Admin.menu.system.log")> active open</#if>">
                                 <a href="#" class="nav-link ">
