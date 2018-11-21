@@ -1,8 +1,7 @@
 package net.mshop.entity;
 
 import net.mshop.listener.EntityListener;
-import org.hibernate.search.annotations.*;
-import org.hibernate.search.annotations.Index;
+
 
 
 import javax.persistence.*;
@@ -64,7 +63,7 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
      */
     private Long version;
 
-    @DocumentId
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "sequenceGenerator")
     public ID getId() {
@@ -75,8 +74,7 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
         this.id = id;
     }
 
-    @Field(store = Store.YES, index = Index.YES, analyze = Analyze.NO)
-    @DateBridge(resolution = Resolution.SECOND)
+
     @Column(nullable = false, updatable = false)
     public Date getCreateDate() {
         return createDate;
@@ -86,8 +84,7 @@ public abstract class BaseEntity<ID extends Serializable> implements Serializabl
         this.createDate = createDate;
     }
 
-    @Field(store = Store.YES, index = Index.YES, analyze = Analyze.NO)
-    @DateBridge(resolution = Resolution.SECOND)
+
     @Column(nullable = false)
     public Date getModifyDate() {
         return modifyDate;

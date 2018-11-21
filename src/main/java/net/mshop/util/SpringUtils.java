@@ -1,14 +1,13 @@
 package net.mshop.util;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-import org.springframework.web.servlet.LocaleResolver;
 
-import java.util.Locale;
 
 @Lazy(false)
 @Component("springUtils")
@@ -30,7 +29,9 @@ public final class SpringUtils implements ApplicationContextAware, DisposableBea
      *
      * @param applicationContext ApplicationContext
      */
-    public void setApplicationContext(ApplicationContext applicationContext) {
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringUtils.applicationContext = applicationContext;
     }
 
@@ -81,20 +82,6 @@ public final class SpringUtils implements ApplicationContextAware, DisposableBea
         return applicationContext.getBean(name, type);
     }
 
-    /**
-     * 获取国际化消息
-     *
-     * @param code 代码
-     * @param args 参数
-     * @return 国际化消息
-     */
-    public static String getMessage(String code, Object... args) {
-        Assert.hasText(code);
-
-        LocaleResolver localeResolver = getBean("localeResolver", LocaleResolver.class);
-        Locale locale = localeResolver.resolveLocale(null);
-        return applicationContext.getMessage(code, args, locale);
-    }
 
     /**
      * 销毁

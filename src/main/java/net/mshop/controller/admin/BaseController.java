@@ -19,6 +19,7 @@ import net.mshop.util.DateEditor;
 import net.mshop.util.SpringUtils;
 import net.mshop.util.StringEditor;
 import net.mshop.util.SystemUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.WebDataBinder;
@@ -50,7 +51,7 @@ public class BaseController {
      */
     private static final String CONSTRAINT_VIOLATIONS_ATTRIBUTE_NAME = "constraintViolations";
 
-    @Resource(name = "validator")
+    @Autowired
     private Validator validator;
 
     @InitBinder
@@ -126,9 +127,9 @@ public class BaseController {
      * @param args 参数
      * @return 国际化消息
      */
-    protected String message(String code, Object... args) {
-        return SpringUtils.getMessage(code, args);
-    }
+//    protected String message(String code, Object... args) {
+//        return SpringUtils.getMessage(code, args);
+//    }
 
     /**
      * 添加瞬时消息

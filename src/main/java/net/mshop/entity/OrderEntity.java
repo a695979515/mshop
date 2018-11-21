@@ -1,7 +1,6 @@
 package net.mshop.entity;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
-import org.hibernate.search.annotations.*;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -17,8 +16,7 @@ public abstract class OrderEntity<ID extends Serializable> extends BaseEntity<ID
     public static final String ORDER_PROPERTY_NAME = "order";
     private Integer order;
 
-    @Field(store = Store.YES, index = Index.YES, analyze = Analyze.NO)
-    @NumericField
+
     @Min(0)
     @Column(name = "orders")
     public Integer getOrder() {

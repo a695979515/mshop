@@ -1,6 +1,5 @@
 package net.mshop.entity;
 
-import net.mshop.util.SpringUtils;
 
 /**
  * 消息实体类
@@ -25,44 +24,38 @@ public class Message {
     public Message() {
     }
 
-    public Message(String content, Type type) {
-        this.content = content;
-        this.type = type;
-    }
 
-    public Message(Message.Type type, String content, Object... args) {
+
+    public Message(Message.Type type, String content) {
         this.type = type;
-        this.content = SpringUtils.getMessage(content, args);
+        this.content = content;
     }
 
     /**
      * 成功消息返回
      * @param content
-     * @param args
      * @return
      */
-    public static Message success(String content, Object... args) {
-        return new Message(Type.success, content, args);
+    public static Message success(String content) {
+        return new Message(Type.success, content);
     }
 
     /**
      * 警告消息返回
      * @param content
-     * @param args
      * @return
      */
-    public static Message warn(String content, Object... args) {
-        return new Message(Type.warn, content, args);
+    public static Message warn(String content) {
+        return new Message(Type.warn, content);
     }
 
     /**
      * 错误消息返回
      * @param content
-     * @param args
      * @return
      */
-    public static Message error(String content, Object... args) {
-        return new Message(Type.error, content, args);
+    public static Message error(String content) {
+        return new Message(Type.error, content);
     }
 
     public String getContent() {
@@ -81,8 +74,5 @@ public class Message {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return SpringUtils.getMessage(content);
-    }
+
 }
